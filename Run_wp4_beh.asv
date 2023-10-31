@@ -174,9 +174,20 @@ try
             hasInput = FALSE;
             PauseTime = 0; % If the experiment is paused, the duration of the pause is stored to account for it.
 
+            % get texture pointer
+            vis_stim_id = blk_mat.identity{tr};
+            orientation = blk_mat.orientation{tr};
+            texture_ptr = getPointer(vis_stim_id, orientation);
+            blk_mat.texture(tr) = texture_ptr;
+
             % show stimulus
-            blk_mat.vis_stim_time(tr) = showStimuli(blk_mat.texture(tr));
-            DiodFrame = 0;
+            if strcmp(practice_type, 'auditory')
+                blk_mat.vis_stim_time(tr) = showFixation('PhotodiodeOn'); % Do not show the
+                DiodFrame = 0;
+            else
+                blk_mat.vis_stim_time(tr) = showStimuli(texture_ptr);
+                DiodFrame = 0;
+            end
 
             % Sending response trigger for the eyetracker
             if EYE_TRACKER
