@@ -14,8 +14,8 @@ global texture_struct w
 
 % path to stimuli folder
 PreFolderName = [pwd,filesep,'stimuli\'];
-cate_names = {'kichten', 'bathroom'};
-texture_struct = struct('kichten', [], 'bathroom', []);
+cate_names = {'kitchen', 'bathroom'};
+texture_struct = struct('kitchen', [], 'bathroom', []);
 
 % loops through the folders an loads all stimuli
 for j = 1:length(cate_names)

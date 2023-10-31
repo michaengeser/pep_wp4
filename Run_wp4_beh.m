@@ -7,7 +7,7 @@ clear all;
 % Hardware parameters:
 global sub_num TRUE FALSE refRate compKbDevice task
 global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE NO_PRACTICE  session
-global TRIAL_DURATION DATA_FOLDER FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
+global TRIAL_DURATION FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
 global ABORTED RESTART_KEY NO_KEY ABORT_KEY 
 
 
@@ -46,7 +46,7 @@ rng('shuffle');
 
 %% check if participant and session exists already
 
-SubSesFolder = fullfile(pwd,DATA_FOLDER,['sub-', num2str(sub_num)],['ses-',num2str(session)]);
+SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)]);
 ExistFlag = exist(SubSesFolder,'dir');
 if ExistFlag
     warning ('This participant number and session was already attributed!')
@@ -61,9 +61,12 @@ initPsychtooblox(); % initializes psychtoolbox window at correct resolution and 
 
 %% Setup the trial matrix and log:
 % open trial matrix (form Experiment 1) and add auditory conditions
-MatFolderName = [pwd,filesep,'trial_matrices\'];
+MatFolderName = [pwd,filesep,'task_matrices\'];
 TableName = ['sub-',sub_num,'_trials.csv'];
-trial_mat = readtable(fullfile(MatFolderName, TableName));
+tr_mat = readtable(fullfile(MatFolderName, TableName));
+
+% get trial matrix of the task 
+task_mat = tr_mat(strcmp(tr_mat.task, task),:);
 
 %% Load and prepare stimuli:
 
@@ -71,9 +74,9 @@ showMessage('Loading');
 loadStimuli()
 
 % make jitter multiple of refresh rate
-for tr_jit = 1:length(trial_mat.trial)
-    jit_multiplicator = round(trial_mat.stim_jit(tr_jit)/refRate);
-    trial_mat.stim_jit(tr_jit) = refRate*jit_multiplicator;
+for tr_jit = 1:length(task_mat.trial)
+    jit_multiplicator = round(task_mat.jitter(tr_jit)/refRate);
+    task_mat.stim_jit(tr_jit) = refRate*jit_multiplicator;
 end
 
 %% Instructions
@@ -93,18 +96,18 @@ try
 
     %%  Experiment
     % Experiment Prep
-    previous_miniblock = 0;
-    warning_response_order = 0;
+    previous_blk = 0;
     start_message_flag = FALSE;
     showFixation('PhotodiodeOff');
 
     %% Block loop:
-    blks = unique(trial_mat.block);
+
+    blks = unique(task_mat.block);
 
     if NO_PRACTICE
         blk = 1;
     else
-        blk = trial_mat.block(1);
+        blk = task_mat.block(1);
     end
 
     while blk <= blks(end)
@@ -145,13 +148,13 @@ try
         end
 
         % Extract the trial and log of this block only:
-        blk_mat = trial_mat(trial_mat.block == blk, :);
+        blk_mat = task_mat(task_mat.block == blk, :);
         % Extract the task from this block:
         task = char(blk_mat.task(1));
 
         % Add the columns for logging:
         blk_mat = prepare_log(blk_mat);
-        log_hasInputs_vis = nan(1,length(trial_mat.trial));
+        log_hasInputs_vis = nan(1,length(task_mat.trial));
 
         % Check whether this block is a practice or not:
         is_practice = blk_mat.is_practice(1);
@@ -473,7 +476,7 @@ try
             if mod(blk, blk_break) == 0 
                 last_block = log_all(log_all.block > blk - blk_break, :);
                 [last_block, ~] = compute_performance(last_block);
-                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(trial_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
+                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
                 showMessage(block_message);
 
                 wait_resp = 0;
@@ -481,7 +484,7 @@ try
                     [~, ~, wait_resp] = KbCheck();
                 end
             elseif mod(blk, miniblk_break) == 0
-                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(trial_mat.block(end)/miniblk_break));
+                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
                 showMessage(block_message);
 
                 wait_resp = 0;
