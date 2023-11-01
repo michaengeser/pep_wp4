@@ -199,7 +199,7 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            min_trial_duration = blk_mat.duration(tr) + blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
+            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION) ;
             
             while elapsedTime < min_trial_duration && ~hasInput
 
@@ -236,7 +236,7 @@ try
                 end
 
                 %% add 
-                % Present fixation
+                % Present fixation while waiting for response
                 if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE && 
                     fix_time = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
@@ -254,23 +254,6 @@ try
                     fixShown = TRUE;
                 end
 
-                % Present jitter
-                if elapsedTime > TRIAL_DURATION  - refRate*FRAME_ANTICIPATION && jitterLogged == FALSE
-                    JitOnset = showFixation('PhotodiodeOn');
-                    DiodFrame = CurrentFrame;
-                    % Sending response trigger for the eyetracker
-                    if EYE_TRACKER
-                        trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
-                            blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                            blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        Eyelink('Message',trigger_str);
-                    end
-
-                    % log jitter started
-                    blk_mat.JitOnset(tr) = JitOnset;
-                    jitterLogged = TRUE;
-                end
-
                 % Updating clock:
                 elapsedTime = GetSecs - blk_mat.vis_stim_time(tr);
 
@@ -286,6 +269,38 @@ try
                         turnPhotoTrigger('off');
                     end
                     PreviousFrame = CurrentFrame;
+                end
+            end 
+
+
+            %% Jitter TIME LOOP
+            elapsedTime = 0;
+
+            % define total trial duration
+            jitter_duration = blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
+            
+            while elapsedTime < jitter_duration
+
+                % Present jitter
+                if jitterLogged == FALSE
+                    JitOnset = showFixation('PhotodiodeOn');
+                    DiodFrame = CurrentFrame;
+
+%                     % Sending response trigger for the eyetracker
+%                     if EYE_TRACKER
+%                         trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
+%                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+%                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+%                         Eyelink('Message',trigger_str);
+%                     end
+
+                    % log jitter started
+                    blk_mat.JitOnset(tr) = JitOnset;
+                    jitterLogged = TRUE;
+
+                % Updating clock:
+                elapsedTime = GetSecs - blk_mat.vis_stim_time(tr);
+
                 end
             end
             blk_mat.trial_end(tr) = GetSecs;
