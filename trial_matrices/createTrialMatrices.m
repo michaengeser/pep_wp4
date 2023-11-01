@@ -38,8 +38,8 @@ for cate = cateories
 end
 
 % Define trial matrix table
-columnNames = ["sub_num", "trial", "block", "task", "is_practice", "category", "image", "texture", "jitter"];
-dataTypes = {'double', 'double', 'double', 'string', 'double', 'string', 'string', 'double', 'double'};
+columnNames = ["sub_num", "trial", "block", "task", "is_practice", "category", "image", "texture", "duration", "jitter"];
+dataTypes = {'double', 'double', 'double', 'string', 'double', 'string', 'string', 'double', 'double', 'double'};
 
 % Create an empty table with the specified column names and data types
 tr_mat = table('Size', [0, numel(columnNames)], 'VariableNames', columnNames, 'VariableTypes', dataTypes);
@@ -59,9 +59,11 @@ for task = tasks
     if strcmp(task, 'categorization')
         repeats = 12;
         pics_per_blk = 50;
+        duration = 83;
     else
         repeats = 1;
         pics_per_blk = 25;
+        duration = 1500;
     end
 
     % Create an empty table with the specified column names and data types
@@ -77,6 +79,7 @@ for task = tasks
             task_mat.task(count) = task;
             task_mat.image{count} =  file_list.(cate)(t).name;
             task_mat.texture(count) =  file_list.(cate)(t).texture;
+            task_mat.duration(count) =  duration;
 
             if contains(file_list.(cate)(t).name, 'practice')
                 task_mat.is_practice(count) = 1;

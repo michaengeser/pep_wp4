@@ -174,28 +174,17 @@ try
             hasInput = FALSE;
             PauseTime = 0; % If the experiment is paused, the duration of the pause is stored to account for it.
 
-            % get texture pointer
-            vis_stim_id = blk_mat.identity{tr};
-            orientation = blk_mat.orientation{tr};
-            texture_ptr = getPointer(vis_stim_id, orientation);
-            blk_mat.texture(tr) = texture_ptr;
-
             % show stimulus
-            if strcmp(practice_type, 'auditory')
-                blk_mat.vis_stim_time(tr) = showFixation('PhotodiodeOn'); % Do not show the
-                DiodFrame = 0;
-            else
-                blk_mat.vis_stim_time(tr) = showStimuli(texture_ptr);
-                DiodFrame = 0;
-            end
+            blk_mat.vis_stim_time(tr) = showStimuli(blk_mat.texture(tr));
+            DiodFrame = 0;
 
-            % Sending response trigger for the eyetracker
-            if EYE_TRACKER
-                trigger_str = get_et_trigger('vis_onset', blk_mat.task_relevance{tr}, ...
-                    blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                    blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                Eyelink('Message',trigger_str);
-            end
+%             % Sending response trigger for the eyetracker
+%             if EYE_TRACKER
+%                 trigger_str = get_et_trigger('vis_onset', blk_mat.task_relevance{tr}, ...
+%                     blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+%                     blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+%                 Eyelink('Message',trigger_str);
+%             end
 
             % I then set a frame counter. The flip of the stimulus
             % presentation is frame 0. It is already the previous frame because it already occured:
@@ -210,82 +199,39 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            total_trial_duration = TRIAL_DURATION - (refRate*FRAME_ANTICIPATION) + blk_mat.stim_jit(tr);
+            min_trial_duration =  - (refRate*FRAME_ANTICIPATION) + blk_mat.jitter(tr);
             
-            while elapsedTime < total_trial_duration
-
-                %% Play audio stimulus
-                if elapsedTime >= blk_mat.onset_SOA(tr) && pitchPlayed == FALSE && ~strcmp(practice_type, 'visual')
-                    % Select the right buffer
-                    if blk_mat.pitch(tr) == 1000
-                        pitch_buff = low_pitch_buff;
-                    elseif blk_mat.pitch(tr) == 1100
-                        pitch_buff = high_pitch_buff;
-                    end
-                    % Load the buffer
-                    PsychPortAudio('FillBuffer', padhandle, pitch_buff);
-                    % Play the buffer
-                    audio_start = PsychPortAudio('Start',padhandle, 1, 0);
-                    % Get the buffer time stamp:
-                    audio_start = GetSecs();
-                    % Sending response trigger for the eyetracker
-                    if EYE_TRACKER
-                        trigger_str = get_et_trigger('audio_onset', blk_mat.task_relevance{tr}, ...
-                            blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                            blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        Eyelink('Message',trigger_str);
-                    end
-                    blk_mat.aud_stim_time(tr) = audio_start;
-                    blk_mat.aud_stim_buff(tr) = pitch_buff;
-                    pitchPlayed = TRUE;
-                end
+            while elapsedTime < min_trial_duration
 
                 %% Get response:
-                if hasInputs < 2
+                if ~hasInput
                     % Ge the response:
                     [key,Resp_Time] = getInput();
 
                     % Handling the response:
                     % If the participant pressed a key that is different
                     % to the one of the previous iteration:
-                    if key ~= NO_KEY && key ~= blk_mat.trial_first_button_press(tr)
+                    if key ~= NO_KEY
 
-                        % Sending response trigger for the eyetracker
-                        if EYE_TRACKER
-                            trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
-                                blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                                blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                            Eyelink('Message',trigger_str);
-                        end
+%                         % Sending response trigger for the eyetracker
+%                         if EYE_TRACKER
+%                             trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
+%                                 blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+%                                 blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+%                             Eyelink('Message',trigger_str);
+%                         end
 
                         if key == ABORT_KEY % If the experiment was aborted:
                             ABORTED = 1;
                             error(CLEAN_EXIT_MESSAGE);
                         end
 
-                        % logging reaction
-                        hasInputs = hasInputs + 1;
-
                         % Log the response received:
-                        if  hasInputs == 1
-                            blk_mat.trial_first_button_press(tr) = key;
-                        else
-                            blk_mat.trial_second_button_press(tr) = key;
-                        end
+                        blk_mat.trial_button_press(tr) = key;
+                        blk_mat.time_of_resp(tr) =  Resp_Time;
 
-                        % store RT for visual task
-                        if key == VIS_TARGET_KEY && hasInput_vis == FALSE % taget key was pressed
-                            blk_mat.time_of_resp_vis(tr) =  Resp_Time;
-                            blk_mat.has_response_vis(tr) = 1;
-                            hasInput_vis = TRUE;
-                            % store RT for auditory task
-                        elseif (key == LOW_PITCH_KEY || key == HIGH_PITCH_KEY) && hasInput_aud == FALSE % auditory key was pressed
-                            blk_mat.time_of_resp_aud(tr) =  Resp_Time;
-                            hasInput_aud = TRUE;
-                        elseif  ~ismember(key,[VIS_TARGET_KEY, LOW_PITCH_KEY, HIGH_PITCH_KEY])
-                            blk_mat.wrong_key(tr) =  key;
-                            blk_mat.wrong_key_timestemp(tr) =  Resp_Time;
-                        end
+                        % logging reaction
+                        hasInput = TRUE;
                     end
                 end
 
