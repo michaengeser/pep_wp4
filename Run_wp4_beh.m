@@ -307,76 +307,6 @@ try
 
             %% End of trial
 
-            % check order of responses
-            if blk_mat.trial_first_button_press(tr) >= 1000 && blk_mat.trial_second_button_press(tr) == 1
-                warning_response_order = 1;
-            end
-
-            %% introspective questions
-            if introspection
-                
-                % introspective question 1 (RT visual task)
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('vis_qn_onset', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                if ~strcmp(practice_type, 'auditory')
-                    introspec_question = 'vis';
-                    blk_mat.iRT_vis(tr) = run_dial(introspec_question);
-                end
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('vis_qn_resp', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                showFixation('PhotodiodeOn');
-                WaitSecs(0.2);
-
-                % introspective question 2 (RT auditory task)
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('aud_qn_onset', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                if ~strcmp(practice_type, 'visual')
-                    introspec_question = 'aud';
-                    blk_mat.iRT_aud(tr) = run_dial(introspec_question);
-                end
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('aud_qn_resp', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                showFixation('PhotodiodeOn');
-                WaitSecs(blk_mat.intro_jit(tr)-0.5);
-
-
-                % Show the target screen in the beginning of each block (expect during auditory practice):
-                if ~strcmp(practice_type, 'auditory') && tr == round(length(blk_mat.trial)/2)
-                    blk_mat.TargetScreenOnset(1) = showMiniBlockBeginScreen(blk_mat, 1);
-                    WaitSecs(0.3);
-                    wait_resp = 0;
-                    while wait_resp == 0
-                        [~, ~, wait_resp] = KbCheck();
-                    end
-                end
-
-
-            end
-            %%
-
             if(key==RESTART_KEY)
                 break
             end
@@ -384,51 +314,41 @@ try
 
         % Save the data of this block:
         saveTable(blk_mat, task, blk);
-        % Save the eyetracker data:
-        if EYE_TRACKER
-            saveEyetracker(task, blk);
-        end
+
+%         % Save the eyetracker data:
+%         if EYE_TRACKER
+%             saveEyetracker(task, blk);
+%         end
 
         % Append the block log to the overall log:
-        if ~exist('log_all', 'var') && ~blk_mat.is_practice(1)
+        if ~exist('log_all', 'var')
             log_all = blk_mat;
-        elseif ~blk_mat.is_practice(1)
+        else
             log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
         end
 
-        % order of responses reminder (if needed)
-        if warning_response_order == 1
-            showMessage(RESP_ORDER_WARNING_MESSAGE);
-            WaitSecs(3);
-            warning_response_order = 0;
-        end
+        %% Feedback 
 
-        % Break after every 4 blocks in prp task and every 8 blocks in introspective task
+        if mod(blk, blk_break) == 0
+            last_block = log_all(log_all.block > blk - blk_break, :);
+            [last_block, ~] = compute_performance(last_block);
+            block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
+            showMessage(block_message);
 
-        blk_break = 4;
-        miniblk_break = 1;
+            wait_resp = 0;
+            while wait_resp == 0
+                [~, ~, wait_resp] = KbCheck();
+            end
+        elseif mod(blk, miniblk_break) == 0
+            block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
+            showMessage(block_message);
 
-        if ~is_practice
-            if mod(blk, blk_break) == 0 
-                last_block = log_all(log_all.block > blk - blk_break, :);
-                [last_block, ~] = compute_performance(last_block);
-                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
-                showMessage(block_message);
-
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end
-            elseif mod(blk, miniblk_break) == 0
-                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
-                showMessage(block_message);
-
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end
+            wait_resp = 0;
+            while wait_resp == 0
+                [~, ~, wait_resp] = KbCheck();
             end
         end
+ 
 
         if is_practice
             blk_continue = get_practice_feedback(blk_mat, practice_type);
