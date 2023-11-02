@@ -226,7 +226,7 @@ try
                         end
 
                         % Log the response received:
-                        blk_mat.trial_button_press(tr) = key;
+                        blk_mat.trial_response(tr) = key;
                         blk_mat.time_of_resp(tr) =  Resp_Time;
 
                         % logging reaction
