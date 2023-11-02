@@ -13,9 +13,6 @@ n_pics_per_cate = 50;
 % List the tasks.
 tasks = ["categorization", "typicality", "familiarity", "aesthecticness"];
 
-% Set all the conditions:
-conditions = ["picture", "category"];
-
 % Create a structure storing the levels of each of these conditions:
 file_list = struct('kitchen', [], 'bathroom', [], 'practice', []);
 cateories = ["kitchen", "bathroom", "practice"];

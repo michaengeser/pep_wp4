@@ -222,7 +222,7 @@ try
 
                         if key == ABORT_KEY % If the experiment was aborted:
                             ABORTED = 1;
-                            error(CLEAN_EXIT_MESSAGE);
+                            error('Experiment has been aborted');
                         end
 
                         % Log the response received:
@@ -234,7 +234,8 @@ try
                     end
                 end
 
-                %% add 
+                %% Waiting for response
+
                 % Present fixation while waiting for response
                 if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE && 
                     fix_time = showFixation('PhotodiodeOn');
@@ -282,7 +283,8 @@ try
 
                 % Present jitter
                 if jitterLogged == FALSE
-                    JitOnset = showFixation('PhotodiodeOn');
+
+                    blk_mat.JitOnset(tr) = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 
 %                     % Sending response trigger for the eyetracker
@@ -293,15 +295,16 @@ try
 %                         Eyelink('Message',trigger_str);
 %                     end
 
-                    % log jitter started
-                    blk_mat.JitOnset(tr) = JitOnset;
                     jitterLogged = TRUE;
 
-                % Updating clock:
-                elapsedTime = GetSecs - blk_mat.vis_stim_time(tr);
+                    % Updating clock:
+                    elapsedTime = GetSecs - blk_mat.JitOnset(tr);
 
                 end
+
             end
+
+            % log end of trial
             blk_mat.trial_end(tr) = GetSecs;
 
             %% End of trial

@@ -17,13 +17,15 @@ global DISTANCE_SCREEN_TRACKER HEAD_FIXED
 global SCREEN_SIZE_CM REF_RATE_OPTIMAL viewDistanceBottomTop viewDistance 
 % Debugging and code parameters:
 global NO_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION NO_ERROR SHOW_INSTRUCTIONS 
+% experimental parameters
+global CATEGORIES
 % keys
-global  CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key H_Key MINIBLOCK_RESTART_KEY BLOCK_RESTART_KEY
+global CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
+global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key H_Key KITCHEN_KEY BATHROOM_KEY
 % text
 global fontType fontSize fontColor 
 % optics
-global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE  DIAMOUT_FIXATION DIAMIN_FIXATION
+global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION
 % other
 global TRUE FALSE
 
@@ -59,6 +61,10 @@ NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 NO_ERROR = 0; % Disable testing program error throws
 % Q: Do I need to fill this out? Pixels? Yoav: only if you want the debug scree to be of a different size
 WINDOW_RESOLUTION = [10 10 1200 800];
+
+%% Experimental parameters
+% Set all the catagories:
+CATEGORIES = ["kitchen", "bathroom"];
 
 %% Constant parameters
 
@@ -98,18 +104,23 @@ twoKey        =  KbName('2@');
 threeKey      =  KbName('3#');
 fourKey       =  KbName('4$');
 fiveKey       =  KbName('5%');
-sixKey       =  KbName('6&');
-sevenKey       =  KbName('7/');
-eightKey       =  KbName('8(');
+sixKey       =  KbName('6^');
+sevenKey       =  KbName('7&');
+eightKey       =  KbName('8*');
 ValidationKey = KbName('V');
 
-MINIBLOCK_RESTART_KEY = KbName('M');
-BLOCK_RESTART_KEY = KbName('B');
+if mod(sub_num, 2)
+    KITCHEN_KEY = F_Key;
+    BATHROOM_KEY = H_Key;
+else
+    KITCHEN_KEY = H_Key;
+    BATHROOM_KEY = F_Key;
+end
 
 % program codes
-ABORT_KEY = 4;
-RESTART_KEY = 3;
-WRONG_KEY = 2;
+ABORT_KEY = 14;
+RESTART_KEY = 13;
+WRONG_KEY = 12;
 NO_KEY = 0;
 
 TRUE = 1;

@@ -31,7 +31,6 @@ end
 
 % initializing experimental parameters
 initRuntimeParameters
-initConstantsParameters(); % defines all constants and initilizes parameters of the program
 
 % Logging everything that is printed into the command window! If the
 % log file already exist, delete it, otherwise the logs will besub_num
@@ -199,9 +198,9 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            min_trial_duration =  - (refRate*FRAME_ANTICIPATION) + blk_mat.jitter(tr);
+            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION) ;
             
-            while elapsedTime < min_trial_duration
+            while elapsedTime < min_trial_duration && ~hasInput
 
                 %% Get response:
                 if ~hasInput
@@ -223,7 +222,7 @@ try
 
                         if key == ABORT_KEY % If the experiment was aborted:
                             ABORTED = 1;
-                            error(CLEAN_EXIT_MESSAGE);
+                            error('Experiment has been aborted');
                         end
 
                         % Log the response received:
@@ -235,38 +234,24 @@ try
                     end
                 end
 
-                %% Inter stimulus interval
-                % Present fixation
-                if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+                %% Waiting for response
+
+                % Present fixation while waiting for response
+                if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE && 
                     fix_time = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
-                    % Sending response trigger for the eyetracker
-                    if EYE_TRACKER
-                        trigger_str = get_et_trigger('fixation_onset', blk_mat.task_relevance{tr}, ...
-                            blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                            blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        Eyelink('Message',trigger_str);
-                    end
-                    % log fixation in journal
+
+%                     % Sending response trigger for the eyetracker
+%                     if EYE_TRACKER
+%                         trigger_str = get_et_trigger('fixation_onset', blk_mat.task_relevance{tr}, ...
+%                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+%                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+%                         Eyelink('Message',trigger_str);
+%                     end
+
+                    % log fixation
                     blk_mat.fix_time(tr) = fix_time;
                     fixShown = TRUE;
-                end
-
-                % Present jitter
-                if elapsedTime > TRIAL_DURATION  - refRate*FRAME_ANTICIPATION && jitterLogged == FALSE
-                    JitOnset = showFixation('PhotodiodeOn');
-                    DiodFrame = CurrentFrame;
-                    % Sending response trigger for the eyetracker
-                    if EYE_TRACKER
-                        trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
-                            blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                            blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        Eyelink('Message',trigger_str);
-                    end
-
-                    % log jitter started
-                    blk_mat.JitOnset(tr) = JitOnset;
-                    jitterLogged = TRUE;
                 end
 
                 % Updating clock:
@@ -285,80 +270,44 @@ try
                     end
                     PreviousFrame = CurrentFrame;
                 end
+            end 
+
+
+            %% Jitter TIME LOOP
+            elapsedTime = 0;
+
+            % define total trial duration
+            jitter_duration = blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
+            
+            while elapsedTime < jitter_duration
+
+                % Present jitter
+                if jitterLogged == FALSE
+
+                    blk_mat.JitOnset(tr) = showFixation('PhotodiodeOn');
+                    DiodFrame = CurrentFrame;
+
+%                     % Sending response trigger for the eyetracker
+%                     if EYE_TRACKER
+%                         trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
+%                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+%                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+%                         Eyelink('Message',trigger_str);
+%                     end
+
+                    jitterLogged = TRUE;
+
+                    % Updating clock:
+                    elapsedTime = GetSecs - blk_mat.JitOnset(tr);
+
+                end
+
             end
+
+            % log end of trial
             blk_mat.trial_end(tr) = GetSecs;
 
             %% End of trial
-
-            % check order of responses
-            if blk_mat.trial_first_button_press(tr) >= 1000 && blk_mat.trial_second_button_press(tr) == 1
-                warning_response_order = 1;
-            end
-
-            %% introspective questions
-            if introspection
-                
-                % introspective question 1 (RT visual task)
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('vis_qn_onset', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                if ~strcmp(practice_type, 'auditory')
-                    introspec_question = 'vis';
-                    blk_mat.iRT_vis(tr) = run_dial(introspec_question);
-                end
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('vis_qn_resp', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                showFixation('PhotodiodeOn');
-                WaitSecs(0.2);
-
-                % introspective question 2 (RT auditory task)
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('aud_qn_onset', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                if ~strcmp(practice_type, 'visual')
-                    introspec_question = 'aud';
-                    blk_mat.iRT_aud(tr) = run_dial(introspec_question);
-                end
-
-                if EYE_TRACKER
-                    trigger_str = get_et_trigger('aud_qn_resp', blk_mat.task_relevance{tr}, ...
-                        blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                    Eyelink('Message',trigger_str);
-                end
-
-                showFixation('PhotodiodeOn');
-                WaitSecs(blk_mat.intro_jit(tr)-0.5);
-
-
-                % Show the target screen in the beginning of each block (expect during auditory practice):
-                if ~strcmp(practice_type, 'auditory') && tr == round(length(blk_mat.trial)/2)
-                    blk_mat.TargetScreenOnset(1) = showMiniBlockBeginScreen(blk_mat, 1);
-                    WaitSecs(0.3);
-                    wait_resp = 0;
-                    while wait_resp == 0
-                        [~, ~, wait_resp] = KbCheck();
-                    end
-                end
-
-
-            end
-            %%
 
             if(key==RESTART_KEY)
                 break
@@ -367,31 +316,26 @@ try
 
         % Save the data of this block:
         saveTable(blk_mat, task, blk);
-        % Save the eyetracker data:
-        if EYE_TRACKER
-            saveEyetracker(task, blk);
-        end
+
+%         % Save the eyetracker data:
+%         if EYE_TRACKER
+%             saveEyetracker(task, blk);
+%         end
 
         % Append the block log to the overall log:
-        if ~exist('log_all', 'var') && ~blk_mat.is_practice(1)
+        if ~exist('log_all', 'var')
             log_all = blk_mat;
-        elseif ~blk_mat.is_practice(1)
+        else
             log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
         end
 
-        % order of responses reminder (if needed)
-        if warning_response_order == 1
-            showMessage(RESP_ORDER_WARNING_MESSAGE);
-            WaitSecs(3);
-            warning_response_order = 0;
-        end
+        %% Feedback 
 
-        % Break after every 4 blocks in prp task and every 8 blocks in introspective task
+        if strcmp(task, 'categorization')
 
-        blk_break = 4;
-        miniblk_break = 1;
+            [blk_mat, ~] = compute_performance(blk_mat);
 
-        if ~is_practice
+
             if mod(blk, blk_break) == 0 
                 last_block = log_all(log_all.block > blk - blk_break, :);
                 [last_block, ~] = compute_performance(last_block);

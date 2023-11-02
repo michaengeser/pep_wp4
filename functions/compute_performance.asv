@@ -1,6 +1,7 @@
 function [log_table, performance_struct] = compute_performance(log_table)
 %%
 
+global task
 % keys
 global  CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey KITCHEN_KEY BATHROOM_KEY
 global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key H_Key MINIBLOCK_RESTART_KEY BLOCK_RESTART_KEY
@@ -27,7 +28,7 @@ for tr = 1:length(log_table.trial)
         end 
      end 
 
-
+     
         % get RT auditory response 
         log_table.RT_aud(tr) = log_table.time_of_resp_aud(tr) - log_table.aud_stim_time(tr);
         % make it a nan when RT is negative 
