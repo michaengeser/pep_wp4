@@ -31,7 +31,6 @@ end
 
 % initializing experimental parameters
 initRuntimeParameters
-initConstantsParameters(); % defines all constants and initilizes parameters of the program
 
 % Logging everything that is printed into the command window! If the
 % log file already exist, delete it, otherwise the logs will besub_num
@@ -329,26 +328,31 @@ try
 
         %% Feedback 
 
-        if mod(blk, blk_break) == 0
-            last_block = log_all(log_all.block > blk - blk_break, :);
-            [last_block, ~] = compute_performance(last_block);
-            block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
-            showMessage(block_message);
+        if strcmp(task, 'categorization')
 
-            wait_resp = 0;
-            while wait_resp == 0
-                [~, ~, wait_resp] = KbCheck();
-            end
-        elseif mod(blk, miniblk_break) == 0
-            block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
-            showMessage(block_message);
+            [blk_mat, ~] = compute_performance(blk_mat);
 
-            wait_resp = 0;
-            while wait_resp == 0
-                [~, ~, wait_resp] = KbCheck();
+
+            if mod(blk, blk_break) == 0 
+                last_block = log_all(log_all.block > blk - blk_break, :);
+                [last_block, ~] = compute_performance(last_block);
+                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
+                showMessage(block_message);
+
+                wait_resp = 0;
+                while wait_resp == 0
+                    [~, ~, wait_resp] = KbCheck();
+                end
+            elseif mod(blk, miniblk_break) == 0
+                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
+                showMessage(block_message);
+
+                wait_resp = 0;
+                while wait_resp == 0
+                    [~, ~, wait_resp] = KbCheck();
+                end
             end
         end
- 
 
         if is_practice
             blk_continue = get_practice_feedback(blk_mat, practice_type);

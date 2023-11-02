@@ -22,7 +22,7 @@ global  CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abor
 global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key H_Key MINIBLOCK_RESTART_KEY BLOCK_RESTART_KEY
 % text
 global fontType fontSize fontColor 
-% optics
+% 
 global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE  DIAMOUT_FIXATION DIAMIN_FIXATION
 % other
 global TRUE FALSE
@@ -81,7 +81,7 @@ MAX_VISUAL_ANGEL = [6,6]; % in degrees | "on a rectangular aperture at an averag
 DIAMOUT_FIXATION = 0.6; % diameter of outer circle (degrees)
 DIAMIN_FIXATION = 0.1; % diameter of inner circle (degrees)
 
-%% Response params
+% Response params
 KbName('UnifyKeyNames');
 CalibrationKey = KbName('C');
 upKey         =  KbName('UpArrow');
