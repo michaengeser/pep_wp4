@@ -333,55 +333,50 @@ try
 
         if strcmp(task, 'categorization')
 
+            % compute accuracy
             [blk_mat, ~] = compute_performance(blk_mat);
 
+            % get mean accuracy
+            mean_acc = mean(blk_mat.accurcay);
 
-            if mod(blk, blk_break) == 0 
-                last_block = log_all(log_all.block > blk - blk_break, :);
-                [last_block, ~] = compute_performance(last_block);
-                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
-                showMessage(block_message);
 
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end
-            elseif mod(blk, miniblk_break) == 0
-                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
-                showMessage(block_message);
 
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end
+            % generate feedback message
+            block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end)), ...
+                newline, 'Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
+
+            showMessage(block_message);
+
+
+            wait_resp = 0;
+            while wait_resp == 0
+                [~, ~, wait_resp] = KbCheck();
             end
-        end
-
-        if is_practice
-            blk_continue = get_practice_feedback(blk_mat, practice_type);
-            blk = blk + blk_continue;
-        else
-            blk = blk + 1;
         end
 
     end  % End of block loop
 
     %% End of experiment
 
+    % Letting the participant that it is over:
+    end_message = ['THE END', newline, newline,'Thank you!'];
+
     % compute performances of tasks
-    [log_all, performance_struct] = compute_performance(log_all);
+    [log_all] = compute_performance(log_all);
+
+    %% Save
+
     % Save the whole table:
     saveTable(log_all, task, "all");
     % Save the code:
     saveCode(task);
-    % Letting the participant that it is over:
-    showMessage(END_OF_EXPERIMENT_MESSAGE);
+    
+    showMessage(end_message);
     WaitSecs(2);
 
-    showMessage(SAVING_MESSAGE);
+    showMessage('saving');
     % Mark the time of saving onset
     ttime = GetSecs;
-
 
     % save everything from command window
     Str = CmdWinTool('getText');
@@ -389,26 +384,34 @@ try
 
     % Terminating teh experiment:
     safeExit()
+    
 catch e
+
     % Save the data:
     try
         % Save the beh data:
         saveTable(blk_mat, task, blk);
+
         % Save the eyetracker data:
-        if EYE_TRACKER
-            saveEyetracker(task, blk);
-        end
+%         if EYE_TRACKER
+%             saveEyetracker(task, blk);
+%         end
+
         % If the log all already exists, save it as well:
         if exist('log_all', 'var')
-            [log_all, performance_struct] = compute_performance(log_all);
+            [log_all] = compute_performance(log_all);
             saveTable(log_all, task, "all");
         end
+
         % Save the code:
         saveCode(task);
         safeExit()
-    catch
+
+    catch ee
         warning('-----  Data could not be saved!  ------')
         safeExit()
-        rethrow(e);
+        rethrow(ee);
     end
+
+    rethrow(e);
 end

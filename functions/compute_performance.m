@@ -1,4 +1,4 @@
-function [blk_mat, performance_struct] = compute_performance(blk_mat)
+function [blk_mat] = compute_performance(blk_mat)
 %%
 
 % keys

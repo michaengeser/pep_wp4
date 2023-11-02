@@ -226,7 +226,7 @@ try
                         end
 
                         % Log the response received:
-                        blk_mat.trial_button_press(tr) = key;
+                        blk_mat.trial_response(tr) = key;
                         blk_mat.time_of_resp(tr) =  Resp_Time;
 
                         % logging reaction
@@ -333,28 +333,25 @@ try
 
         if strcmp(task, 'categorization')
 
+            % compute accuracy 
             [blk_mat, ~] = compute_performance(blk_mat);
 
+            % get mean accuracy
+            mean_acc = mean(blk_mat.accurcay);
 
-            if mod(blk, blk_break) == 0 
-                last_block = log_all(log_all.block > blk - blk_break, :);
-                [last_block, ~] = compute_performance(last_block);
-                block_message = sprintf(END_OF_BLOCK_MESSAGE, round(blk/blk_break), round(task_mat.block(end)/blk_break), round(mean(last_block.trial_accuracy_aud, 'omitnan')*100));
-                showMessage(block_message);
 
+
+            % generate feedback message
+            block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end)), ...
+                newline, 'Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
+
+            showMessage(block_message);
+
+            
                 wait_resp = 0;
                 while wait_resp == 0
                     [~, ~, wait_resp] = KbCheck();
-                end
-            elseif mod(blk, miniblk_break) == 0
-                block_message = sprintf(END_OF_MINIBLOCK_MESSAGE, round(blk/miniblk_break), round(task_mat.block(end)/miniblk_break));
-                showMessage(block_message);
-
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end
-            end
+                end           
         end
 
         if is_practice
