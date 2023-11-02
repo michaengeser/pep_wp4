@@ -5,14 +5,14 @@
 % This code file is saved into the code folder ("/data/code/").
 function [ ] = saveCode(task)
 
-global subID session CODE_FOLDER DATA_FOLDER FUNCTIONS_FOLDER%subject number
+global sub_num session %subject number
 
 try
     % Get all the matlab files in the directory:
     fileStruct = dir('*.m');
     
     % Create the save directory:
-    directory = fullfile(pwd,DATA_FOLDER,['sub-', subID],['ses-',num2str(session)],CODE_FOLDER);
+    directory = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)],'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -36,14 +36,14 @@ try
     copyfile(logsource,logdestination);
     
     % Saving the helper functions
-    helperFunctionFile = fullfile(pwd,FUNCTIONS_FOLDER);
-    destination = fullfile(directory,FUNCTIONS_FOLDER);
+    helperFunctionFile = fullfile(pwd,'functions');
+    destination = fullfile(directory,'functions');
     copyfile(helperFunctionFile,destination)
     
 catch  % Try again if something went wrong:
     fileStruct = dir('*.m');
     
-    directory = fullfile(pwd,DATA_FOLDER,['sub-',subID],task,['ses-',num2str(session)],CODE_FOLDER);
+    directory = fullfile(pwd,'data',['sub-',num2str(sub_num)],task,['ses-',num2str(session)],'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -66,7 +66,7 @@ catch  % Try again if something went wrong:
     copyfile(logsource,logdestination);
     
     % Saving the helper functions
-    helperFunctionFile = fullfile(pwd,FUNCTIONS_FOLDER);
+    helperFunctionFile = fullfile(pwd,'functions');
     destination = fullfile(directory);
     copyfile(helperFunctionFile,destination) % XXX commented out as it crashed
 end
