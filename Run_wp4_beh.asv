@@ -22,9 +22,9 @@ task_num = input('Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Fami
 if isempty(task_num); task_num = 0; end
 
 if task_num == 0; task = 'slide_show';
-elseif task_num == 1; task = 'cate';
-elseif task_num == 2; task = 'typ';
-elseif task_num == 3; task = 'fam';
+elseif task_num == 1; task = 'categorization';
+elseif task_num == 2; task = 'typicality';
+elseif task_num == 3; task = 'familiarity';
 elseif task_num == 4; task = 'aes';
     % to be extended
 end
@@ -45,7 +45,7 @@ rng('shuffle');
 
 %% check if participant and session exists already
 
-SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)]);
+SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], task);
 ExistFlag = exist(SubSesFolder,'dir');
 if ExistFlag
     warning ('This participant number and session was already attributed!')
@@ -237,7 +237,7 @@ try
                 %% Waiting for response
 
                 % Present fixation while waiting for response
-                if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE && 
+                if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
                     fix_time = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 
@@ -333,7 +333,7 @@ try
 
         if strcmp(task, 'categorization')
 
-            % compute accuracy 
+            % compute accuracy
             [blk_mat, ~] = compute_performance(blk_mat);
 
             % get mean accuracy
@@ -347,38 +347,36 @@ try
 
             showMessage(block_message);
 
-            
-                wait_resp = 0;
-                while wait_resp == 0
-                    [~, ~, wait_resp] = KbCheck();
-                end           
-        end
 
-        if is_practice
-            blk_continue = get_practice_feedback(blk_mat, practice_type);
-            blk = blk + blk_continue;
-        else
-            blk = blk + 1;
+            wait_resp = 0;
+            while wait_resp == 0
+                [~, ~, wait_resp] = KbCheck();
+            end
         end
 
     end  % End of block loop
 
     %% End of experiment
 
+    % Letting the participant that it is over:
+    end_message = ['THE END', newline, newline,'Thank you!'];
+
     % compute performances of tasks
-    [log_all, performance_struct] = compute_performance(log_all);
+    [log_all] = compute_performance(log_all);
+
+    %% Save
+
     % Save the whole table:
     saveTable(log_all, task, "all");
     % Save the code:
     saveCode(task);
-    % Letting the participant that it is over:
-    showMessage(END_OF_EXPERIMENT_MESSAGE);
+    
+    showMessage(end_message);
     WaitSecs(2);
 
-    showMessage(SAVING_MESSAGE);
+    showMessage('saving');
     % Mark the time of saving onset
     ttime = GetSecs;
-
 
     % save everything from command window
     Str = CmdWinTool('getText');
@@ -386,26 +384,34 @@ try
 
     % Terminating teh experiment:
     safeExit()
+
 catch e
+
     % Save the data:
     try
         % Save the beh data:
         saveTable(blk_mat, task, blk);
+
         % Save the eyetracker data:
-        if EYE_TRACKER
-            saveEyetracker(task, blk);
-        end
+%         if EYE_TRACKER
+%             saveEyetracker(task, blk);
+%         end
+
         % If the log all already exists, save it as well:
         if exist('log_all', 'var')
-            [log_all, performance_struct] = compute_performance(log_all);
+            [log_all] = compute_performance(log_all);
             saveTable(log_all, task, "all");
         end
+
         % Save the code:
         saveCode(task);
         safeExit()
-    catch
+
+    catch ee
         warning('-----  Data could not be saved!  ------')
         safeExit()
-        rethrow(e);
+        rethrow(ee);
     end
+
+    rethrow(e);
 end

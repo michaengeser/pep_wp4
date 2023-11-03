@@ -12,7 +12,7 @@ try
     fileStruct = dir('*.m');
     
     % Create the save directory:
-    directory = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)],'code');
+    directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)], ['ses-',num2str(session)], task,'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -43,7 +43,7 @@ try
 catch  % Try again if something went wrong:
     fileStruct = dir('*.m');
     
-    directory = fullfile(pwd,'data',['sub-',num2str(sub_num)],task,['ses-',num2str(session)],'code');
+    directory = fullfile(pwd, 'data', ['sub-',num2str(sub_num)], ['ses-',num2str(session)], task, 'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -69,5 +69,6 @@ catch  % Try again if something went wrong:
     helperFunctionFile = fullfile(pwd,'functions');
     destination = fullfile(directory);
     copyfile(helperFunctionFile,destination) % XXX commented out as it crashed
+    
 end
 end

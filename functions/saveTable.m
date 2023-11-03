@@ -1,21 +1,27 @@
 % SAVELOG_TABLE saves a matrix as mat and csv
 % input:
 % ------
-% lof_tbale - the table to be saved
+% input_table - the table to be saved
+% and block numner (can be number or 'all')
+%
 % output:
 % -------
-% A mat and a csv file containning the data of log_table
+% A mat and a csv file containning the data of log_table are saved to data
+% folder
 
 
-function [] = saveTable(input_table, task, blk_num)
+function [] = saveTable(input_table, blk_num)
 
-global DATA_FOLDER subID session
+global subID session
+
+task = blk_mat.task(1);
 
 % Creating the directories if they don't already exist:
-dir = string(fullfile(pwd,DATA_FOLDER,['sub-', subID],['ses-',num2str(session)]));
+dir = string(fullfile(pwd,'data',['sub-', subID],['ses-',num2str(session)], string(task)));
 if ~exist(dir, 'dir')
     mkdir(dir);
 end
+
 if isnumeric(blk_num)
     if blk_num < 0
         blk_num = 0;
@@ -27,7 +33,7 @@ end
 fileName_mat  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.mat', subID, session, blk_num, string(task)));
 fileName_csv  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.csv', subID, session, blk_num, string(task)));
 
-% check if they already exist and mark them aas repetitions
+% check if they already exist and add repetition to file name
 repetition = 0;
 new_fileName_mat = fileName_mat; 
 while exist(new_fileName_mat, 'file') == 2

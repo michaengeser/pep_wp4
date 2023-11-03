@@ -21,7 +21,7 @@ global NO_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION NO_ERR
 global CATEGORIES
 % keys
 global CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key H_Key KITCHEN_KEY BATHROOM_KEY
+global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY
 % text
 global fontType fontSize fontColor 
 % optics
@@ -97,7 +97,7 @@ RestartKey    =  KbName('R');
 abortKey      =  KbName('ESCAPE'); % ESC aborts experiment
 YesKey        =  KbName('Y');
 F_Key        =  KbName('F');
-H_Key        =  KbName('H');
+J_Key        =  KbName('J');
 spaceBar      =  KbName('SPACE');
 oneKey        =  KbName('1!');
 twoKey        =  KbName('2@');
@@ -111,9 +111,9 @@ ValidationKey = KbName('V');
 
 if mod(sub_num, 2)
     KITCHEN_KEY = F_Key;
-    BATHROOM_KEY = H_Key;
+    BATHROOM_KEY = J_Key;
 else
-    KITCHEN_KEY = H_Key;
+    KITCHEN_KEY = J_Key;
     BATHROOM_KEY = F_Key;
 end
 
