@@ -110,9 +110,11 @@ eightKey       =  KbName('8*');
 ValidationKey = KbName('V');
 
 if mod(sub_num, 2)
+    % odd subject number
     KITCHEN_KEY = F_Key;
     BATHROOM_KEY = J_Key;
 else
+    % even subject number
     KITCHEN_KEY = J_Key;
     BATHROOM_KEY = F_Key;
 end
