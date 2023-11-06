@@ -2,12 +2,11 @@
 
 function [ ] = instructions(task)
 
-global sub_num
+global sub_num 
 global RightKey LeftKey
 
 intro_slide1 = "instructions_slide1.png";
 
-% decide which slides to take (based on task and subject number)
 if strcmp(task, 'introspection')
     if mod(sub_num, 2)
         % odd subject number
@@ -20,28 +19,19 @@ if strcmp(task, 'introspection')
     % last slide
     intro_slide3 = "instructions_end_cate.png";
 else
-    if strcmp(task, 'typicality')
-        intro_slide2 = "instructions_typ.png";
-    elseif strcmp(task, 'familiarity')
-        intro_slide2 = "instructions_fam.png";
-    elseif strcmp(task, 'usability')
-        intro_slide2 = "instructions_usa.png";
-    elseif strcmp(task, 'aesthetic')
-        intro_slide2 = "instructions_aes.png";
-    end
+if strcmp(task, 'introspection')
 
-    % last slide
-    intro_slide3 = "instructions_end_rating.png";
+    intro_slide1 = [INSTRUCTIONS1;INSTRUCTIONS2;INSTRUCTIONS3;INSTRUCTIONS5;INSTRUCTIONS6;INSTRUCTIONS7];
+end 
 end
-        
-InstructionsPaths = [intro_slide1;intro_slide2;intro_slide3];
+
+
+InstructionsPaths = [INSTRUCTIONS1;INSTRUCTIONS2;INSTRUCTIONS3;INSTRUCTIONS4];
 
 % Setting the slide number to 1 to initiate the while loop
 InstructionSlideNum = 1;
-
 % displays all instruction screens
 while InstructionSlideNum<= size(InstructionsPaths,1) % Looping until we went through all slides:
-    
     % Showing instruction slide
     showInstructions(InstructionsPaths(InstructionSlideNum,:));
     WaitSecs(0.2);

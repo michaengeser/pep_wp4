@@ -11,7 +11,7 @@ function [tr_mat] = createTrialMatrices(first_sub_num, n)
 n_pics_per_cate = 50;
 
 % List the tasks.
-tasks = ["categorization", "typicality", "familiarity", "aesthecticness"];
+tasks = ["categorization", "typicality", "familiarity", "aesthectic"];
 
 % Create a structure storing the levels of each of these conditions:
 file_list = struct('kitchen', [], 'bathroom', [], 'practice', []);
@@ -49,7 +49,7 @@ exp_dist = makedist("Exponential", "mu", jitter_mean);
 jitter_distribution = truncate(exp_dist, jitter_min, jitter_max);
 
 %% Creating the trials table:
-for sub_num = first_sub_num:first_sub_num+n
+for sub_num = first_sub_num:first_sub_num + (n-1)
 for task = tasks
 
     % How many repeats per picture
@@ -69,7 +69,9 @@ for task = tasks
     % get all image names and textures
     count = 0;
     for cate = cateories
-
+        % supress warnings (it will complain about the assign values in the
+        % table)
+        warning('off','all')
         for t = 1:length(file_list.(cate))
             count = count + 1;
             task_mat.sub_num(count) = sub_num;
@@ -87,6 +89,8 @@ for task = tasks
                 task_mat.is_practice(count) = 0;
             end
         end
+        % turn back on warnings
+        warning('on','all')
     end
 
     % shuffle row order
@@ -117,7 +121,13 @@ end
 
     % Save to file:
     % Create file name:
-    file_name = fullfile(pwd, sprintf("sub-%d_task-%s_trials.csv", 100 + sub_num, 'wp4_beh'));
+    if endsWith(pwd, 'trial_matrices')
+        target_dir = pwd;
+    else
+        target_dir = fullfile(pwd, 'trial_matrices');
+    end
+
+    file_name = fullfile(target_dir, sprintf("sub-%d_%s_trials.csv", sub_num, 'wp4_beh'));
     writetable(tr_mat, file_name);
 
 end

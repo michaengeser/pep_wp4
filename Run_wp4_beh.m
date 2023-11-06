@@ -7,7 +7,7 @@ clear all;
 % Hardware parameters:
 global sub_num TRUE FALSE refRate compKbDevice task
 global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE SHOW_PRACTICE  session
-global TRIAL_DURATION FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
+global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
 global ABORTED RESTART_KEY NO_KEY ABORT_KEY 
 
 
@@ -59,10 +59,7 @@ end
 initPsychtooblox(); % initializes psychtoolbox window at correct resolution and refresh rate
 
 %% Setup the trial matrix and log:
-% open trial matrix (form Experiment 1) and add auditory conditions
-MatFolderName = [pwd,filesep,'task_matrices\'];
-TableName = ['sub-',sub_num,'_trials.csv'];
-tr_mat = readtable(fullfile(MatFolderName, TableName));
+[tr_mat] = load_trial_matrix(sub_num);
 
 % get trial matrix of the task 
 task_mat = tr_mat(strcmp(tr_mat.task, task),:);
