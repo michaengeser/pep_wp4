@@ -8,7 +8,7 @@ clear all;
 global sub_num TRUE FALSE refRate compKbDevice task
 global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
-global ABORTED RESTART_KEY NO_KEY ABORT_KEY YesKey RestartKey
+global ABORTED RESTART_KEY NO_KEY ABORT_KEY spaceBar RestartKey
 
 
 % Add functions folder to path (when we separate all functions)
@@ -66,7 +66,7 @@ task_mat = tr_mat(strcmp(tr_mat.task, task),:);
 
 %% Load and prepare stimuli:
 
-showMessage('Loading');
+showMessage('Loading...');
 loadStimuli()
 
 % make jitter multiple of refresh rate
@@ -92,12 +92,9 @@ try
 
     %%  Experiment
     % Experiment Prep
-    previous_blk = 0;
-    start_message_flag = FALSE;
     showFixation('PhotodiodeOff');
 
     %% Block loop:
-
     blks = unique(task_mat.block);
 
     if SHOW_PRACTICE
@@ -107,15 +104,7 @@ try
     end
 
     while blk <= blks(end)
-        % in the very first trial of the actual experiment show start message
-        if blk == 1
-            showMessage('Experiment starts now');
-            wait_resp = 0;
-            while wait_resp == 0
-                [~, ~, wait_resp] = KbCheck();
-            end
-            start_message_flag = TRUE;
-        end
+
 % 
 %         % Initialize the eyetracker with the block number and run the
 %         % calibration:
@@ -149,18 +138,24 @@ try
         % Add the columns for logging:
         blk_mat = prepare_log(blk_mat);
 
-        % Check whether this block is a practice or not:
-        if blk_mat.is_practice(1)
-            showMessage('Practice starts now');
-            wait_resp = 0;
-            while wait_resp == 0
-                [~, ~, wait_resp] = KbCheck();
-            end
+        % check what block we´re in and informs user
+        if blk == 0
+            showMessage('Press a space to start the practice');
+        elseif blk == 1
+            showMessage('Press a space to start the experiment');
+        else 
+            showMessage('Press a space to start the next block');
+        end
+        
+        % wait for response
+        wait_resp = 0;
+        while wait_resp == 0
+            [~, ~, wait_resp] = KbCheck();
         end
 
         % Wait a random amount of time and show fixation:
-        fixOnset = showFixation('PhotodiodeOff'); % 1
-        WaitSecs(rand*2+0.5);
+        fixOnset = showFixation('PhotodiodeOff'); 
+        WaitSecs(rand + 2);
 
         %% Trials loop:
         for tr = 1:length(blk_mat.trial)
@@ -325,7 +320,10 @@ try
             log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
         end
 
-        %% Feedback 
+        %% Feedback
+
+        % generate end of block message
+        block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end))];
 
         if strcmp(task, 'categorization')
 
@@ -333,44 +331,38 @@ try
             [blk_mat] = compute_performance(blk_mat);
 
             % get mean accuracy
-            mean_acc = mean(blk_mat.accurcay);
-
+            mean_acc = mean(blk_mat.trial_accuracy);
+            
             % generate feedback message
-            block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end)), ...
-                newline, 'Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
+            block_message = [block_message, newline, 'Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
 
-            showMessage(block_message);
-
-            wait_resp = 0;
-            while wait_resp == 0
-                [~, ~, wait_resp] = KbCheck();
-            end
-
-            % give option to reprat practice
+            % give option to repeat practice
             if blk_mat.is_practice
 
-                practice_key_pressed = 0;
-                while practice_key_pressed == 0
-
-                    % generate practice restart message
-                    restart_practice_message = ['Press Y to proceed to experiemt', newline, ...
+                % generate practice feedback message
+                block_message = [block_message, newline, 'Press space to proceed to experiemt', newline, ...
                         'Press R to repeat practice'];
 
-                    showMessage(restart_practice_message)
-
-                    [~, ~, practice_key] = KbCheck();
-
-                    if practice_key == RestartKey
-                        practice_key_pressed = 1;
-                        blk = blk - 1;
-                    elseif practice_key == YesKey
-                        practice_key_pressed = 1;
-                    else
-                        practice_key_pressed = 0;
-                    end
-                end
             end % ends practice message statement
-        end % ends of feedback 
+        end % end of feedback 
+       
+       % show generated end of block message
+       showMessage(block_message)
+
+       % wait for response ("r" = repeats practice, space bar = proceed)
+       key_pressed = 0;
+       while key_pressed == 0
+           [~, ~, Resp] = KbCheck();
+
+           if Resp(RestartKey)
+               key_pressed = 1;
+               blk = blk - 1;
+           elseif Resp(spaceBar)
+               key_pressed = 1;
+           else
+               key_pressed = 0;
+           end
+       end
 
     blk = blk + 1;
     end  % End of block loop

@@ -1,115 +1,3971 @@
+ans =
 
-PsychStartup: Adding path of installed GStreamer runtime to library path. [C:\gstreamer\1.0\msvc_x86_64\bin]
->> initRuntimeParameters
->> Run_wp4_beh
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-Subject number [101-199, default: 101]: 102
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 0]: 1
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+   6.1508e+05
 
 
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
+ans =
 
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
+   6.1508e+05
 
 
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666804 ms [59.999505 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.640968 ms [60.092658 Hz]. (50 valid samples taken, stddev=0.631603 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
+ans =
 
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
+   6.1508e+05
 
 
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
+ans =
 
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
+   6.1508e+05
 
 
+ans =
+
+   6.1508e+05
 
 
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 606449.327608 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 606449.336126 secs).
+ans =
 
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 606449.343216, scanline = 1012
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 533, line_post_swaprequest = 766, time_post_swaprequest = 606449.339577
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 606449.327903
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
+   6.1508e+05
 
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
 
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-37  instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
-Unrecognized function or variable 'showinstrs'.
+ans =
 
-Error in instructions (line 46)
-    showinstrs(instrsPaths(instrSlideNum,:));
+   6.1508e+05
 
-Error in Run_wp4_beh (line 81)
-    instructions(task);
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1508e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1509e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1510e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+
+ans =
+
+   6.1513e+05
+
+Operation terminated by user during DrawFormattedText
+
+
+In showMessage (line 17)
+    DrawFormattedText(w, message, 'center', 'center', text.Color);
+
+In Run_wp4_beh (line 354)
+                    showMessage(restart_practice_message)
  
+rryyyryryryryryryryryryryrryrryyyyy
 >> Run_wp4_beh
 
 
-PTB-INFO: There are still 100 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: There are still 113 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
 PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
 PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
 PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
@@ -119,124 +3975,15 @@ PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to re
 
 
 
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Subject number [101-199, default: 101]: 101
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 0]: 1
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 9 times out of a total of 4778 flips during this session.
 
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666704 ms [59.999865 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.642086 ms [60.088621 Hz]. (50 valid samples taken, stddev=0.304752 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 606525.394474 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 606525.403999 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 606525.407645, scanline = 854
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 608, line_post_swaprequest = 649, time_post_swaprequest = 606525.404611
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 606525.394619
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-37  instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
-Error using imread>get_full_filename
-File "C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität
-Gießen\Dokumente\GitHub\pep_wp4\instructions\instrs_slide1.png" does not exist.
-
-Error in imread (line 371)
-    fullname = get_full_filename(filename);
-
-Error in showInstructions (line 13)
-    x = Screen('MakeTexture', w, imread(fullfile(pwd, 'instructions', slide)));
-
-Error in instructions (line 46)
-    showInstructions(instrsPaths(instrSlideNum,:));
-
-Error in Run_wp4_beh (line 81)
-    instructions(task);
- 
->> Run_wp4_beh
-
-
-PTB-INFO: There are still 100 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
 
 
 
@@ -244,267 +3991,11 @@ WARNING: This session of your experiment was run by you with the setting Screen(
 WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
 WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
 WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 0]: 1
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666804 ms [59.999505 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.665558 ms [60.003991 Hz]. (50 valid samples taken, stddev=0.297606 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C1AF5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 606652.994766 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 606653.001121 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 606653.004249, scanline = 614
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 402, line_post_swaprequest = 460, time_post_swaprequest = 606653.001975
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 606652.994909
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-37  instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
->> Run_wp4_beh
-
-
-PTB-INFO: There are still 101 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 0]: 1
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF93CC65900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF93CC65900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666706 ms [59.999858 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.672340 ms [59.979583 Hz]. (50 valid samples taken, stddev=0.602407 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF93CC65900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 607004.828435 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 607004.837197 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 607004.841183, scanline = 825
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 556, line_post_swaprequest = 607, time_post_swaprequest = 607004.837941
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 607004.828604
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-37  instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 408) 
-
-
-PTB-INFO: There are still 107 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-
-WARNING: Failed to load GetCharJava Java class. Most likely your Matlab
-WARNING: classpath.txt file is not up to date. I will try to auto-fix this for
-WARNING: the current session by executing the PsychJavaTrouble() command.
-WARNING: This may have bad side-effects, like clearing all your scripts variables
-WARNING: and functions! If it works, please read 'help PsychJavaTrouble'
-WARNING: for a proper and permanent fix to the problem.
-
-PsychJavaTrouble: Will now try to add the PsychJava folder to Matlabs dynamic classpath...
-PsychJavaTrouble: Added PsychJava folder to dynamic class path. Psychtoolbox Java commands should work now!
-INFO: Problem may be fixed for this session. Let's see...
-INFO: Yep! Still, please fix the problem properly asap.
-Error using saveTable
-Too many input arguments.
-
-Error in Run_wp4_beh (line 390)
-        saveTable(blk_mat, task, blk);
- 
->> e
-
-e = 
-
-  MException with properties:
-
-    identifier: 'MATLAB:UndefinedFunction'
-       message: 'Unrecognized function or variable 'drawFrame'.'
-         cause: {}
-         stack: [2×1 struct]
-    Correction: []
-
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Operation terminated by user during Run_wp4_beh
- 
-
->> Run_wp4_beh
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
 Subject number [101-199, default: 101]: 
 Session number [default: 1]: 
 Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
+Warning: This participant number and session was already attributed! 
+> In Run_wp4_beh (line 51) 
 WELCOME to initPsychtooblox
 PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
 PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
@@ -532,516 +4023,21 @@ PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliabl
 PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
 PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
 PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
 PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
 PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
 PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
 PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
 PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
 PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666753 ms [59.999689 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.673604 ms [59.975036 Hz]. (50 valid samples taken, stddev=0.227160 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 607515.946036 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 607515.949173 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 607515.952263, scanline = 403
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 195, line_post_swaprequest = 236, time_post_swaprequest = 607515.949788
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 607515.946172
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-37  instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
-Run_wp4_beh
-
-
-PTB-INFO: There are still 100 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
 
 
 PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
 PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
 PTB-INFO: Measured monitor refresh interval from beamposition = 16.666712 ms [59.999836 Hz].
 PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.653480 ms [60.047510 Hz]. (50 valid samples taken, stddev=0.558466 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C13D5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 607543.162729 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 607543.165696 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 607543.169150, scanline = 416
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 182, line_post_swaprequest = 225, time_post_swaprequest = 607543.166335
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 607543.162885
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 408)
-In instructions (line 37)
-In Run_wp4_beh (line 81) 
-
-
-PTB-INFO: There are still 115 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 7 times out of a total of 20 flips during this session.
-
-INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
-INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
-INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
-INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
-INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
-INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Unable to resolve the name 'blk_mat.task'.
-
-Error in saveTable (line 17)
-task = blk_mat.task(1);
-
-Error in Run_wp4_beh (line 390)
-        saveTable(blk_mat, blk);
- 
->> e
-Unrecognized function or variable 'e'.
- 
->>     Str = CmdWinTool('getText');
-    dlmwrite(dfile,Str,'delimiter','');
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C17A5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C17A5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666690 ms [59.999917 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.664920 ms [60.006289 Hz]. (50 valid samples taken, stddev=0.474310 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C17A5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 607873.912814 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 607873.924559 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 607873.927672, scanline = 962
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 751, line_post_swaprequest = 792, time_post_swaprequest = 607873.925165
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 607873.912957
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-85  try
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 408) 
-
-
-PTB-INFO: There are still 109 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 5 times out of a total of 14 flips during this session.
-
-INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
-INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
-INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
-INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
-INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
-INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Error using copyfile
-No matching files named 'C:\Users\JLU-SU\OneDrive - Justus-Liebig-Universität
-Gießen\Dokumente\GitHub\pep_wp4\log_recon_time.txt' were found.
-
-Error in saveCode (line 66)
-    copyfile(logsource,logdestination);
-
-Error in Run_wp4_beh (line 404)
-        saveCode(task);
- 
->> e
-
-e = 
-
-  MException with properties:
-
-    identifier: 'MATLAB:nonLogicalConditional'
-       message: 'Operands to the logical AND (&&) and OR (||) operators must be convertible to logical scalar values. Use the ANY or ALL functions to reduce operands to logical scalar values.'
-         cause: {}
-         stack: [1×1 struct]
-    Correction: []
-
->> elapsedTime < min_trial_duration && ~hasInput
-Operands to the logical AND (&&) and OR (||) operators must be convertible to logical scalar values. Use the ANY or ALL
-functions to reduce operands to logical scalar values.
- 
->> ~hasInput
-
-ans =
-
-  logical
-
-   1
-
->> elapsedTime < min_trial_duration
-
-ans =
-
-  0×0 empty logical array
-
->> min_trial_duration
-
-min_trial_duration =
-
-     []
-
->> elapsedTime
-
-elapsedTime =
-
-     0
-
->> blk_mat.duration(tr)
-
-ans =
-
-    83
-
->>     min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
->> elapsedTime < min_trial_duration && ~hasInput
-Operands to the logical AND (&&) and OR (||) operators must be convertible to logical scalar values. Use the ANY or ALL
-functions to reduce operands to logical scalar values.
- 
->> elapsedTime < min_trial_duration
-
-ans =
-
-  0×0 empty logical array
-
->> elapsedTime = 0;
->> elapsedTime < min_trial_duration && ~hasInput
-Operands to the logical AND (&&) and OR (||) operators must be convertible to logical scalar values. Use the ANY or ALL
-functions to reduce operands to logical scalar values.
- 
->> elapsedTime < min_trial_duration
-
-ans =
-
-  0×0 empty logical array
-
->> elapsedTime
-
-elapsedTime =
-
-     0
-
->> min_trial_duration
-
-min_trial_duration =
-
-     []
-
->> min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
->> min_trial_duration
-
-min_trial_duration =
-
-     []
-
->> blk_mat.duration(tr)
-
-ans =
-
-    83
-
->> refRate
-
-refRate =
-
-    0.0167
-
->> FRAME_ANTICIPATION
-
-FRAME_ANTICIPATION =
-
-     []
-
->> FRAME_ANTICIPATION = 1
-
-FRAME_ANTICIPATION =
-
-     1
-
->> FRAME_ANTICIPATION = 0.5;
->>             elapsedTime = 0;
-
-            % define total trial duration
-            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
->> elapsedTime < min_trial_duration && ~hasInput
-
-ans =
-
-  logical
-
-   1
-
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-Warning: This participant number and session was already attributed! 
-> In Run_wp4_beh (line 51) 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666739 ms [59.999740 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.614178 ms [60.189556 Hz]. (50 valid samples taken, stddev=0.330111 ms.)
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.613216 ms [60.193041 Hz]. (50 valid samples taken, stddev=0.247679 ms.)
 PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
 PTB-INFO: Small deviations between reported values are normal and no reason to worry.
 PTB-WARNING: ==============================================================================================================================
@@ -1065,31 +4061,14 @@ Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you real
 
 
 PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-69  showMessage('Loading');
-K>> global texture_struct w
-
-% path to stimuli folder
-PreFolderName = [pwd,filesep,'stimuli\'];
-cate_names = {'kitchen', 'bathroom', 'practice'};
-texture_struct = struct('kitchen', [], 'bathroom', [], 'practice', []);
-
-% loops through the folders an loads all stimuli
-for j = 1:length(cate_names)
-
-    FolderName = fullfile(PreFolderName, cate_names{j});
-    new_textures = getTexturesFromHD(FolderName, w);
-    texture_struct.(cate_names{j}) = new_textures;
-
-end
-WELCOME to loadStimuli
 
 
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 608939.380881 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 608939.386917 secs).
+PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 615151.014464 secs, which would indicate that
+PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 615151.025146 secs).
 
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 608939.396971, scanline = 1045
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 366, line_post_swaprequest = 414, time_post_swaprequest = 608939.387631
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 608939.381279
+PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 615151.028645, scanline = 921
+PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 685, line_post_swaprequest = 722, time_post_swaprequest = 615151.025699
+PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 615151.014597
 PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
 
 PTB-ERROR: This error can be due to either of the following causes:
@@ -1100,24 +4079,1124 @@ PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset
 PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
 PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
 PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
->> elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+WELCOME to loadStimuli
+WELCOME TO compute_performance
 
 ans =
 
-  logical
+   6.1518e+05
 
-   0
-
->> ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION)
 
 ans =
 
-   82.9917
-
->> Run_wp4_beh
+   6.1518e+05
 
 
-PTB-INFO: There are still 223 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+
+ans =
+
+   6.1518e+05
+
+WELCOME TO compute_performance
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+
+ans =
+
+   6.1521e+05
+
+WELCOME TO compute_performance
+WELCOME TO compute_performance
+
+
+PTB-INFO: There are still 113 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
 PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
 PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
 PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
@@ -1128,7 +5207,7 @@ PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to re
 
 
 INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 3 times out of a total of 9 flips during this session.
+INFO: a total of 5 times out of a total of 450 flips during this session.
 
 INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
 INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
@@ -1143,26 +5222,22 @@ WARNING: This session of your experiment was run by you with the setting Screen(
 WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
 WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
 WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-Warning: This participant number and session was already attributed! 
-> In Run_wp4_beh (line 51) 
 Error using Run_wp4_beh
-Program aborted by user
+Experiment has been aborted
  
->> Run_wp4_beh
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
+>> rand*2.5
 
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
+ans =
+
+    1.6385
+
+>> rand+2.5
+
+ans =
+
+    2.6328
+
+>> Run_wp4_beh
 Subject number [101-199, default: 101]: 
 Session number [default: 1]: 
 Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
@@ -1195,21 +5270,21 @@ PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliabl
 PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
 PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
 PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF936E35900. Setting thread priority to HIGHEST as a work-around...
 PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
 PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
 PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
 PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
 PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
 PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF936E35900. Setting thread priority to HIGHEST as a work-around...
 
 
 PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
 PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
 PTB-INFO: Measured monitor refresh interval from beamposition = 16.666696 ms [59.999895 Hz].
 PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.552640 ms [60.413324 Hz]. (50 valid samples taken, stddev=0.702954 ms.)
+PTB-INFO: Measured monitor refresh interval from VBLsync = 16.649028 ms [60.063566 Hz]. (50 valid samples taken, stddev=0.335039 ms.)
 PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
 PTB-INFO: Small deviations between reported values are normal and no reason to worry.
 PTB-WARNING: ==============================================================================================================================
@@ -1232,442 +5307,15 @@ You can force Psychtoolbox to continue, despite the severe problems, by adding t
 Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
 
 
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
+PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF936E35900. Setting thread priority to HIGHEST as a work-around...
 
 
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 609384.364933 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 609384.374757 secs).
+PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 617034.167288 secs, which would indicate that
+PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 617034.168603 secs).
 
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 609384.378633, scanline = 893
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 631, line_post_swaprequest = 687, time_post_swaprequest = 609384.375585
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 609384.365075
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-200             while elapsedTime < min_trial_duration && ~hasInput
-WELCOME TO compute_performance
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 407) 
-
-
-PTB-INFO: There are still 113 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 5 times out of a total of 32 flips during this session.
-
-INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
-INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
-INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
-INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
-INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
-INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Error using tabular/dotParenReference
-Unrecognized table variable name 'time_of_resp_aud'.
-
-Error in compute_performance (line 31)
-    blk_mat.RT(tr) = blk_mat.time_of_resp_aud(tr) - blk_mat.stim_time(tr);
-
-Error in Run_wp4_beh (line 398)
-            [log_all] = compute_performance(log_all);
- 
->> [log_all] = compute_performance(log_all);
-WELCOME TO compute_performance
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-Warning: This participant number and session was already attributed! 
-> In Run_wp4_beh (line 51) 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666767 ms [59.999638 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.689766 ms [59.916958 Hz]. (50 valid samples taken, stddev=0.831779 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 610455.683026 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 610455.690022 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 610455.693900, scanline = 703
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 442, line_post_swaprequest = 500, time_post_swaprequest = 610455.690889
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 610455.683198
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 407) 
-
-
-PTB-INFO: There are still 113 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 3 times out of a total of 8 flips during this session.
-
-INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
-INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
-INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
-INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
-INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
-INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Unrecognized function or variable 'str'.
-
-Error in saveTable (line 20)
-dir = string(fullfile(pwd,'data',['sub-', str(sub_num)],['ses-',num2str(session)], string(task)));
-
-Error in Run_wp4_beh (line 389)
-        saveTable(blk_mat, blk);
- 
->> e
-
-e = 
-
-  MException with properties:
-
-    identifier: 'MATLAB:table:UnrecognizedVarName'
-       message: 'Unrecognized table variable name 'vis_stim_time'.'
-         cause: {}
-         stack: [2×1 struct]
-    Correction: []
-
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-Warning: This participant number and session was already attributed! 
-> In Run_wp4_beh (line 51) 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666878 ms [59.999241 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.523898 ms [60.518408 Hz]. (50 valid samples taken, stddev=0.693557 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 610564.050042 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 610564.053651 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 610564.057546, scanline = 490
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 227, line_post_swaprequest = 282, time_post_swaprequest = 610564.054473
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 610564.050172
-PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
-
-PTB-ERROR: This error can be due to either of the following causes:
-PTB-ERROR: Very unlikely: Something is broken in your systems beamposition timestamping. I've disabled high precision
-PTB-ERROR: timestamping for now. Returned timestamps will be less robust and accurate.
-
-PTB-ERROR: The most likely cause would be that Synchronization of stimulus onset (buffer swap) to the
-PTB-ERROR: vertical blank interval VBL is not working properly, or swap completion signalling to PTB is broken.
-PTB-ERROR: Please run the script PerceptualVBLSyncTest to check this. With non-working sync to VBL, all stimulus timing
-PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help SyncTrouble' !
-WELCOME to loadStimuli
-WELCOME TO compute_performance
-Warning: -----  Data could not be saved!  ------ 
-> In Run_wp4_beh (line 407) 
-
-
-PTB-INFO: There are still 113 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
-PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
-PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
-PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
-PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
-PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
-PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
-
-
-
-INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
-INFO: a total of 4 times out of a total of 29 flips during this session.
-
-INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
-INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
-INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
-INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
-INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
-INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
-
-
-
-WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
-WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
-WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
-WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
-Error using saveTable
-Too many input arguments.
-
-Error in Run_wp4_beh (line 399)
-            saveTable(log_all, task, "all");
- 
->> log_all.trial_end(2)
-
-ans =
-
-   6.1058e+05
-
->> log_all.trial_end(2) - log_all.trial_end(1)
-
-ans =
-
-    0.0265
-
->>  GetSecs - blk_mat.jit_onset(tr)
-
-ans =
-
-   NaN
-
->> elapsedTime = GetSecs - blk_mat.jit_onset(tr);
->> elapsedTime < jitter_duration
-
-ans =
-
-  logical
-
-   0
-
->> Run_wp4_beh
-Subject number [101-199, default: 101]: 
-Session number [default: 1]: 
-Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: 
-Warning: This participant number and session was already attributed! 
-> In Run_wp4_beh (line 51) 
-WELCOME to initPsychtooblox
-PTB-INFO: Multi-display setup in explicit multi-display mode detected. Using the following mapping:
-PTB-INFO: Screen 0 corresponds to the full Windows desktop area. Useful for stereo presentations in stereomode=4 ...
-PTB-INFO: Screen 1 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY1 ...
-PTB-INFO: Screen 2 corresponds to the display area of the monitor with the Windows-internal name \\.\DISPLAY2 ...
-
-PTB-INFO: Your version of Matlab 64-Bit is global system DPI aware. On Windows-8 or later, fullscreen onscreen windows will only work 
-PTB-INFO: properly timing-wise when displayed on displays with the same pixel density as your systems primary display monitor.
-PTB-INFO: For your multi-display setup the stimulus display monitor must have a DPI of (96, 96), matching that of
-PTB-INFO: your primary display monitor. Ideally you will only display on the primary display in the first place.
-PTB-INFO: Displaying on anything with a different DPI will cause mysterious visual timing problems, sync failures etc.
-PTB-INFO: Read 'help RetinaDisplay' for more info on this topic.
-
-
-PTB-INFO: This is Psychtoolbox-3 for Microsoft Windows, under Matlab 64-Bit (Version 3.0.19 - Build date: Oct 25 2023).
-PTB-INFO: OS support status: Windows 10 (Version 10.0) supported and tested to some limited degree.
-PTB-INFO: Type 'PsychtoolboxVersion' for more detailed version information.
-PTB-INFO: Most parts of the Psychtoolbox distribution are licensed to you under terms of the MIT License, with
-PTB-INFO: some restrictions. See file 'License.txt' in the Psychtoolbox root folder for the exact licensing conditions.
-
-PTB-INFO: For information about paid support, support memberships and other commercial services, please type
-PTB-INFO: 'PsychPaidSupportAndServices'.
-
-PTB-INFO: Proper timing and timestamping of visual stimulus onset is not reliably supported at all
-PTB-INFO: when running in windowed mode (non-fullscreen). If PTB aborts with 'Synchronization failure'
-PTB-INFO: you can disable the sync test via call to Screen('Preference', 'SkipSyncTests', 2); .
-PTB-INFO: You won't get proper stimulus onset timestamps in any case though, so windowed mode is of limited use.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-PTB-INFO: The detected endline of the vertical blank interval is equal or lower than the startline. This indicates
-PTB-INFO: that i couldn't detect the duration of the vertical blank interval and won't be able to correct timestamps
-PTB-INFO: for it. This will introduce a very small and constant offset (typically << 1 msec). Read 'help BeampositionQueries'
-PTB-INFO: for how to correct this, should you really require that last few microseconds of precision.
-PTB-INFO: Btw. this can also mean that your systems beamposition queries are slightly broken. It may help timing precision to
-PTB-INFO: enable the beamposition workaround, as explained in 'help ConserveVRAMSettings', section 'kPsychUseBeampositionQueryWorkaround'.
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-INFO: OpenGL-Renderer is NVIDIA Corporation :: NVIDIA GeForce MX550/PCIe/SSE2 :: 4.6.0 NVIDIA 528.08
-PTB-INFO: VBL startline = 1080 , VBL Endline = 1079
-PTB-INFO: Measured monitor refresh interval from beamposition = 16.666704 ms [59.999865 Hz].
-PTB-INFO: Will use beamposition query for accurate Flip time stamping.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 16.628858 ms [60.136421 Hz]. (50 valid samples taken, stddev=0.269651 ms.)
-PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
-PTB-INFO: Small deviations between reported values are normal and no reason to worry.
-PTB-WARNING: ==============================================================================================================================
-PTB-WARNING: WINDOWS DWM DESKTOP COMPOSITOR IS ACTIVE! ALL FLIP STIMULUS ONSET TIMESTAMPS WILL BE VERY LIKELY UNRELIABLE AND LESS ACCURATE!
-PTB-WARNING: STIMULUS ONSET TIMING WILL BE UNRELIABLE AS WELL, AND GRAPHICS PERFORMANCE MAY BE SEVERELY REDUCED! STIMULUS IMAGES MAY NOT
-PTB-WARNING: SHOW UP AT ALL! DO NOT USE THIS MODE FOR RUNNING REAL EXPERIMENT SESSIONS WITH ANY REQUIREMENTS FOR ACCURATE TIMING!
-PTB-WARNING: ==============================================================================================================================
-
-WARNING: Couldn't compute a reliable estimate of monitor refresh interval! Trouble with VBL syncing?!?
-
-
------ ! PTB - ERROR: SYNCHRONIZATION FAILURE ! -----
-
-One or more internal checks (see Warnings above) indicate that synchronization
-of Psychtoolbox to the vertical retrace (VBL) is not working on your setup.
-
-This will seriously impair proper stimulus presentation and stimulus presentation timing!
-Please read 'help SyncTrouble' for information about how to solve or work-around the problem.
-You can force Psychtoolbox to continue, despite the severe problems, by adding the command
-Screen('Preference', 'SkipSyncTests', 1); at the top of your script, if you really know what you are doing.
-
-
-PTB-WARNING: Call to PsychAvSetMmMaxThreadCharacteristics() for Vista-MMCSS scheduling failed for threadhandle 00007FF8C0BC5900. Setting thread priority to HIGHEST as a work-around...
-
-
-PTB-ERROR: Screen('Flip'); beamposition timestamping computed an *impossible stimulus onset value* of 612145.010780 secs, which would indicate that
-PTB-ERROR: stimulus onset happened *before* it was actually requested! (Earliest theoretically possible 612145.014997 secs).
-
-PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 612145.018023, scanline = 470
-PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 266, line_post_swaprequest = 324, time_post_swaprequest = 612145.015859
-PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 612145.010894
+PTB-ERROR: Some more diagnostic values (only for experts): rawTimestamp = 617034.171685, scanline = 285
+PTB-ERROR: Some more diagnostic values (only for experts): line_pre_swaprequest = 77, line_post_swaprequest = 123, time_post_swaprequest = 617034.169293
+PTB-ERROR: Some more diagnostic values (only for experts): preflip_vblcount = 0, preflip_vbltimestamp = 617034.167428
 PTB-ERROR: Some more diagnostic values (only for experts): postflip_vblcount = 0, postflip_vbltimestamp = -1.000000, vbltimestampquery_retrycount = 0
 
 PTB-ERROR: This error can be due to either of the following causes:
