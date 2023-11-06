@@ -8,7 +8,7 @@ clear all;
 global sub_num TRUE FALSE refRate compKbDevice task
 global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
-global ABORTED RESTART_KEY NO_KEY ABORT_KEY 
+global ABORTED RESTART_KEY NO_KEY ABORT_KEY YesKey RestartKey
 
 
 % Add functions folder to path (when we separate all functions)
@@ -252,7 +252,7 @@ try
                 end
 
                 % Updating clock:
-                elapsedTime = GetSecs - blk_mat.vis_stim_time(tr);
+                elapsedTime = GetSecs - blk_mat.stim_time(tr);
 
                 % Updating the frame counter:
                 CurrentFrame = floor(elapsedTime/refRate);
@@ -281,7 +281,7 @@ try
                 % Present jitter
                 if jitterLogged == FALSE
 
-                    blk_mat.JitOnset(tr) = showFixation('PhotodiodeOn');
+                    blk_mat.jit_onset(tr) = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 
 %                     % Sending response trigger for the eyetracker
@@ -330,12 +330,10 @@ try
         if strcmp(task, 'categorization')
 
             % compute accuracy
-            [blk_mat, ~] = compute_performance(blk_mat);
+            [blk_mat] = compute_performance(blk_mat);
 
             % get mean accuracy
             mean_acc = mean(blk_mat.accurcay);
-
-
 
             % generate feedback message
             block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end)), ...
@@ -343,13 +341,38 @@ try
 
             showMessage(block_message);
 
-
             wait_resp = 0;
             while wait_resp == 0
                 [~, ~, wait_resp] = KbCheck();
             end
-        end
 
+            % give option to reprat practice
+            if blk_mat.is_practice
+
+                practice_key_pressed = 0;
+                while practice_key_pressed == 0
+
+                    % generate practice restart message
+                    restart_practice_message = ['Press Y to proceed to experiemt', newline, ...
+                        'Press R to repeat practice'];
+
+                    showMessage(restart_practice_message)
+
+                    [~, ~, practice_key] = KbCheck();
+
+                    if practice_key == RestartKey
+                        practice_key_pressed = 1;
+                        blk = blk - 1;
+                    elseif practice_key == YesKey
+                        practice_key_pressed = 1;
+                    else
+                        practice_key_pressed = 0;
+                    end
+                end
+            end % ends practice message statement
+        end % ends of feedback 
+
+    blk = blk + 1;
     end  % End of block loop
 
     %% End of experiment
@@ -363,7 +386,7 @@ try
     %% Save
 
     % Save the whole table:
-    saveTable(log_all, task, "all");
+    saveTable(log_all, "all");
     % Save the code:
     saveCode(task);
     
@@ -396,7 +419,7 @@ catch e
         % If the log all already exists, save it as well:
         if exist('log_all', 'var')
             [log_all] = compute_performance(log_all);
-            saveTable(log_all, task, "all");
+            saveTable(log_all, "all");
         end
 
         % Save the code:

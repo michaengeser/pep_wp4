@@ -8,7 +8,7 @@ clear all;
 global sub_num TRUE FALSE refRate compKbDevice task
 global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
-global ABORTED RESTART_KEY NO_KEY ABORT_KEY 
+global ABORTED RESTART_KEY NO_KEY ABORT_KEY YesKey RestartKey
 
 
 % Add functions folder to path (when we separate all functions)
@@ -330,12 +330,10 @@ try
         if strcmp(task, 'categorization')
 
             % compute accuracy
-            [blk_mat, ~] = compute_performance(blk_mat);
+            [blk_mat] = compute_performance(blk_mat);
 
             % get mean accuracy
             mean_acc = mean(blk_mat.accurcay);
-
-
 
             % generate feedback message
             block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end)), ...
@@ -343,12 +341,34 @@ try
 
             showMessage(block_message);
 
-
             wait_resp = 0;
             while wait_resp == 0
                 [~, ~, wait_resp] = KbCheck();
             end
-        end
+
+            % give option to reprat practice
+            if blk_mat.is_practice
+                practice_key = 0;
+                while wait_resrestart_keyp == 0
+
+                    % generate practice restart message
+                    restart_practice_message = ['Press Y to proceed to experiemt', newline, ...
+                        'Press R to repeat practice'];
+
+                    showMessage(restart_practice_message)
+
+                    [~, ~, practice_key] = KbCheck();
+
+                    if practice_key == RestartKey
+                        blk = 0;
+                    elseif practice_key == YesKey
+                        blk = 1;
+                    else
+                        practice_key = 0;
+                    end
+                end
+            end % ends practice message statement
+        end % ends of feedback 
 
     end  % End of block loop
 
