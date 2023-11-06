@@ -16,12 +16,12 @@ global DISTANCE_SCREEN_TRACKER HEAD_FIXED
 % Hardware parameters:
 global SCREEN_SIZE_CM REF_RATE_OPTIMAL viewDistanceBottomTop viewDistance 
 % Debugging and code parameters:
-global NO_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION NO_ERROR SHOW_INSTRUCTIONS 
+global SHOW_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION NO_ERROR SHOW_INSTRUCTIONS 
 % experimental parameters
-global CATEGORIES
+global CATEGORIES sub_num
 % keys
 global CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY
+global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
 % text
 global fontType fontSize fontColor 
 % optics
@@ -44,7 +44,6 @@ viewDistanceBottomTop = [72 72]; % IN CM!! Distance between the participant head
 DISTANCE_SCREEN_TRACKER = 90; % Distance between the eyetracker lense and the computer screen. Only needed for REMOTE MODE!
 HEAD_FIXED = 0; % Head fixed must be set to 0 if remote mode
 
-
 %% Photodiode parameters:
 PHOTODIODE = 0; % Must be set to 1 for the photodiode to be presented
 DIOD_ON_COLOUR = 255; % Color of the photodiode when turned on (255 white, 0 black)
@@ -53,9 +52,9 @@ DIOD_SIZE = 100; % Size of the square where the photodiode is presented (in pixe
 DIOD_DURATION = 3; % Duration of the photodiode flash when turned on (in frames)
 
 %% DEBUG parameters
-DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
-NO_PRACTICE = 1; % skip the practice run
+SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
 NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 NO_ERROR = 0; % Disable testing program error throws
@@ -89,24 +88,26 @@ DIAMIN_FIXATION = 0.1; % diameter of inner circle (degrees)
 
 %% Response params
 KbName('UnifyKeyNames');
-CalibrationKey = KbName('C');
+CalibrationKey= KbName('C');
 upKey         =  KbName('UpArrow');
 downKey       =  KbName('DownArrow');
+RightKey      =  KbName('RightArrow');
+LeftKey       =  KbName('LeftArrow');
 PauseKey      =  KbName('Q');
 RestartKey    =  KbName('R');
 abortKey      =  KbName('ESCAPE'); % ESC aborts experiment
 YesKey        =  KbName('Y');
-F_Key        =  KbName('F');
-J_Key        =  KbName('J');
+F_Key         =  KbName('F');
+J_Key         =  KbName('J');
 spaceBar      =  KbName('SPACE');
 oneKey        =  KbName('1!');
 twoKey        =  KbName('2@');
 threeKey      =  KbName('3#');
 fourKey       =  KbName('4$');
 fiveKey       =  KbName('5%');
-sixKey       =  KbName('6^');
-sevenKey       =  KbName('7&');
-eightKey       =  KbName('8*');
+sixKey        =  KbName('6^');
+sevenKey      =  KbName('7&');
+eightKey      =  KbName('8*');
 ValidationKey = KbName('V');
 
 if mod(sub_num, 2)

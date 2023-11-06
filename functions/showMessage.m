@@ -14,7 +14,7 @@ function [ message_time ] = showMessage( message )
 
     Screen('FillRect', w, gray);
 
-    DrawFormattedText(w, textProcess(message), 'center', 'center', text.Color);
+    DrawFormattedText(w, message, 'center', 'center', text.Color);
     
     if PHOTODIODE
             drawPhotodiodBlock('off')

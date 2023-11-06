@@ -18,8 +18,8 @@ addpath(function_folder)
 % prompt user for information
 sub_num = input('Subject number [101-199, default: 101]: '); if isempty(sub_num); sub_num = 101; end
 session = input('Session number [default: 1]: '); if isempty(session); session = 1; end
-task_num = input('Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 0]: ');
-if isempty(task_num); task_num = 0; end
+task_num = input('Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, ..., default: 1]: ');
+if isempty(task_num); task_num = 1; end
 
 if task_num == 0; task = 'slide_show';
 elseif task_num == 1; task = 'categorization';
@@ -312,7 +312,7 @@ try
         end  % End of trial loop
 
         % Save the data of this block:
-        saveTable(blk_mat, task, blk);
+        saveTable(blk_mat, blk);
 
 %         % Save the eyetracker data:
 %         if EYE_TRACKER
@@ -387,7 +387,7 @@ catch e
     % Save the data:
     try
         % Save the beh data:
-        saveTable(blk_mat, task, blk);
+        saveTable(blk_mat, blk);
 
         % Save the eyetracker data:
 %         if EYE_TRACKER
