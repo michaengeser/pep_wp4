@@ -8,8 +8,6 @@ trial_mat.trial_response(:) = nan;  % First button pressed
 trial_mat.fix_time(:) = nan;  % Time stamp of fixation onset
 trial_mat.jit_onset(:) = nan;  % Time stamp of the jitter onset
 trial_mat.trial_end(:) = nan;  % Time stamp of trial end
-trial_mat.wrong_key(:) =  nan;  % Wrong key being pressed during the trial
-trial_mat.wrong_key_timestemp(:) =  nan;  % Time stamp of wrong key press
 
 end
 

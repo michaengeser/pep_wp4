@@ -60,7 +60,7 @@ catch  % Try again if something went wrong:
     end
     
     % Saving the log file:
-    logfileName = 'log_recon_time.txt';
+    logfileName = 'log_wp4_beh.txt';
     logsource = fullfile(pwd,logfileName);
     logdestination = fullfile(directory,logfileName);
     copyfile(logsource,logdestination);

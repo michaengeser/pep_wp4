@@ -36,7 +36,7 @@ initRuntimeParameters
 % log file already exist, delete it, otherwise the logs will besub_num
 % appended and it won't be specific to that participant. Moreover, the
 % logs are always saved
-dfile ='log_wp4_beh.txt';
+dfile ='log_wg4_beh.txt';
 if exist(dfile, 'file') ; delete(dfile); end
 Str = CmdWinTool('getText');
 dlmwrite(dfile,Str,'delimiter','');
@@ -49,7 +49,7 @@ SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(se
 ExistFlag = exist(SubSesFolder,'dir');
 if ExistFlag
     warning ('This participant number and session was already attributed!')
-    proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
+    proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','no');
     if strcmp(proceedInput,'no')
         error('Program aborted by user')
     end
@@ -171,7 +171,7 @@ try
             PauseTime = 0; % If the experiment is paused, the duration of the pause is stored to account for it.
 
             % show stimulus
-            blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
+            blk_mat.vis_stim_time(tr) = showStimuli(blk_mat.texture(tr));
             DiodFrame = 0;
 
 %             % Sending response trigger for the eyetracker
@@ -195,7 +195,7 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
+            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION) ;
             
             while elapsedTime < min_trial_duration && ~hasInput
 
@@ -234,7 +234,7 @@ try
                 %% Waiting for response
 
                 % Present fixation while waiting for response
-                if elapsedTime >= ((blk_mat.duration(tr)/1000) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+                if elapsedTime >= ((blk_mat.duration(tr)) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
                     fix_time = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 
@@ -294,9 +294,10 @@ try
 
                     jitterLogged = TRUE;
 
+                    % Updating clock:
+                    elapsedTime = GetSecs - blk_mat.JitOnset(tr);
+
                 end
-                % Updating clock:
-                elapsedTime = GetSecs - blk_mat.jit_onset(tr);
 
             end
 

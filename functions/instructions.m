@@ -44,7 +44,7 @@ while instrSlideNum<= size(instrsPaths,1) % Looping until we went through all sl
 
     % Showing instr slide
     showInstructions(instrsPaths(instrSlideNum,:));
-    WaitSecs(0.2);
+    WaitSecs(0.3);
 
     CorrectKey = 0; % Setting the CorrectKey to 0 to initiate the loop
     while ~CorrectKey % As long as a non-accepted key is pressed, keep on asking

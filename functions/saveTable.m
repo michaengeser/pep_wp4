@@ -12,12 +12,12 @@
 
 function [] = saveTable(input_table, blk_num)
 
-global subID session
+global sub_num session
 
-task = blk_mat.task(1);
+task = input_table.task(1);
 
 % Creating the directories if they don't already exist:
-dir = string(fullfile(pwd,'data',['sub-', subID],['ses-',num2str(session)], string(task)));
+dir = string(fullfile(pwd,'data',['sub-', str(sub_num)],['ses-',num2str(session)], string(task)));
 if ~exist(dir, 'dir')
     mkdir(dir);
 end
@@ -30,8 +30,8 @@ if isnumeric(blk_num)
 end
 
 % make files names 
-fileName_mat  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.mat', subID, session, blk_num, string(task)));
-fileName_csv  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.csv', subID, session, blk_num, string(task)));
+fileName_mat  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.mat', str(sub_num), session, blk_num, string(task)));
+fileName_csv  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.csv', str(sub_num), session, blk_num, string(task)));
 
 % check if they already exist and add repetition to file name
 repetition = 0;

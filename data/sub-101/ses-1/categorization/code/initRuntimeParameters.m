@@ -10,7 +10,7 @@ function initRuntimeParameters
 % Recording modalities:
 global Behavior EYE_TRACKER 
 % Photodiode parameters:
-global PHOTODIODE DIOD_DURATION DIOD_SIZE DIOD_ON_COLOUR DIOD_OFF_COLOUR FRAME_ANTICIPATION
+global PHOTODIODE DIOD_DURATION DIOD_SIZE DIOD_ON_COLOUR DIOD_OFF_COLOUR  
 % Eyetracker parameters:
 global DISTANCE_SCREEN_TRACKER HEAD_FIXED
 % Hardware parameters:
@@ -60,7 +60,6 @@ NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 NO_ERROR = 0; % Disable testing program error throws
 % Q: Do I need to fill this out? Pixels? Yoav: only if you want the debug scree to be of a different size
 WINDOW_RESOLUTION = [10 10 1200 800];
-FRAME_ANTICIPATION = 0.5;
 
 %% Experimental parameters
 % Set all the catagories:

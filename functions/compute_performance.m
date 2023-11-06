@@ -27,8 +27,8 @@ for tr = 1:length(blk_mat.trial)
     end
 
 
-    % get RT auditory response
-    blk_mat.RT(tr) = blk_mat.time_of_resp_aud(tr) - blk_mat.stim_time(tr);
+    % get RT 
+    blk_mat.RT(tr) = blk_mat.time_of_resp(tr) - blk_mat.stim_time(tr);
 
 end
 end
