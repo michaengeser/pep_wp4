@@ -4,16 +4,22 @@ sca;
 close all;
 clear all;
 
-% Hardware parameters:
-global sub_num TRUE FALSE refRate compKbDevice task
-global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE SHOW_PRACTICE  session
-global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
-global ABORTED RESTART_KEY NO_KEY ABORT_KEY spaceBar RestartKey
+% To get different seeds for matlab randomization functions.
+rng('shuffle');
 
+% global parameters:
+global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
+global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
+global RESTART_KEY NO_KEY ABORT_KEY
+
+% Eye-tracking parameters
+% global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE compKbDevice 
 
 % Add functions folder to path (when we separate all functions)
 function_folder = [pwd,filesep,'functions\'];
 addpath(function_folder)
+
+%% User input
 
 % prompt user for information
 sub_num = input('Subject number [101-199, default: 101]: '); if isempty(sub_num); sub_num = 101; end
@@ -29,19 +35,12 @@ elseif task_num == 4; task = 'aesthetic';
     % to be extended
 end
 
-% initializing experimental parameters
-initRuntimeParameters
-
-% Logging everything that is printed into the command window! If the
-% log file already exist, delete it, otherwise the logs will besub_num
-% appended and it won't be specific to that participant. Moreover, the
-% logs are always saved
+% Logging everything that is printed into the command window
 dfile ='log_wp4_beh.txt';
 if exist(dfile, 'file') ; delete(dfile); end
 Str = CmdWinTool('getText');
 dlmwrite(dfile,Str,'delimiter','');
-% To get different seeds for matlab randomization functions.
-rng('shuffle');
+
 
 %% check if participant and session exists already
 
@@ -55,7 +54,12 @@ if ExistFlag
     end
 end
 
-% Initializing PTB:
+%% Initializing
+
+% experimental parameters
+initRuntimeParameters
+
+% PTB:
 initPsychtooblox(); % initializes psychtoolbox window at correct resolution and refresh rate
 
 %% Setup the trial matrix and log:
@@ -84,18 +88,13 @@ end
 %% Main experimental loop:
 try
 
-    ABORTED = 0;
-
     %% save everything from command window
     Str = CmdWinTool('getText');
     dlmwrite(dfile,Str,'delimiter','');
 
-    %%  Experiment
-    % Experiment Prep
-    showFixation('PhotodiodeOff');
-
     %% Block loop:
     blks = unique(task_mat.block);
+    showFixation('PhotodiodeOff');
 
     if SHOW_PRACTICE
         blk = 0;
@@ -159,11 +158,11 @@ try
 
         %% Trials loop:
         for tr = 1:length(blk_mat.trial)
+
             % flags needs to be initialized
             fixShown = FALSE;
             jitterLogged = FALSE;
             hasInput = FALSE;
-            PauseTime = 0; % If the experiment is paused, the duration of the pause is stored to account for it.
 
             % show stimulus
             blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
@@ -177,6 +176,12 @@ try
             %                 Eyelink('Message',trigger_str);
             %             end
 
+
+
+            %--------------------------------------------------------
+
+            %% TIME LOOP
+
             % I then set a frame counter. The flip of the stimulus
             % presentation is frame 0. It is already the previous frame because it already occured:
             PreviousFrame = 0;
@@ -184,9 +189,7 @@ try
             % frame for now
             FrameIndex = PreviousFrame;
 
-            %--------------------------------------------------------
-
-            %% TIME LOOP
+            % start timer
             elapsedTime = 0;
 
             % define total trial duration
@@ -200,8 +203,6 @@ try
                     [key,Resp_Time] = getInput();
 
                     % Handling the response:
-                    % If the participant pressed a key that is different
-                    % to the one of the previous iteration:
                     if key ~= NO_KEY
 
                         %                         % Sending response trigger for the eyetracker
@@ -213,7 +214,6 @@ try
                         %                         end
 
                         if key == ABORT_KEY % If the experiment was aborted:
-                            ABORTED = 1;
                             error('Experiment has been aborted');
                         end
 
@@ -331,7 +331,7 @@ try
 
     %% End of experiment
 
-    % Letting the participant that it is over:
+    % Letting the participant know that it is over:
     end_message = ['THE END', newline, newline,'Thank you!'];
     showMessage(end_message);
 
