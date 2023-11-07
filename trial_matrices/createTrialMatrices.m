@@ -93,15 +93,15 @@ for task = tasks
         warning('on','all')
     end
 
-    % shuffle row order
-    task_mat = task_mat(randperm(height(task_mat)),:);
-
     % split task and practice matrix
     practice_mat = task_mat(task_mat.is_practice == 1, :);
     task_mat = task_mat(task_mat.is_practice ~= 1, :);
 
     % repreat matrix according to number of repeats per image
     task_mat = repmat(task_mat, repeats, 1);
+
+    % shuffle row order
+    task_mat = task_mat(randperm(height(task_mat)),:);
 
     % add block and trial numbers 
     practice_mat.block = zeros(height(practice_mat), 1);
