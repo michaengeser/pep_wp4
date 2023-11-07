@@ -321,58 +321,19 @@ try
         end
 
         %% Feedback
-
-        % generate end of block message
-        block_message = ['End of block ', num2str(blk_mat.block(1)), ' of ', num2str(task_mat.block(end))];
-
-        if strcmp(task, 'categorization')
-
-            % compute accuracy
-            [blk_mat] = compute_performance(blk_mat);
-
-            % get mean accuracy
-            mean_acc = mean(blk_mat.trial_accuracy);
-
-            % generate feedback message
-            block_message = [block_message, newline, 'Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
-
-            % give option to repeat practice
-            if blk_mat.is_practice
-
-                % generate practice feedback message
-                block_message = [block_message, newline, 'Press space to proceed to experiemt', newline, ...
-                    'Press R to repeat practice'];
-
-            end % ends practice message statement
-        end % end of feedback
-
-        % show generated end of block message
-        showMessage(block_message)
-
-        % wait for response ("r" = repeats practice, space bar = proceed)
-        key_pressed = 0;
-        while key_pressed == 0
-            [~, ~, Resp] = KbCheck();
-
-            if Resp(RestartKey)
-                key_pressed = 1;
-                blk = blk - 1;
-            elseif Resp(spaceBar)
-                key_pressed = 1;
-            else
-                key_pressed = 0;
-            end
-        end
-
+        blk = trialFeedback(blk_mat, task_mat);
+       
         % Move to the next block
         blk = blk + 1;
         WaitSecs(0.2);
+
     end  % End of block loop
 
     %% End of experiment
 
     % Letting the participant that it is over:
     end_message = ['THE END', newline, newline,'Thank you!'];
+    showMessage(end_message);
 
     % compute performances of tasks
     [log_all] = compute_performance(log_all);
@@ -381,15 +342,12 @@ try
 
     % Save the whole table:
     saveTable(log_all, "all");
+
     % Save the code:
     saveCode(task);
 
-    showMessage(end_message);
     WaitSecs(2);
-
-    showMessage('saving');
-    % Mark the time of saving onset
-    ttime = GetSecs;
+    showMessage('saving...');
 
     % save everything from command window
     Str = CmdWinTool('getText');
