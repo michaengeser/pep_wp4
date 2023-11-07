@@ -16,11 +16,11 @@ global DISTANCE_SCREEN_TRACKER HEAD_FIXED
 % Hardware parameters:
 global SCREEN_SIZE_CM REF_RATE_OPTIMAL viewDistanceBottomTop viewDistance 
 % Debugging and code parameters:
-global SHOW_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION NO_ERROR SHOW_INSTRUCTIONS 
+global SHOW_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION SHOW_INSTRUCTIONS 
 % experimental parameters
 global CATEGORIES sub_num
 % keys
-global CalibrationKey ValidationKey WRONG_KEY NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
+global CalibrationKey ValidationKey NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
 global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
 % text
 global fontType fontSize fontColor 
@@ -52,13 +52,11 @@ DIOD_SIZE = 100; % Size of the square where the photodiode is presented (in pixe
 DIOD_DURATION = 3; % Duration of the photodiode flash when turned on (in frames)
 
 %% DEBUG parameters
-DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 1; % enable windowed mode for dubugging
-NO_ERROR = 0; % Disable testing program error throws
-% Q: Do I need to fill this out? Pixels? Yoav: only if you want the debug scree to be of a different size
+NO_FULLSCREEN = 0; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
 FRAME_ANTICIPATION = 0.5;
 
@@ -124,7 +122,6 @@ end
 % program codes
 ABORT_KEY = 14;
 RESTART_KEY = 13;
-WRONG_KEY = 12;
 NO_KEY = 0;
 
 TRUE = 1;

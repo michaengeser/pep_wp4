@@ -11,7 +11,7 @@ function [tr_mat] = createTrialMatrices(first_sub_num, n)
 n_pics_per_cate = 50;
 
 % List the tasks.
-tasks = ["categorization", "typicality", "familiarity", "aesthectic"];
+tasks = ["categorization", "typicality", "familiarity", "aesthetic"];
 
 % Create a structure storing the levels of each of these conditions:
 file_list = struct('kitchen', [], 'bathroom', [], 'practice', []);
@@ -56,7 +56,7 @@ for task = tasks
     if strcmp(task, 'categorization')
         repeats = 12;
         pics_per_blk = 50;
-        duration = 83;
+        duration = 83.33;
     else
         repeats = 1;
         pics_per_blk = 25;
