@@ -7,7 +7,7 @@
 
 function [tr_mat, file_list] = createTrialMatrices(first_sub_num, n)
 
-global FILE_POSTFIX
+global FILE_POSTFIX expDir
 
 if isempty(FILE_POSTFIX)
 FILE_POSTFIX = '*tif';
@@ -28,8 +28,10 @@ cateories = ["bathroom", "kitchen", "practice"];
 img_types = ["SHINEd", "raw"];
 
 % Get the list of stimuli files
+if isempty(expDir)
 currentDirectory = pwd;
-[parentDirectory, ~, ~] = fileparts(currentDirectory);
+[expDir, ~, ~] = fileparts(currentDirectory);
+end
 
 % initialize loop varaibles
 textures = (1:1000) + 10;
@@ -37,7 +39,7 @@ count = 0;
 
 for type = img_types
     for cate = cateories
-        stimuli_path = fullfile(parentDirectory, 'stimuli', type, cate);
+        stimuli_path = fullfile(expDir, 'stimuli', type, cate);
         file_list.(type).(cate) = dir(fullfile(stimuli_path, FILE_POSTFIX));
         for t = 1:length(file_list.(type).(cate))
         count = count + 1;
@@ -136,11 +138,8 @@ end
 
     % Save to file:
     % Create file name:
-    if endsWith(pwd, 'trial_matrices')
-        target_dir = pwd;
-    else
-        target_dir = fullfile(pwd, 'trial_matrices');
-    end
+    target_dir = fullfile(expDir, 'trial_matrices');
+
 
     file_name = fullfile(target_dir, sprintf("sub-%d_%s_trials.csv", sub_num, 'wp4_beh'));
     writetable(tr_mat, file_name);

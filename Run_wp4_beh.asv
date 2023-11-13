@@ -11,9 +11,6 @@ rng('shuffle');
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
 global RESTART_KEY NO_KEY ABORT_KEY
-global expDir
-
-expDir = pwd;
 
 % Eye-tracking parameters
 % global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE compKbDevice 
