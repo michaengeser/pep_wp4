@@ -5,7 +5,7 @@
 %
 % The task and categories can be adjusted in first few lines
 
-function [tr_mat, file_list] = createTrialMatrices(first_sub_num, n)
+function [tr_mat] = createTrialMatrices(first_sub_num, n)
 
 %% Set constant parameters:
 n_pics_per_cate = 50;
@@ -20,7 +20,7 @@ pre_file_list = struct('bathroom', nan(1,n_pics_per_cate), ...
 file_list = struct("SHINEd", pre_file_list, "raw", pre_file_list);
 cateories = ["bathroom", "kitchen", "practice"];
 img_types = ["SHINEd", "raw"];
-file_postfix = '*tif';
+file_postfix = '*jpg';
 
 % Get the list of stimuli files
 currentDirectory = pwd;
@@ -82,15 +82,15 @@ for task = tasks
         % supress warnings (it will complain about the assign values in the
         % table)
         warning('off','all')
-        for t = 1:length(file_list.(img_type).(cate))
+        for t = 1:length(file_list.(cate))
             count = count + 1;
             task_mat.sub_num(count) = sub_num;
             task_mat.task(count) = task;
-            task_mat.image{count} =  file_list.(img_type).(cate)(t).name;
-            task_mat.texture(count) =  file_list.(img_type).(cate)(t).texture;
+            task_mat.image{count} =  file_list.(cate)(t).name;
+            task_mat.texture(count) =  file_list.(cate)(t).texture;
             task_mat.duration(count) =  duration;
 
-            if contains(file_list.(img_type).(cate)(t).name, 'practice')
+            if contains(file_list.(cate)(t).name, 'practice')
                 task_mat.is_practice(count) = 1;
                 task_mat.category(count) = strtok(task_mat.image{count}, '_');
 
