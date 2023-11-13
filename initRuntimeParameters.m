@@ -52,11 +52,11 @@ DIOD_SIZE = 100; % Size of the square where the photodiode is presented (in pixe
 DIOD_DURATION = 3; % Duration of the photodiode flash when turned on (in frames)
 
 %% DEBUG parameters
-DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 1; % enable windowed mode for dubugging
+NO_FULLSCREEN = 0; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
 FRAME_ANTICIPATION = 0.5;
 
