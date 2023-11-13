@@ -7,6 +7,12 @@
 
 function [tr_mat, file_list] = createTrialMatrices(first_sub_num, n)
 
+global FILE_POSTFIX
+
+if isempty(FILE_POSTFIX)
+FILE_POSTFIX = '*tif';
+end 
+
 %% Set constant parameters:
 n_pics_per_cate = 50;
 n_pics_practice = 10;
@@ -20,7 +26,6 @@ pre_file_list = struct('bathroom', nan(1,n_pics_per_cate), ...
 file_list = struct("SHINEd", pre_file_list, "raw", pre_file_list);
 cateories = ["bathroom", "kitchen", "practice"];
 img_types = ["SHINEd", "raw"];
-file_postfix = '*tif';
 
 % Get the list of stimuli files
 currentDirectory = pwd;
@@ -33,7 +38,7 @@ count = 0;
 for type = img_types
     for cate = cateories
         stimuli_path = fullfile(parentDirectory, 'stimuli', type, cate);
-        file_list.(type).(cate) = dir(fullfile(stimuli_path,file_postfix));
+        file_list.(type).(cate) = dir(fullfile(stimuli_path, FILE_POSTFIX));
         for t = 1:length(file_list.(type).(cate))
         count = count + 1;
             file_list.(type).(cate)(t).texture = textures(count);

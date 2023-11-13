@@ -25,7 +25,7 @@ global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar 
 % text
 global fontType fontSize fontColor 
 % optics
-global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION
+global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION FILE_POSTFIX
 % other
 global TRUE FALSE
 
@@ -52,11 +52,11 @@ DIOD_SIZE = 100; % Size of the square where the photodiode is presented (in pixe
 DIOD_DURATION = 3; % Duration of the photodiode flash when turned on (in frames)
 
 %% DEBUG parameters
-DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 0; % enable windowed mode for dubugging
+NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
 FRAME_ANTICIPATION = 0.5;
 
@@ -77,6 +77,9 @@ fontSize = 50; % general text size, not target
 FIXATION_COLOR = [205 33 42];
 FIXATION_FONT_SIZE = 20;
 fontColor = 0; % black;
+
+% image format
+FILE_POSTFIX = '*tif';
 
 VIEWING_DISTANCE = viewDistance; % in centimeters
 MAX_VISUAL_ANGEL = [6,6]; % in degrees | "on a rectangular aperture at an average visual angle of 6? by 4?"
