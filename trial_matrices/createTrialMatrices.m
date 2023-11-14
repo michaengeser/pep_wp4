@@ -68,19 +68,19 @@ jitter_distribution = truncate(exp_dist, jitter_min, jitter_max);
 for sub_num = first_sub_num:first_sub_num + (n-1)
     for task = tasks
 
-        % Set parameters according to task (durations in ms)
+        % Set parameters according to task (durations in sec)
         if strcmp(task, 'categorization')
             repeats = 12;
             pics_per_blk = 50;
-            duration = 83.33;
+            duration = 0.08333;
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
-            blank = 33.33;
-            mask_dur = 83.33;
+            blank = 0.03333;
+            mask_dur = 0.08333;
         else
             repeats = 1;
             pics_per_blk = 25;
-            duration = 1500;
+            duration = 1.500;
             img_type = 'raw';
             blank = 0;
             mask_dur = 0;
