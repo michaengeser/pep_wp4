@@ -50,7 +50,6 @@ dlmwrite(dfile,Str,'delimiter','');
 SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], task);
 ExistFlag = exist(SubSesFolder,'dir');
 if ExistFlag
-    WaitSecs(1);
     warning ('This participant number and session was already attributed!')
     proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
     if strcmp(proceedInput,'no')
@@ -95,7 +94,6 @@ end
 % displays instructions
 if SHOW_INSTRUCTIONS
     instructions(task);
-    WaitSecs(1);
 end
 
 %% Main experimental loop:
