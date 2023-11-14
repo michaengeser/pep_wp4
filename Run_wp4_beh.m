@@ -77,6 +77,9 @@ task_mat = tr_mat(strcmp(tr_mat.task, task),:);
 % get stimuli
 loadStimuli(file_list)
 
+% get mask
+mask_texture = loadMask();
+
 % make jitter and duration multiple of refresh rate
 for tr_time = 1:length(task_mat.trial)
     % jitter

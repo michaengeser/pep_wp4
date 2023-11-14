@@ -50,9 +50,9 @@ end
 
 % Define trial matrix table
 columnNames = ["sub_num", "trial", "block", "task", "is_practice", "category",...
-    "image", "texture", "duration","blank", "mask", "mask_dur", "mask_texture", "jitter"];
+    "image", "texture", "duration","blank", "mask", "mask_dur", "jitter"];
 dataTypes = {'double', 'double', 'double', 'string', 'double', 'string',...
-    'string', 'double', 'double', 'double', 'double', 'double', 'double', 'double'};
+    'string', 'double', 'double', 'double', 'double', 'double', 'double'};
 
 % Create an empty table with the specified column names and data types
 tr_mat = table('Size', [0, numel(columnNames)], 'VariableNames', columnNames, 'VariableTypes', dataTypes);
@@ -127,9 +127,6 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             % turn back on warnings
             warning('on','all')
         end
-
-        % add mask texture
-        task_mat.mask_texture(:) = max(task_mat.texture) + 1;
 
         % split task and practice matrix
         practice_mat = task_mat(task_mat.is_practice == 1, :);
