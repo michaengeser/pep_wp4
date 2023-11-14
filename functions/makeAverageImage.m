@@ -1,4 +1,4 @@
-% function to make an average image out of a set of images
+% function to make an average image out of a set of images (made by ChatGPT)
 % provide folder of images as input
 % output is the average image
 

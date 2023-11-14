@@ -104,7 +104,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
                 task_mat.image{count} =  file_list.(img_type).(cate)(t).name;
                 task_mat.texture(count) =  file_list.(img_type).(cate)(t).texture;
                 task_mat.duration(count) =  duration;
-                task_mat.blank(count) =  blank;
+                task_mat.blan(count) =  blank;
                 task_mat.mask(count) =  mask;
                 task_mat.mask_dur(count) =  mask_dur;
 
