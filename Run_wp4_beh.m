@@ -82,22 +82,7 @@ loadStimuli(file_list)
 mask_texture = loadMask();
 
 % make durations multiple of refresh rate
-for tr_time = 1:length(task_mat.trial)
-
-    % duration
-    dur_multiplicator = round(task_mat.duration(tr_time)/refRate);
-    task_mat.duration(tr_time) = refRate*dur_multiplicator;
-    % blank
-    blank_multiplicator = round(task_mat.blank(tr_time)/refRate);
-    task_mat.blank(tr_time) = refRate*blank_multiplicator;
-    % mask
-    mask_multiplicator = round(task_mat.mask_dur(tr_time)/refRate);
-    task_mat.mask_dur(tr_time) = refRate*mask_multiplicator;
-    % jitter
-    jit_multiplicator = round(task_mat.jitter(tr_time)/refRate);
-    task_mat.jitter(tr_time) = refRate*jit_multiplicator;
-
-end
+[task_mat] = durationXrefRate(task_mat);
 
 %% Instructions
 % displays instructions
