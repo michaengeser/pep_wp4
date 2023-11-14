@@ -76,7 +76,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
             blank = 0.03333;
-            mask_dur = 0.08333;
+            mask_dur = 0.03333;
         else
             repeats = 1;
             pics_per_blk = 25;
