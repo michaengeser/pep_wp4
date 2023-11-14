@@ -50,9 +50,9 @@ end
 
 % Define trial matrix table
 columnNames = ["sub_num", "trial", "block", "task", "is_practice", "category",...
-    "image", "texture", "duration","blank", "mask", "mask_dur", "jitter"];
+    "image", "texture", "duration","blank", "mask_dur", "jitter"];
 dataTypes = {'double', 'double', 'double', 'string', 'double', 'string',...
-    'string', 'double', 'double', 'double', 'double', 'double', 'double'};
+    'string', 'double', 'double', 'double', 'double', 'double'};
 
 % Create an empty table with the specified column names and data types
 tr_mat = table('Size', [0, numel(columnNames)], 'VariableNames', columnNames, 'VariableTypes', dataTypes);
@@ -76,7 +76,6 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
             blank = 33.33;
-            mask = 1;
             mask_dur = 83.33;
         else
             repeats = 1;
@@ -84,7 +83,6 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             duration = 1500;
             img_type = 'raw';
             blank = 0;
-            mask = 0;
             mask_dur = 0;
         end
 
@@ -105,7 +103,6 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
                 task_mat.texture(count) =  file_list.(img_type).(cate)(t).texture;
                 task_mat.duration(count) =  duration;
                 task_mat.blank(count) =  blank;
-                task_mat.mask(count) =  mask;
                 task_mat.mask_dur(count) =  mask_dur;
 
                 if contains(file_list.(img_type).(cate)(t).name, 'practice')

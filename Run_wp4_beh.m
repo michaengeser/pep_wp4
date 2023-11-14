@@ -204,7 +204,7 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
+            min_trial_duration = blk_mat.duration(tr) + blk_mat.blank(tr) + blk_mat.mask_dur(tr)- (refRate*FRAME_ANTICIPATION);
 
             while elapsedTime < min_trial_duration && ~hasInput
 
