@@ -72,7 +72,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
         if strcmp(task, 'categorization')
             repeats = 12;
             pics_per_blk = 50;
-            duration = 0.08333;
+            duration = 0.03333;
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
             blank = 0.03333;
