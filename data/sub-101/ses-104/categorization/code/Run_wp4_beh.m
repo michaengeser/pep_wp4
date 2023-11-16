@@ -10,7 +10,7 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
-global RESTART_KEY NO_KEY ABORT_KEY black gray red green
+global RESTART_KEY NO_KEY ABORT_KEY spaceBar valid_resp_keys black red green
 global expDir
 
 expDir = pwd;
@@ -152,9 +152,9 @@ try
             showMessage('Press a space to start the next block');
         end
 
-        % wait for response
-        wait_resp = 0;
-        while wait_resp == 0
+        % wait for space bar
+        [~, ~, wait_resp] = KbCheck();
+        while ~wait_resp(spaceBar)
             [~, ~, wait_resp] = KbCheck();
         end
 
@@ -221,8 +221,22 @@ try
                         %                             Eyelink('Message',trigger_str);
                         %                         end
 
-                        if key == ABORT_KEY % If the experiment was aborted:
-                            error('Experiment has been aborted');
+                        % If the experiment was aborted:
+                        if key == ABORT_KEY 
+                            error('Experiment has been aborted'); 
+
+                        % if pressed key is not a valid response key
+                        elseif ~ismember(key, valid_resp_keys)
+                            invalid_key_msg = ['Invalid response key!', newline, newline,...
+                                'Press space to proceed'];
+                            showMessage(invalid_key_msg);
+
+                            % wait for space bar
+                            [~, ~, wait_resp] = KbCheck();
+                            while ~wait_resp(spaceBar)
+                                [~, ~, wait_resp] = KbCheck();
+                            end
+
                         end
 
                         % Log the response received:
@@ -321,7 +335,7 @@ try
 
 
             %% Jitter TIME LOOP
-            facc_mat = compute_performance(blk_mat(blk_mat.trial == tr, :));
+            acc_mat = compute_performance(blk_mat(blk_mat.trial == tr, :));
             blk_mat.trial_accuracy(tr) = acc_mat.trial_accuracy;
             blk_mat.RT(tr) = acc_mat.RT;
 

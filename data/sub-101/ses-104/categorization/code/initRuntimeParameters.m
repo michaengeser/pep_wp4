@@ -18,21 +18,29 @@ global SCREEN_SIZE_CM REF_RATE_OPTIMAL viewDistanceBottomTop viewDistance
 % Debugging and code parameters:
 global SHOW_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION SHOW_INSTRUCTIONS 
 % experimental parameters
-global CATEGORIES sub_num
+global CATEGORIES task sub_num
 % keys
 global CalibrationKey ValidationKey NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
+global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar 
+global F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey valid_resp_keys
 % text
 global fontType fontSize fontColor
 % colors
-global gray red blue green
-
+global black gray red green
 % optics
 global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION FILE_POSTFIX
 % other
 global TRUE FALSE
 
- 
+%% DEBUG parameters
+DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
+SHOW_INSTRUCTIONS = 1;
+SHOW_PRACTICE = 1; % skip the practice run
+RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
+NO_FULLSCREEN = 0; % enable windowed mode for dubugging
+WINDOW_RESOLUTION = [10 10 1200 800];
+FRAME_ANTICIPATION = 0.1; % optimizes timing in PTB
+
 %% Recording modalities
 EYE_TRACKER = 0; % Must be set to 1 if recording with Eyetracker
 Behavior = 1; %Set to 1 if recording with Behavior only
@@ -54,15 +62,6 @@ DIOD_OFF_COLOUR = 1;  % Color of the photodiode when off (255 white, 0 black)
 DIOD_SIZE = 100; % Size of the square where the photodiode is presented (in pixels)
 DIOD_DURATION = 3; % Duration of the photodiode flash when turned on (in frames)
 
-%% DEBUG parameters
-DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
-SHOW_INSTRUCTIONS = 1;
-SHOW_PRACTICE = 1; % skip the practice run
-RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 0; % enable windowed mode for dubugging
-WINDOW_RESOLUTION = [10 10 1200 800];
-FRAME_ANTICIPATION = 0.1; % optimizes timing in PTB
-
 %% Experimental parameters
 % Set all the catagories:
 CATEGORIES = ["kitchen", "bathroom"];
@@ -82,10 +81,10 @@ FIXATION_FONT_SIZE = 20;
 fontColor = 0; % black;
 
 % color
+black = [255, 255, 255];
 gray = [125, 125, 125];
 red = [255, 0, 0];
-blue = [0, 255, 0];
-green = [0, 0, 255];
+green = [0, 255, 0];
 
 % image format
 FILE_POSTFIX = '*tif';
@@ -129,6 +128,20 @@ else
     % even subject number
     KITCHEN_KEY = J_Key;
     BATHROOM_KEY = F_Key;
+end
+
+
+% define which keys are valid response keys
+if strcmp(task, 'categorization')
+
+    % cagtegorization response keys
+    valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
+
+else
+
+    % rating response key
+    valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
+
 end
 
 % program codes

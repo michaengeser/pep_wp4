@@ -18,10 +18,11 @@ global SCREEN_SIZE_CM REF_RATE_OPTIMAL viewDistanceBottomTop viewDistance
 % Debugging and code parameters:
 global SHOW_PRACTICE DEBUG RESOLUTION_FORCE NO_FULLSCREEN WINDOW_RESOLUTION SHOW_INSTRUCTIONS 
 % experimental parameters
-global CATEGORIES sub_num
+global CATEGORIES task sub_num
 % keys
 global CalibrationKey ValidationKey NO_KEY RESTART_KEY ABORT_KEY abortKey upKey downKey PauseKey RestartKey YesKey
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
+global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar 
+global F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey valid_resp_keys
 % text
 global fontType fontSize fontColor
 % colors
@@ -127,6 +128,20 @@ else
     % even subject number
     KITCHEN_KEY = J_Key;
     BATHROOM_KEY = F_Key;
+end
+
+
+% define which keys are valid response keys
+if strcmp(task, 'categorization')
+
+    % cagtegorization response keys
+    valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
+
+else
+
+    % rating response key
+    valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
+
 end
 
 % program codes
