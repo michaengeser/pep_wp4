@@ -69,5 +69,35 @@ for row = 1: length(img_names)
 
     % get number of image repetitions
     img_acc_table.repetitions(row) = height(img_trial_mat);
+
+    if img_acc_table.mean_acc(row) < 0.4 || img_acc_table.mean_acc(row) > 0.9
+
+        img_file = dir(fullfile(pwd, '**', img_name));
+        img_path = fullfile(img_file.folder, img_name);
+        img = imread(img_path);
+
+        if img_acc_table.mean_acc(row) < 0.4
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'below_40%');
+        elseif img_acc_table.mean_acc(row) == 1
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', '100%');
+        elseif img_acc_table.mean_acc(row) > 0.95
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'above_95%');
+        elseif img_acc_table.mean_acc(row) > 0.9
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'above_90%');
+        end
+
+        if ~exist(char(NewFolder),'dir')
+            mkdir(NewFolder);
+        end
+
+        new_img_path = fullfile(NewFolder, img_name);
+        % Write the new version
+        imwrite(img, new_img_path, 'tif');
+    end
+
 end
 end

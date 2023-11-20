@@ -75,7 +75,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             duration = (1/60)*2;
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
-            blank = (1/60)*2;
+            blank = (1/60)*1;
             mask_dur = (1/60)*5;
         else
             repeats = 1;
