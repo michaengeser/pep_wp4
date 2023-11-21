@@ -349,22 +349,18 @@ try
                 end
             end
 
+
             %% Jitter TIME LOOP
+            acc_mat = compute_performance(blk_mat(blk_mat.trial == tr, :));
+            blk_mat.trial_accuracy(tr) = acc_mat.trial_accuracy;
+            blk_mat.RT(tr) = acc_mat.RT;
 
-            % set feeback color to black
-            feedback_color = black;
-
-            if strcmp(task, 'categorization')
-                acc_mat = compute_performance(blk_mat(blk_mat.trial == tr, :));
-                blk_mat.trial_accuracy(tr) = acc_mat.trial_accuracy;
-                blk_mat.RT(tr) = acc_mat.RT;
-
-                % change feedback color according to accuracy
-                if acc_mat.trial_accuracy == 1
-                    feedback_color = green;
-                elseif acc_mat.trial_accuracy == 0
-                    feedback_color = red;
-                end
+            if acc_mat.trial_accuracy == 1
+                feedback_color = green;
+            elseif acc_mat.trial_accuracy == 0
+                feedback_color = red;
+            else
+                feedback_color = black;
             end
 
             % start timer
