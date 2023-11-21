@@ -10,10 +10,16 @@ global sub_num session category
 try
     % Get all the matlab files in the directory:
     fileStruct = dir('*.m');
-    
+
+    if length(category) > 1
+        category_name = ['_', category];
+    else
+        category_name = [];
+    end
+
     % Create the save directory:
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
-        ['ses-',num2str(session)], task, ['code', category]);
+        ['ses-',num2str(session)], task, ['code', category_name]);
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -46,7 +52,7 @@ catch  % Try again if something went wrong:
     
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
         ['ses-',num2str(session)], task, ['code', category]);
-    
+
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
