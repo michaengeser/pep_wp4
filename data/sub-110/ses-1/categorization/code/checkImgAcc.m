@@ -48,11 +48,10 @@ end
 img_names = unique(all_mat.image);
 
 % define column names
-variable_names = ["image_name", "category", "mean_acc", "repetitions", "RT"];
+variable_names = ["image_name", "category", "mean_acc", "repetitions"];
 
 % init table
-img_acc_table = table(img_names, repmat("empty",length(img_names),1), nan(length(img_names),1),...
-    nan(length(img_names),1), nan(length(img_names),1),...
+img_acc_table = table(img_names, repmat("empty",length(img_names),1), nan(length(img_names),1), nan(length(img_names),1),...
     'VariableNames', variable_names);
 
 % get category inforamtion and accuray
@@ -68,40 +67,37 @@ for row = 1: length(img_names)
     % get image accuracy
     img_acc_table.mean_acc(row) = mean(img_trial_mat.trial_accuracy, 'omitnan');
 
-    % get image reaction time 
-    img_acc_table.RT(row) = mean(img_trial_mat.RT, 'omitnan');
-
     % get number of image repetitions
     img_acc_table.repetitions(row) = height(img_trial_mat);
 
-%     if img_acc_table.mean_acc(row) < 0.4 || img_acc_table.mean_acc(row) > 0.9
-% 
-%         img_file = dir(fullfile(pwd, '**', img_name));
-%         img_path = fullfile(img_file.folder, img_name);
-%         img = imread(img_path);
-% 
-%         if img_acc_table.mean_acc(row) < 0.4
-%             % make below directory
-%             NewFolder = fullfile(pwd, 'special_image', 'below_40%');
-%         elseif img_acc_table.mean_acc(row) == 1
-%             % make below directory
-%             NewFolder = fullfile(pwd, 'special_image', '100%');
-%         elseif img_acc_table.mean_acc(row) > 0.95
-%             % make below directory
-%             NewFolder = fullfile(pwd, 'special_image', 'above_95%');
-%         elseif img_acc_table.mean_acc(row) > 0.9
-%             % make below directory
-%             NewFolder = fullfile(pwd, 'special_image', 'above_90%');
-%         end
-% 
-%         if ~exist(char(NewFolder),'dir')
-%             mkdir(NewFolder);
-%         end
-% 
-%         new_img_path = fullfile(NewFolder, img_name);
-%         % Write the new version
-%         imwrite(img, new_img_path, 'tif');
-%     end
+    if img_acc_table.mean_acc(row) < 0.4 || img_acc_table.mean_acc(row) > 0.9
+
+        img_file = dir(fullfile(pwd, '**', img_name));
+        img_path = fullfile(img_file.folder, img_name);
+        img = imread(img_path);
+
+        if img_acc_table.mean_acc(row) < 0.4
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'below_40%');
+        elseif img_acc_table.mean_acc(row) == 1
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', '100%');
+        elseif img_acc_table.mean_acc(row) > 0.95
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'above_95%');
+        elseif img_acc_table.mean_acc(row) > 0.9
+            % make below directory
+            NewFolder = fullfile(pwd, 'special_image', 'above_90%');
+        end
+
+        if ~exist(char(NewFolder),'dir')
+            mkdir(NewFolder);
+        end
+
+        new_img_path = fullfile(NewFolder, img_name);
+        % Write the new version
+        imwrite(img, new_img_path, 'tif');
+    end
 
 end
 end
