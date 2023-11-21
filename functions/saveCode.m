@@ -5,14 +5,15 @@
 % This code file is saved into the code folder ("/data/code/").
 function [ ] = saveCode(task)
 
-global sub_num session %subject number
+global sub_num session category
 
 try
     % Get all the matlab files in the directory:
     fileStruct = dir('*.m');
     
     % Create the save directory:
-    directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)], ['ses-',num2str(session)], task,'code');
+    directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
+        ['ses-',num2str(session)], task, ['code', category]);
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -43,7 +44,9 @@ try
 catch  % Try again if something went wrong:
     fileStruct = dir('*.m');
     
-    directory = fullfile(pwd, 'data', ['sub-',num2str(sub_num)], ['ses-',num2str(session)], task, 'code');
+    directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
+        ['ses-',num2str(session)], task, ['code', category]);
+    
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end

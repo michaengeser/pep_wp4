@@ -8,8 +8,7 @@
 % recorded to make sure we account for it when starting again!
 function [ key, Resp_Time ] = getInput()
 
-global NO_KEY ABORT_KEY abortKey KITCHEN_KEY BATHROOM_KEY
-global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar
+global NO_KEY 
 
 %%
 key = NO_KEY;

@@ -9,7 +9,7 @@ rng('shuffle');
 
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
-global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS categories
+global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
 global RESTART_KEY NO_KEY ABORT_KEY spaceBar valid_resp_keys black red green
 global expDir
 
@@ -48,6 +48,9 @@ if task_num > 1
 
     % translate user input
     category = categories{category_num + 1};
+
+else 
+    category = ' ';
 end
 
 % Logging everything that is printed into the command window

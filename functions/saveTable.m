@@ -12,7 +12,7 @@
 
 function [] = saveTable(input_table, blk_num)
 
-global sub_num session
+global sub_num session category
 
 task = input_table.task(1);
 
@@ -29,29 +29,28 @@ if isnumeric(blk_num)
     blk_num = num2str(blk_num);
 end
 
+if length(category) > 1
+    category_name = ['_', category];
+else 
+    category_name = [];
+end 
+
 % make files names 
-fileName_mat  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.mat', num2str(sub_num), session, blk_num, string(task)));
-fileName_csv  = fullfile(dir, sprintf('sub-%s_ses-%d_run-%s_task-%s_events.csv', num2str(sub_num), session, blk_num, string(task)));
+fileName = fullfile(dir, ['sub-', num2str(sub_num), '_ses-', num2str(session),...
+    '_run-', num2str(blk_num), '_task-', task, category_name, '_events']);
 
 % check if they already exist and add repetition to file name
 repetition = 0;
-new_fileName_mat = fileName_mat; 
-while exist(new_fileName_mat, 'file') == 2
-    repetition = repetition+1;
-    new_fileName_mat = insertAfter(fileName_mat,'events',['_repetition_',num2str(repetition)]);
-end 
-fileName_mat = new_fileName_mat;
+new_fileName = fileName; 
 
-repetition = 0;
-new_fileName_csv  = fileName_csv; 
-while exist(new_fileName_csv , 'file') == 2
+while exist(new_fileName, 'file') == 2
     repetition = repetition+1;
-    new_fileName_csv = insertAfter(fileName_csv ,'events',['_repetition_',num2str(repetition)]);
+    new_fileName = insertAfter(fileName,'events',['_repetition_',num2str(repetition)]);
 end 
-fileName_csv  = new_fileName_csv;
+fileName = new_fileName;
 
 % save files
-save(fileName_mat,'input_table');
-writetable(input_table,fileName_csv);
+save([fileName, '.mat'], 'input_table');
+writetable(input_table, [fileName, '.csv']);
 
 end
