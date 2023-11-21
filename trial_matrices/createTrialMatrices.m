@@ -5,7 +5,7 @@
 %
 % The task and categories can be adjusted in first few lines
 
-function [tr_mat, file_list] = createTrialMatrices(first_sub_num, n)
+function [final_mat, file_list] = createTrialMatrices(first_sub_num, n)
 
 global FILE_POSTFIX expDir
 
@@ -55,7 +55,7 @@ dataTypes = {'double', 'double', 'double', 'string', 'double', 'string',...
     'string', 'double', 'double', 'double', 'double', 'double'};
 
 % Create an empty table with the specified column names and data types
-tr_mat = table('Size', [0, numel(columnNames)], 'VariableNames', columnNames, 'VariableTypes', dataTypes);
+final_mat = table('Size', [0, numel(columnNames)], 'VariableNames', columnNames, 'VariableTypes', dataTypes);
 
 % Create the jitter distribution:
 jitter_mean = 1;
@@ -66,6 +66,10 @@ jitter_distribution = truncate(exp_dist, jitter_min, jitter_max);
 
 %% Creating the trials table:
 for sub_num = first_sub_num:first_sub_num + (n-1)
+
+    % set random number generator seed to subject number 
+    rng(sub_num)
+
     for task = tasks
 
         % Set parameters according to task (durations in sec)
@@ -75,8 +79,8 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             duration = (1/60)*2;
             % images properties are normalized with SHINE toolbox
             img_type = 'SHINEd';
-            blank = (1/60)*1;
-            mask_dur = (1/60)*5;
+            blank = (1/60)*2;
+            mask_dur = (1/60)*4;
         else
             repeats = 1;
             pics_per_blk = 25;
@@ -129,27 +133,36 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
         practice_mat = task_mat(task_mat.is_practice == 1, :);
         task_mat = task_mat(task_mat.is_practice ~= 1, :);
 
-        % repreat matrix according to number of repeats per image
-        task_mat = repmat(task_mat, repeats, 1);
+        for rep = 1:repeats
 
-        % shuffle row order
-        task_mat = task_mat(randperm(height(task_mat)),:);
+            % shuffle row order
+            task_mat = task_mat(randperm(height(task_mat)),:);
+
+            if rep == 1
+                tr_mat = task_mat;
+            else
+                tr_mat = vertcat(tr_mat, task_mat);
+            end
+        end
+
+        % shuffle practice
+        practice_mat = practice_mat(randperm(height(practice_mat)),:);
 
         % add block and trial numbers
         practice_mat.block = zeros(height(practice_mat), 1);
         practice_mat.trial = (1:height(practice_mat))';
 
-        task_mat.block = repelem(1:height(task_mat)/pics_per_blk, pics_per_blk)';
-        task_mat.trial = repmat(1: pics_per_blk, 1, height(task_mat)/pics_per_blk)';
+        tr_mat.block = repelem(1:height(tr_mat)/pics_per_blk, pics_per_blk)';
+        tr_mat.trial = repmat(1: pics_per_blk, 1, height(tr_mat)/pics_per_blk)';
 
         % add new task matrix to trial matrix
-        tr_mat = vertcat(tr_mat, practice_mat);
-        tr_mat = vertcat(tr_mat, task_mat);
+        final_mat = vertcat(final_mat, practice_mat);
+        final_mat = vertcat(final_mat, tr_mat);
 
     end
 
     % Add the jitter:
-    tr_mat.jitter = random(jitter_distribution, height(tr_mat), 1);
+    final_mat.jitter = random(jitter_distribution, height(final_mat), 1);
 
     % Save to file:
     % Create file name:
@@ -157,7 +170,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
 
 
     file_name = fullfile(target_dir, sprintf("sub-%d_%s_trials.csv", sub_num, 'wp4_beh'));
-    writetable(tr_mat, file_name);
+    writetable(final_mat, file_name);
 
 end
 
