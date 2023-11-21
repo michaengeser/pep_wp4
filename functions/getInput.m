@@ -17,33 +17,7 @@ key = NO_KEY;
 [KeyIsDown, Resp_Time, Resp1] = KbCheck();
 
 if KeyIsDown
-    if Resp1(oneKey)
-        key = 1;
-    elseif Resp1(twoKey)
-        key = 2;
-    elseif Resp1(threeKey)
-        key = 3;
-    elseif Resp1(fourKey)
-        key = 4;
-    elseif Resp1(fiveKey)
-        key = 5;
-    elseif Resp1(sixKey)
-        key = 6;
-    elseif Resp1(sevenKey)
-        key = 7;
-    elseif Resp1(eightKey)
-        key = 8;
-    elseif Resp1(spaceBar)
-        key = 9;
-    elseif Resp1(KITCHEN_KEY)
-        key = KITCHEN_KEY;
-    elseif Resp1(BATHROOM_KEY)
-        key = BATHROOM_KEY;
-    elseif Resp1(abortKey)
-        key = ABORT_KEY;
-    else
-        key = find(Resp1);
-    end
+key = find(Resp1);
 end
 
 if key == NO_KEY

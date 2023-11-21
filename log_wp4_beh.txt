@@ -3182,4 +3182,46 @@ PTB-ERROR: is futile. Also run OSXCompositorIdiocyTest on macOS. Also read 'help
 blaaaa
 WELCOME to loadStimuli
 WELCOME to loadMask
+241                         if key == ABORT_KEY
+WELCOME TO compute_performance
+
+
+PTB-INFO: There are still 224 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
+PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
+PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
+PTB-INFO: stale objects linger around and can consume significant memory ressources, causing degraded performance,
+PTB-INFO: timing trouble (if the system has to resort to disk paging) and ultimately out of memory conditions or
+PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to release all textures and offscreen windows)
+
+
+
+INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+INFO: a total of 2 times out of a total of 10 flips during this session.
+
+INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
+INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
+INFO: If you called Screen('Flip', window); without the 'when' argument, this count is more of a ''mild'' indicator
+INFO: of timing behaviour than a hard reliable measurement. Large numbers may indicate problems and should at least
+INFO: deserve your closer attention. Cfe. 'help SyncTrouble', the FAQ section at www.psychtoolbox.org and the
+INFO: examples in the PDF presentation in PsychDocumentation/Psychtoolbox3-Slides.pdf for more info and timing tips.
+
+
+
+WARNING: This session of your experiment was run by you with the setting Screen('Preference', 'SkipSyncTests', 1).
+WARNING: This means that some internal self-tests and calibrations were skipped. Your stimulus presentation timing
+WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
+WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
+Error using  . 
+Unable to perform assignment because the left and right sides have a different number of
+elements.
+
+Error in Run_wp4_beh (line 355)
+            blk_mat.trial_accuracy(tr) = acc_mat.trial_accuracy;
+ 
+>> Run_wp4_beh
+Subject number [101-199, default: 101]:  113
+Session number [default: 1]: 2
+Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, 5: Usability, 6: Complexity, default: 1]: 2
+Category [0: Bathroom, 1: Kitchen, default: 1]: 
 
