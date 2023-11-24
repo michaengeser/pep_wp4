@@ -147,18 +147,23 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
         % shuffle practice
         practice_mat = practice_mat(randperm(height(practice_mat)),:);
 
-        % sort by category if rating task
+        % sort by category if rating task then add block and trial number
         if ~strcmp(task, 'categorization')
             tr_mat = sortrows(tr_mat,'category');
             practice_mat = sortrows(practice_mat,'category');
-        end
 
-        % add block and trial numbers
+            blks = repelem(1:(height(tr_mat)/pics_per_blk)/2, pics_per_blk);
+            tr_mat.block = repmat(blks, 1, 2)';
+
+        else 
+            tr_mat.block = repelem(1:height(tr_mat)/pics_per_blk, pics_per_blk)';
+        end
+   
+        tr_mat.trial = repmat(1: pics_per_blk, 1, height(tr_mat)/pics_per_blk)';
+
+        % add block and trial numbers for practice
         practice_mat.block = zeros(height(practice_mat), 1);
         practice_mat.trial = (1:height(practice_mat))';
-
-        tr_mat.block = repelem(1:height(tr_mat)/pics_per_blk, pics_per_blk)';
-        tr_mat.trial = repmat(1: pics_per_blk, 1, height(tr_mat)/pics_per_blk)';
 
         % add new task matrix to trial matrix
         final_mat = vertcat(final_mat, practice_mat);

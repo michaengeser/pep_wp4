@@ -192,7 +192,7 @@ try
 
             % show stimulus
             blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
-            DiodFrame = 0; 
+            DiodFrame = 0;
 
             %             % Sending response trigger for the eyetracker
             %             if EYE_TRACKER
