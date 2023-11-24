@@ -1,4 +1,4 @@
-function [blk] = trialFeedback(blk_mat, task_mat)
+function [blk] = blockFeedback(blk_mat, task_mat)
 
 global spaceBar RestartKey
 

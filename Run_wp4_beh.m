@@ -10,7 +10,7 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
-global RESTART_KEY NO_KEY ABORT_KEY spaceBar valid_resp_keys black red green
+global RESTART_KEY NO_KEY ABORT_KEY spaceBar valid_resp_keys
 global expDir
 
 expDir = pwd;
@@ -354,22 +354,6 @@ try
 
             %% Jitter TIME LOOP
 
-            % set feeback color to black
-            feedback_color = black;
-
-            if strcmp(task, 'categorization')
-                acc_mat = compute_performance(blk_mat(blk_mat.trial == tr, :));
-                blk_mat.trial_accuracy(tr) = acc_mat.trial_accuracy;
-                blk_mat.RT(tr) = acc_mat.RT;
-
-                % change feedback color according to accuracy
-                if acc_mat.trial_accuracy == 1
-                    feedback_color = green;
-                elseif acc_mat.trial_accuracy == 0
-                    feedback_color = red;
-                end
-            end
-
             % start timer
             elapsedTime = 0;
 
@@ -426,7 +410,7 @@ try
         end
 
         %% Feedback
-        blk = trialFeedback(blk_mat, task_mat);
+        blk = blockFeedback(blk_mat, task_mat);
 
         % Move to the next block
         blk = blk + 1;
