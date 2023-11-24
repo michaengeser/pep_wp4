@@ -18,7 +18,7 @@ n_pics_per_cate = 50;
 n_pics_practice = 10;
 
 % List the tasks.
-tasks = ["categorization", "typicality", "familiarity", "aesthetic"];
+tasks = ["categorization", "typicality", "familiarity", "aesthetic", "usability", "complexity"];
 
 % Create a structure storing the levels of each of these conditions:
 pre_file_list = struct('bathroom', nan(1,n_pics_per_cate), ...
@@ -67,27 +67,29 @@ jitter_distribution = truncate(exp_dist, jitter_min, jitter_max);
 %% Creating the trials table:
 for sub_num = first_sub_num:first_sub_num + (n-1)
 
-    % set random number generator seed to subject number
-    rng(sub_num)
-
     for task = tasks
 
         % Set parameters according to task (durations in sec)
         if strcmp(task, 'categorization')
-            repeats = 12;
-            pics_per_blk = 50;
-            duration = (1/60)*3;
-            % images properties are normalized with SHINE toolbox
-            img_type = 'SHINEd';
-            blank = (1/60)*3;
-            mask_dur = (1/60)*5;
-        else
-            repeats = 1;
-            pics_per_blk = 25;
-            duration = 1.5;
-            img_type = 'raw';
-            blank = 0;
-            mask_dur = 0;
+
+            rng(sub_num) % different random number for each subject
+            repeats = 12; % how often each image is shown
+            pics_per_blk = 50; % how many images are one block
+            duration = (1/60)*3; % for how long is the image shown
+            img_type = 'SHINEd'; % images properties are normalized with SHINE toolbox
+            blank = (1/60)*3; % blank duration between image and mask
+            mask_dur = (1/60)*5; % mask duration
+
+        else % for rating task
+
+            rng(find(strcmp(task, tasks))) % same random number for each subject but different for each task
+            repeats = 1; % how often each image is shown
+            pics_per_blk = 25; % how many images are one block
+            duration = 1.5; % for how long is the image shown
+            img_type = 'raw'; % gray scale images 
+            blank = 0; % blank duration between image and mask
+            mask_dur = 0; % mask duration
+
         end
 
         % Create an empty table with the specified column names and data types
