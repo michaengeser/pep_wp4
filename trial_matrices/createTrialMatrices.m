@@ -75,10 +75,9 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             rng(sub_num) % different random number for each subject
             repeats = 12; % how often each image is shown
             pics_per_blk = 50; % how many images are one block
-            duration = (1/60)*3; % for how long is the image shown
+            duration = (1/60)*4; % for how long is the image shown
             img_type = 'SHINEd'; % images properties are normalized with SHINE toolbox
-            blank = (1/60)*3; % blank duration between image and mask
-            mask_dur = (1/60)*5; % mask duration
+            mask_dur = (1/60)*4; % mask duration
 
         else % for rating task
 
@@ -87,7 +86,6 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             pics_per_blk = 25; % how many images are one block
             duration = 1.5; % for how long is the image shown
             img_type = 'raw'; % gray scale images 
-            blank = 0; % blank duration between image and mask
             mask_dur = 0; % mask duration
 
         end
