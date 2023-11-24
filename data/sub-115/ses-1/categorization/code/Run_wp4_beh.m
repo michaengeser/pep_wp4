@@ -341,7 +341,7 @@ try
                 % Present jitter
                 if jitterLogged == FALSE
 
-                    blk_mat.jit_onset(tr) = showFixation('PhotodiodeOn', feedback_color);
+                    blk_mat.jit_onset(tr) = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 
                     %                     % Sending response trigger for the eyetracker
