@@ -232,12 +232,13 @@ try
                 elapsedTime = 0;
 
                 % define total trial duration
-                min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr);
+                min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr)  - refRate*FRAME_ANTICIPATION;
 
                 while elapsedTime < min_trial_duration || ~hasInput
 
                     %% Get response:
-                    if ~hasInput
+                    % Current implementation disables repsonse while stimulus is shown 
+                    if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput 
                         % Ge the response:
                         [key,Resp_Time] = getInput();
 
@@ -264,7 +265,7 @@ try
 
                                 % wait for space bar
                                 [~, ~, wait_resp] = KbCheck();
-                                while ~wait_resp(spaceBar)
+                                while ~wait_resp(valid_resp_keys)
                                     [~, ~, wait_resp] = KbCheck();
                                 end
 
@@ -307,7 +308,12 @@ try
 
                     % Present fixation while waiting for response
                     if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
-                        fix_time = showFixation('PhotodiodeOn');
+
+                        if strcmp('categorization', task)
+                            fix_time = showFixation('PhotodiodeOn');
+                        else
+                            fix_time = showMessage('Please provide your rating response');
+                        end
                         DiodFrame = CurrentFrame;
 
                         %                     % Sending response trigger for the eyetracker

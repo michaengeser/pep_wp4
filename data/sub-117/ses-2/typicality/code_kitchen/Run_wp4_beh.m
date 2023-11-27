@@ -98,6 +98,9 @@ try
 
         task = char(task);
 
+        % initialize/reset log table
+        log_all = [];
+
         % Set the catagories:
         if ~strcmp('categorization', task)
 
@@ -229,12 +232,13 @@ try
                 elapsedTime = 0;
 
                 % define total trial duration
-                min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr);
+                min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr)  - refRate*FRAME_ANTICIPATION;
 
                 while elapsedTime < min_trial_duration || ~hasInput
 
                     %% Get response:
-                    if ~hasInput
+                    % Current implementation disables repsonse while stimulus is shown 
+                    if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput 
                         % Ge the response:
                         [key,Resp_Time] = getInput();
 
@@ -304,7 +308,12 @@ try
 
                     % Present fixation while waiting for response
                     if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
-                        fix_time = showFixation('PhotodiodeOn');
+
+                        if strcmp('categorization', task)
+                            fix_time = showFixation('PhotodiodeOn');
+                        else
+                            fix_time = showMessage('Please provide your rating response');
+                        end
                         DiodFrame = CurrentFrame;
 
                         %                     % Sending response trigger for the eyetracker
@@ -389,7 +398,7 @@ try
             %         end
 
             % Append the block log to the overall log:
-            if ~exist('log_all', 'var')
+            if isempty(log_all)
                 log_all = blk_mat;
             else
                 log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
