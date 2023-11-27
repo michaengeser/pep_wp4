@@ -98,9 +98,6 @@ try
 
         task = char(task);
 
-        % initialize/reset log table
-        log_all = [];
-
         % Set the catagories:
         if ~strcmp('categorization', task)
 
@@ -392,7 +389,7 @@ try
             %         end
 
             % Append the block log to the overall log:
-            if isempty(log_all)
+            if ~exist('log_all', 'var')
                 log_all = blk_mat;
             else
                 log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
