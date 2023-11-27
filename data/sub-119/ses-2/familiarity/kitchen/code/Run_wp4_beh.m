@@ -104,16 +104,12 @@ try
         ExistFlag = exist(SubSesFolder,'dir');
         if ExistFlag
             WaitSecs(1);
-            ListenChar(0);
-            ShowCursor;
             warning_msg = ['This participant number and session was already attributed for task: ', category, ' ',  task];
                 warning (warning_msg);
                 proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
                 if strcmp(proceedInput,'no')
-                    error('Program aborted by user')
+                error('Program aborted by user')
                 end
-                ListenChar(2);
-                HideCursor;
         end
 
         % get trial matrix of the task
@@ -272,9 +268,11 @@ try
 
                                 % if pressed key is not a valid response key
                             elseif ~ismember(key, valid_resp_keys)
-                                showMessage('Invalid response key!');
+                                invalid_key_msg = ['Invalid response key!', newline, newline,...
+                                    'Press space to proceed'];
+                                showMessage(invalid_key_msg);
 
-                                % wait for correct response bar
+                                % wait for space bar
                                 [~, ~, wait_resp] = KbCheck();
                                 while ~wait_resp(valid_resp_keys)
                                     [~, ~, wait_resp] = KbCheck();
