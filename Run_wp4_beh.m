@@ -10,7 +10,8 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
-global RESTART_KEY NO_KEY abortKey spaceBar valid_resp_keys
+global RESTART_KEY NO_KEY abortKey spaceBar  
+global KITCHEN_KEY BATHROOM_KEY oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey
 global expDir
 
 expDir = pwd;
@@ -51,26 +52,10 @@ if exist(dfile, 'file') ; delete(dfile); end
 Str = CmdWinTool('getText');
 dlmwrite(dfile,Str,'delimiter','');
 
-%% check if participant and session exists already
-
-for task_check = tasks
-
-    SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], string(task_check));
-    ExistFlag = exist(SubSesFolder,'dir');
-    if ExistFlag
-        WaitSecs(1);
-        warning ('This participant number and session was already attributed!')
-        proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
-        if strcmp(proceedInput,'no')
-            error('Program aborted by user')
-        end
-    end
-end
-
 %% Initializing
 
 % experimental parameters
-initRuntimeParameters
+initRuntimeParameters;
 
 % PTB:
 initPsychtooblox(); % initializes psychtoolbox window at correct resolution and refresh rate
@@ -96,21 +81,35 @@ try
     %% Task loop
     for task = tasks
 
+        %% Set task parameters
         task = char(task);
 
         % initialize/reset log table
         log_all = [];
 
+
+        %% check if participant and session exists already
+
         % Set the catagories:
         if ~strcmp('categorization', task)
-
             categories = ["bathroom", "kitchen"];
-
             % translate user input
             category = categories{category_num + 1};
-
         else
             category = ' ';
+        end
+
+
+        SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], string(task), category);
+        ExistFlag = exist(SubSesFolder,'dir');
+        if ExistFlag
+            WaitSecs(1);
+            warning_msg = ['This participant number and session was already attributed for task: ', category, ' ',  task];
+                warning (warning_msg);
+                proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
+                if strcmp(proceedInput,'no')
+                error('Program aborted by user')
+                end
         end
 
         % get trial matrix of the task
@@ -118,6 +117,16 @@ try
             task_mat = tr_mat(strcmp(tr_mat.task, task),:);
         else % if rating task, just take corresponding category
             task_mat = tr_mat(strcmp(tr_mat.task, task) & strcmp(tr_mat.category, category),:);
+        end
+
+
+        % define which keys are valid response keys
+        if strcmp(task, 'categorization')
+            % cagtegorization response keys
+            valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
+        else
+            % rating response key
+            valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
         end
 
         %% Instructions
