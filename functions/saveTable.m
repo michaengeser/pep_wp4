@@ -15,7 +15,7 @@ function [] = saveTable(input_table, blk_num)
 global sub_num session category task
 
 % Creating the directories if they don't already exist:
-dir = string(fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], string(task)));
+dir = string(fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], task));
 if ~exist(dir, 'dir')
     mkdir(dir);
 end
