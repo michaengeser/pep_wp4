@@ -29,7 +29,7 @@ sub_num = input('Subject number [101-199, default: 101]: ');
 if isempty(sub_num); sub_num = 101; end % default
 session = input('Session number [default: 1]: ');
 if isempty(session); session = 1; end % default
-task_num = input(['Task [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity,', ...
+task_num = input(['Tasks [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity,', ...
     ' 4: Aesthetic, 5: Usability, 6: Complexity, default: 1]: ']);
 if isempty(task_num); task_num = 1; end % default
 
@@ -90,7 +90,7 @@ try
     for task = tasks
 
         task = string(task);
-        
+
         % ask for category if its the rating task
         if ~strcmp(task, 'categorization')
             category_num = input('Category [0: Bathroom, 1: Kitchen, default: 1]: ');
