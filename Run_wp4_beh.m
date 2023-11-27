@@ -122,7 +122,7 @@ try
 
         %% Instructions
         if SHOW_INSTRUCTIONS
-            instructions(task);
+            instructions();
             WaitSecs(1);
         end
 

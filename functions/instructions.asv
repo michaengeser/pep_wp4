@@ -2,38 +2,36 @@
 
 function [ ] = instructions()
 
-global category task
+global sub_num category task
 global RightKey LeftKey
 
 % decide which slides to take (based on task and subject number)
 if strcmp(task, 'categorization')
 
-    instr_slide1 = 'Slide01.tif';
-    instr_slide2 = 'Slide02.tif';
-    instr_slide3 = 'Slide03.tif';
+    instr_slide1 = 'Slide1.tif';
+    instr_slide2 = 'Slide2.tif';
+    instr_slide3 = 'Slide3.tif';
 
 else
 
     if strcmp(category, 'kitchen')
-        instr_slide1 = 'Slide04.tif';
+        instr_slide1 = 'Slide4.tif';
     elseif strcmp(category, 'bathroom')
-        instr_slide1 = 'Slide05.tif';
+        instr_slide1 = 'Slide5.tif';
     end
 
     if strcmp(task, 'typicality')
-        instr_slide2 = 'Slide06.tif';
+        instr_slide2 = "instructions_typ.png";
     elseif strcmp(task, 'familiarity')
-        instr_slide2 = 'Slide07.tif';
-    elseif strcmp(task, 'aesthetic')
-        instr_slide2 = 'Slide08.tif';
+        instr_slide2 = "instructions_fam.png";
     elseif strcmp(task, 'usability')
-        instr_slide2 = 'Slide09.tif';
-    elseif strcmp(task, 'complexity')
-        instr_slide2 = 'Slide10.tif';
+        instr_slide2 = "instructions_usa.png";
+    elseif strcmp(task, 'aesthetic')
+        instr_slide2 = "instructions_aes.png";
     end
 
     % last slide
-    instr_slide3 = 'Slide11.tif';
+    instr_slide3 = "instructions_end_rating.png";
 end
         
 instrsPaths = [instr_slide1; instr_slide2; instr_slide3];
