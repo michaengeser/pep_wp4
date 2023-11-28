@@ -16,7 +16,7 @@ blk = blk_mat.block(1);
             end
 
             % get mean accuracy
-            mean_acc = mean(blk_mat.trial_accuracy);
+            mean_acc = mean(blk_mat.trial_accuracy, 'omitnan');
 
             % generate feedback message about accuracy
             accuracy_msg = ['Your accuracy is: ', num2str(round(mean_acc*100)), '%'];
