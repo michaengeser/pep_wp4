@@ -10,7 +10,7 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
-global RESTART_KEY NO_KEY abortKey spaceBar  
+global RESTART_KEY NO_KEY abortKey spaceBar
 global KITCHEN_KEY BATHROOM_KEY oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey
 global expDir
 
@@ -38,7 +38,7 @@ if isempty(task_num); task_num = 1; end % default
 if max(task_num) > 1
     category_num = input('Category dor rating task [0: Bathroom, 1: Kitchen, default: 1]: ');
     if isempty(category_num); category_num = 1; end % default
-end 
+end
 
 
 % tanslate used input
@@ -91,7 +91,7 @@ try
         %% check if participant and session exists already
 
         % Set the catagories:
-        if ~strcmp('categorization', task)
+        if ~strcmp('categorization', task) && exist('category_num', 'var')
             categories = ["bathroom", "kitchen"];
             % translate user input
             category = categories{category_num + 1};
@@ -99,14 +99,20 @@ try
             category = ' ';
         end
 
+        % if task show slide show
+        if strcmp('slide_show', task)
+            showAllStimuli(file_list);
 
-        SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], string(task), category);
-        ExistFlag = exist(SubSesFolder,'dir');
-        if ExistFlag
-            WaitSecs(1);
-            ListenChar(0);
-            ShowCursor;
-            warning_msg = ['This participant number and session was already attributed for task: ', category, ' ',  task];
+        % execute dxperiment
+        else
+
+            SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], string(task), category);
+            ExistFlag = exist(SubSesFolder,'dir');
+            if ExistFlag
+                WaitSecs(1);
+                ListenChar(0);
+                ShowCursor;
+                warning_msg = ['This participant number and session was already attributed for task: ', category, ' ',  task];
                 warning (warning_msg);
                 proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
                 if strcmp(proceedInput,'no')
@@ -114,333 +120,333 @@ try
                 end
                 ListenChar(2);
                 HideCursor;
-        end
+            end
 
-        % get trial matrix of the task
-        if strcmp(task, 'categorization')
-            task_mat = tr_mat(strcmp(tr_mat.task, task),:);
-        else % if rating task, just take corresponding category
-            task_mat = tr_mat(strcmp(tr_mat.task, task) & strcmp(tr_mat.category, category),:);
-        end
+            % get trial matrix of the task
+            if strcmp(task, 'categorization')
+                task_mat = tr_mat(strcmp(tr_mat.task, task),:);
+            else % if rating task, just take corresponding category
+                task_mat = tr_mat(strcmp(tr_mat.task, task) & strcmp(tr_mat.category, category),:);
+            end
 
 
-        % define which keys are valid response keys
-        if strcmp(task, 'categorization')
-            % cagtegorization response keys
-            valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
-        else
-            % rating response key
-            valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
-        end
-
-        %% Instructions
-        if SHOW_INSTRUCTIONS
-            instructions();
-            WaitSecs(1);
-        end
-
-        %% save everything from command window
-        Str = CmdWinTool('getText');
-        dlmwrite(dfile,Str,'delimiter','');
-
-        %% Block loop:
-        blks = unique(task_mat.block);
-        showFixation('PhotodiodeOff');
-
-        if SHOW_PRACTICE
-            blk = 0;
-        else
-            blk = 1;
-        end
-
-        while blk <= blks(end)
-
-            %
-            %         % Initialize the eyetracker with the block number and run the
-            %         % calibration:
-            %
-            %         if EYE_TRACKER
-            %             % Initialize the eyetracker:
-            %             initEyetracker(sub_num, blk);
-            %             % Show the calibration message to give the option to perform
-            %             % the eyetracker calibration if needed:
-            %             showMessage(EYETRACKER_CALIBRATION_MESSAGE);
-            %             CorrectKey = 0; % Setting the CorrectKey to 0 to initiate the loop
-            %             while ~CorrectKey % As long as a non-accepted key is pressed, keep on asking
-            %                 [~, CalibrationResp, ~] = KbWait(compKbDevice,3);
-            %                 if CalibrationResp(CalibrationKey)
-            %                     % Run the calibration:
-            %                     EyelinkDoTrackerSetup(el);
-            %                     CorrectKey = 1;
-            %                 elseif CalibrationResp(ValidationKey)
-            %                     CorrectKey = 1;
-            %                 end
-            %             end
-            %             % Starting the recording
-            %             Eyelink('StartRecording');
-            %             % Wait for the recording to have started:
-            %             WaitSecs(0.1);
-            %         end
-
-            % Extract the trial and log of this block only:
-            blk_mat = task_mat(task_mat.block == blk, :);
-
-            % Add the columns for logging:
-            blk_mat = prepare_log(blk_mat);
-
-            % check what block we´re in and informs user
-            if blk == 0
-                showMessage('Press a space to start the practice');
-            elseif blk == 1
-                showMessage('Press a space to start the experiment');
+            % define which keys are valid response keys
+            if strcmp(task, 'categorization')
+                % cagtegorization response keys
+                valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
             else
-                showMessage('Press a space to start the next block');
+                % rating response key
+                valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
             end
 
-            % wait for space bar
-            [~, ~, wait_resp] = KbCheck();
-             while ~wait_resp(spaceBar)
-                [~, ~, wait_resp] = KbCheck();
+            %% Instructions
+            if SHOW_INSTRUCTIONS
+                instructions();
+                WaitSecs(1);
             end
 
-            % Wait a random amount of time and show fixation:
+            %% save everything from command window
+            Str = CmdWinTool('getText');
+            dlmwrite(dfile,Str,'delimiter','');
+
+            %% Block loop:
+            blks = unique(task_mat.block);
             showFixation('PhotodiodeOff');
-            WaitSecs(rand + 2);
 
-            %% Trials loop:
-            for tr = 1:length(blk_mat.trial)
+            if SHOW_PRACTICE
+                blk = 0;
+            else
+                blk = 1;
+            end
 
-                % flags needs to be initialized
-                fixShown = FALSE;
-                maskShown = FALSE;
-                jitterLogged = FALSE;
-                hasInput = FALSE;
+            while blk <= blks(end)
 
-                % show stimulus
-                blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
-                DiodFrame = 0;
-
-                %             % Sending response trigger for the eyetracker
-                %             if EYE_TRACKER
-                %                 trigger_str = get_et_trigger('vis_onset', blk_mat.task_relevance{tr}, ...
-                %                     blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                %                     blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                %                 Eyelink('Message',trigger_str);
+                %
+                %         % Initialize the eyetracker with the block number and run the
+                %         % calibration:
+                %
+                %         if EYE_TRACKER
+                %             % Initialize the eyetracker:
+                %             initEyetracker(sub_num, blk);
+                %             % Show the calibration message to give the option to perform
+                %             % the eyetracker calibration if needed:
+                %             showMessage(EYETRACKER_CALIBRATION_MESSAGE);
+                %             CorrectKey = 0; % Setting the CorrectKey to 0 to initiate the loop
+                %             while ~CorrectKey % As long as a non-accepted key is pressed, keep on asking
+                %                 [~, CalibrationResp, ~] = KbWait(compKbDevice,3);
+                %                 if CalibrationResp(CalibrationKey)
+                %                     % Run the calibration:
+                %                     EyelinkDoTrackerSetup(el);
+                %                     CorrectKey = 1;
+                %                 elseif CalibrationResp(ValidationKey)
+                %                     CorrectKey = 1;
+                %                 end
                 %             end
+                %             % Starting the recording
+                %             Eyelink('StartRecording');
+                %             % Wait for the recording to have started:
+                %             WaitSecs(0.1);
+                %         end
+
+                % Extract the trial and log of this block only:
+                blk_mat = task_mat(task_mat.block == blk, :);
+
+                % Add the columns for logging:
+                blk_mat = prepare_log(blk_mat);
+
+                % check what block we´re in and informs user
+                if blk == 0
+                    showMessage('Press a space to start the practice');
+                elseif blk == 1
+                    showMessage('Press a space to start the experiment');
+                else
+                    showMessage('Press a space to start the next block');
+                end
+
+                % wait for space bar
+                [~, ~, wait_resp] = KbCheck();
+                while ~wait_resp(spaceBar)
+                    [~, ~, wait_resp] = KbCheck();
+                end
+
+                % Wait a random amount of time and show fixation:
+                showFixation('PhotodiodeOff');
+                WaitSecs(rand + 2);
+
+                %% Trials loop:
+                for tr = 1:length(blk_mat.trial)
+
+                    % flags needs to be initialized
+                    fixShown = FALSE;
+                    maskShown = FALSE;
+                    jitterLogged = FALSE;
+                    hasInput = FALSE;
+
+                    % show stimulus
+                    blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
+                    DiodFrame = 0;
+
+                    %             % Sending response trigger for the eyetracker
+                    %             if EYE_TRACKER
+                    %                 trigger_str = get_et_trigger('vis_onset', blk_mat.task_relevance{tr}, ...
+                    %                     blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                    %                     blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                    %                 Eyelink('Message',trigger_str);
+                    %             end
 
 
 
-                %--------------------------------------------------------
+                    %--------------------------------------------------------
 
-                %% TIME LOOP
+                    %% TIME LOOP
 
-                % I then set a frame counter. The flip of the stimulus
-                % presentation is frame 0. It is already the previous frame because it already occured:
-                PreviousFrame = 0;
-                % I then set a frame index. It is the same as the previous
-                % frame for now
-                FrameIndex = PreviousFrame;
+                    % I then set a frame counter. The flip of the stimulus
+                    % presentation is frame 0. It is already the previous frame because it already occured:
+                    PreviousFrame = 0;
+                    % I then set a frame index. It is the same as the previous
+                    % frame for now
+                    FrameIndex = PreviousFrame;
 
-                % start timer
-                elapsedTime = 0;
+                    % start timer
+                    elapsedTime = 0;
 
-                % define total trial duration
-                min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr)  - refRate*FRAME_ANTICIPATION;
+                    % define total trial duration
+                    min_trial_duration = blk_mat.duration(tr) + blk_mat.mask_dur(tr)  - refRate*FRAME_ANTICIPATION;
 
-                while elapsedTime < min_trial_duration || ~hasInput
+                    while elapsedTime < min_trial_duration || ~hasInput
 
-                    %% Get response:
-                    % Current implementation disables repsonse while stimulus is shown 
-                    if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput 
-                        % Ge the response:
-                        [key,Resp_Time] = getInput();
+                        %% Get response:
+                        % Current implementation disables repsonse while stimulus is shown
+                        if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput
+                            % Ge the response:
+                            [key,Resp_Time] = getInput();
 
-                        % Handling the response:
-                        if key ~= NO_KEY
+                            % Handling the response:
+                            if key ~= NO_KEY
 
-                            %                         % Sending response trigger for the eyetracker
-                            %                         if EYE_TRACKER
-                            %                             trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
-                            %                                 blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                            %                                 blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                            %                             Eyelink('Message',trigger_str);
-                            %                         end
+                                %                         % Sending response trigger for the eyetracker
+                                %                         if EYE_TRACKER
+                                %                             trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
+                                %                                 blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                                %                                 blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                                %                             Eyelink('Message',trigger_str);
+                                %                         end
 
-                            % If the experiment was aborted:
-                            if key == abortKey
-                                error('Experiment has been aborted');
+                                % If the experiment was aborted:
+                                if key == abortKey
+                                    error('Experiment has been aborted');
 
-                                % if pressed key is not a valid response key
-                            elseif ~ismember(key, valid_resp_keys)
-                                showMessage('Invalid response key!');
+                                    % if pressed key is not a valid response key
+                                elseif ~ismember(key, valid_resp_keys)
+                                    showMessage('Invalid response key!');
 
-                                % wait for correct response bar
-                                [~, ~, wait_resp] = KbCheck();
-                                while ~wait_resp(valid_resp_keys)
+                                    % wait for correct response bar
                                     [~, ~, wait_resp] = KbCheck();
+                                    while ~wait_resp(valid_resp_keys)
+                                        [~, ~, wait_resp] = KbCheck();
+                                    end
+
                                 end
 
+                                % Log the response received:
+                                blk_mat.trial_response(tr) = key;
+                                blk_mat.time_of_resp(tr) =  Resp_Time;
+
+                                % logging reaction
+                                hasInput = TRUE;
                             end
-
-                            % Log the response received:
-                            blk_mat.trial_response(tr) = key;
-                            blk_mat.time_of_resp(tr) =  Resp_Time;
-
-                            % logging reaction
-                            hasInput = TRUE;
                         end
-                    end
 
-                    %% mask
+                        %% mask
 
-                    % check if trial has a mask
-                    if blk_mat.mask_dur(tr) > 0
+                        % check if trial has a mask
+                        if blk_mat.mask_dur(tr) > 0
 
-                        % Present mask
-                        if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
-                            mask_time = showStimuli(mask_texture);
+                            % Present mask
+                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
+                                mask_time = showStimuli(mask_texture);
+                                DiodFrame = CurrentFrame;
+
+                                %                     % Sending response trigger for the eyetracker
+                                %                     if EYE_TRACKER
+                                %                         trigger_str = get_et_trigger('mask_onset', blk_mat.task_relevance{tr}, ...
+                                %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                                %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                                %                         Eyelink('Message',trigger_str);
+                                %                     end
+
+                                % log fixation
+                                blk_mat.mask_time(tr) = mask_time;
+                                maskShown = TRUE;
+                            end
+                        end
+
+                        %% Waiting for response
+
+                        % Present fixation while waiting for response
+                        if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+
+                            if strcmp('categorization', task)
+                                fix_time = showFixation('PhotodiodeOn');
+                            else
+                                fix_time = showMessage('Please provide your rating response');
+                            end
                             DiodFrame = CurrentFrame;
 
                             %                     % Sending response trigger for the eyetracker
                             %                     if EYE_TRACKER
-                            %                         trigger_str = get_et_trigger('mask_onset', blk_mat.task_relevance{tr}, ...
+                            %                         trigger_str = get_et_trigger('fixation_onset', blk_mat.task_relevance{tr}, ...
                             %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
                             %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
                             %                         Eyelink('Message',trigger_str);
                             %                     end
 
                             % log fixation
-                            blk_mat.mask_time(tr) = mask_time;
-                            maskShown = TRUE;
+                            blk_mat.fix_time(tr) = fix_time;
+                            fixShown = TRUE;
+                        end
+
+                        % Updating clock:
+                        elapsedTime = GetSecs - blk_mat.stim_time(tr);
+
+                        % Updating the frame counter:
+                        CurrentFrame = floor(elapsedTime/refRate);
+
+                        % Check if a new frame started:
+                        if CurrentFrame > PreviousFrame
+                            FrameIndex = FrameIndex +1;
+
+                            % turn photodiode off again after diod duration
+                            if PHOTODIODE && (CurrentFrame - DiodFrame == DIOD_DURATION - 1)
+                                turnPhotoTrigger('off');
+                            end
+                            PreviousFrame = CurrentFrame;
                         end
                     end
 
-                    %% Waiting for response
+                    %% Jitter TIME LOOP
 
-                    % Present fixation while waiting for response
-                    if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+                    % start timer
+                    elapsedTime = 0;
 
-                        if strcmp('categorization', task)
-                            fix_time = showFixation('PhotodiodeOn');
-                        else
-                            fix_time = showMessage('Please provide your rating response');
+                    % define total trial duration
+                    jitter_duration = blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
+
+                    while elapsedTime < jitter_duration
+
+                        % Present jitter
+                        if jitterLogged == FALSE
+
+                            blk_mat.jit_onset(tr) = showFixation('PhotodiodeOn');
+                            DiodFrame = CurrentFrame;
+
+                            %                     % Sending response trigger for the eyetracker
+                            %                     if EYE_TRACKER
+                            %                         trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
+                            %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                            %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                            %                         Eyelink('Message',trigger_str);
+                            %                     end
+
+                            jitterLogged = TRUE;
+
                         end
-                        DiodFrame = CurrentFrame;
-
-                        %                     % Sending response trigger for the eyetracker
-                        %                     if EYE_TRACKER
-                        %                         trigger_str = get_et_trigger('fixation_onset', blk_mat.task_relevance{tr}, ...
-                        %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        %                         Eyelink('Message',trigger_str);
-                        %                     end
-
-                        % log fixation
-                        blk_mat.fix_time(tr) = fix_time;
-                        fixShown = TRUE;
-                    end
-
-                    % Updating clock:
-                    elapsedTime = GetSecs - blk_mat.stim_time(tr);
-
-                    % Updating the frame counter:
-                    CurrentFrame = floor(elapsedTime/refRate);
-
-                    % Check if a new frame started:
-                    if CurrentFrame > PreviousFrame
-                        FrameIndex = FrameIndex +1;
-
-                        % turn photodiode off again after diod duration
-                        if PHOTODIODE && (CurrentFrame - DiodFrame == DIOD_DURATION - 1)
-                            turnPhotoTrigger('off');
-                        end
-                        PreviousFrame = CurrentFrame;
-                    end
-                end
-
-                %% Jitter TIME LOOP
-
-                % start timer
-                elapsedTime = 0;
-
-                % define total trial duration
-                jitter_duration = blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
-
-                while elapsedTime < jitter_duration
-
-                    % Present jitter
-                    if jitterLogged == FALSE
-
-                        blk_mat.jit_onset(tr) = showFixation('PhotodiodeOn');
-                        DiodFrame = CurrentFrame;
-
-                        %                     % Sending response trigger for the eyetracker
-                        %                     if EYE_TRACKER
-                        %                         trigger_str = get_et_trigger('jitter_onset', blk_mat.task_relevance{tr}, ...
-                        %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                        %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                        %                         Eyelink('Message',trigger_str);
-                        %                     end
-
-                        jitterLogged = TRUE;
+                        % Updating clock:
+                        elapsedTime = GetSecs - blk_mat.jit_onset(tr);
 
                     end
-                    % Updating clock:
-                    elapsedTime = GetSecs - blk_mat.jit_onset(tr);
 
+                    % log end of trial
+                    blk_mat.trial_end(tr) = GetSecs;
+
+                    %% End of trial
+
+                    if(key==RESTART_KEY)
+                        break
+                    end
+                end  % End of trial loop
+
+                % Save the data of this block:
+                saveTable(blk_mat, blk);
+
+                %         % Save the eyetracker data:
+                %         if EYE_TRACKER
+                %             saveEyetracker(task, blk);
+                %         end
+
+                % Append the block log to the overall log:
+                if isempty(log_all)
+                    log_all = blk_mat;
+                else
+                    log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
                 end
 
-                % log end of trial
-                blk_mat.trial_end(tr) = GetSecs;
+                %% Feedback
+                blk = blockFeedback(blk_mat, task_mat);
 
-                %% End of trial
+                % Move to the next block
+                blk = blk + 1;
+                WaitSecs(0.2);
 
-                if(key==RESTART_KEY)
-                    break
-                end
-            end  % End of trial loop
+            end  % End of block loop
 
-            % Save the data of this block:
-            saveTable(blk_mat, blk);
+            %% End of experiment
 
-            %         % Save the eyetracker data:
-            %         if EYE_TRACKER
-            %             saveEyetracker(task, blk);
-            %         end
+            % Letting the participant know that it is over:
+            end_message = ['THE END', newline, newline,'Thank you!'];
+            showMessage(end_message);
 
-            % Append the block log to the overall log:
-            if isempty(log_all)
-                log_all = blk_mat;
-            else
-                log_all = [log_all; blk_mat];  % Not the most efficient but it is in a non critical part
-            end
+            %% Save
 
-            %% Feedback
-            blk = blockFeedback(blk_mat, task_mat);
+            % Save the whole table:
+            saveTable(log_all, "all");
 
-            % Move to the next block
-            blk = blk + 1;
-            WaitSecs(0.2);
+            % Save the code:
+            saveCode(task);
 
-        end  % End of block loop
-
-        %% End of experiment
-
-        % Letting the participant know that it is over:
-        end_message = ['THE END', newline, newline,'Thank you!'];
-        showMessage(end_message);
-
-        %% Save
-
-        % Save the whole table:
-        saveTable(log_all, "all");
-
-        % Save the code:
-        saveCode(task);
-
-        WaitSecs(2);
-        showMessage('saving...');
-
+            WaitSecs(2);
+            showMessage('saving...');
+        end % end of slide show statement
     end % end task loop
 
     % save everything from command window
