@@ -3,11 +3,11 @@
 
 function [ ] = drawFixation(colorCross)
 
-global  ppd w center DIAMOUT_FIXATION DIAMIN_FIXATION black
+global  ppd w center DIAMOUT_FIXATION DIAMIN_FIXATION white
 
 % if no color is specified its black
 if nargin<1
-    colorCross = black;
+    colorCross = white;
 end
 
 colorOval = [0 0 0]; % color of the two circles [R G B]

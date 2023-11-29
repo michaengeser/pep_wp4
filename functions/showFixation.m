@@ -8,11 +8,11 @@
 function [ fixation_time ] = showFixation(Photodiode, feedback_color)
 
 
-global gray_color w PHOTODIODE black
+global gray_color w PHOTODIODE white
 
-% if no color is specified its black
+% if no color is specified its white
 if nargin<2
-    feedback_color = black;
+    feedback_color = white;
 end
 
 % Draw the fixation

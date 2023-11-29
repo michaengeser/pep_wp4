@@ -24,18 +24,18 @@ global F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
 % text
 global fontType fontSize fontColor
 % colors
-global black gray_color red green
+global black white gray_color red green 
 % optics
 global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION FILE_POSTFIX
 % other
 global TRUE FALSE
 
 %% DEBUG parameters
-DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 1; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 0; % enable windowed mode for dubugging
+NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
 FRAME_ANTICIPATION = 0.1; % optimizes timing in PTB
 
@@ -75,7 +75,8 @@ FIXATION_FONT_SIZE = 20;
 fontColor = 0; % black;
 
 % color
-black = [255, 255, 255];
+white = [255, 255, 255];
+black = [0, 0, 0];
 gray_color = [125, 125, 125];
 red = [255, 0, 0];
 green = [0, 255, 0];
