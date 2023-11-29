@@ -10,7 +10,7 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
-global RESTART_KEY NO_KEY abortKey spaceBar
+global RESTART_KEY NO_KEY spaceBar valid_resp_keys
 global KITCHEN_KEY BATHROOM_KEY oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey
 global expDir
 
@@ -134,9 +134,6 @@ try
             if strcmp(task, 'categorization')
                 % cagtegorization response keys
                 valid_resp_keys = [KITCHEN_KEY, BATHROOM_KEY];
-            else
-                % rating response key
-                valid_resp_keys = [oneKey, twoKey,threeKey, fourKey, fiveKey, sixKey, sevenKey];
             end
 
             %% Instructions
@@ -258,43 +255,45 @@ try
                         %% Get response:
                         % Current implementation disables repsonse while stimulus is shown
                         if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput
-                            % Ge the response:
-                            [key,Resp_Time] = getInput();
 
-                            % Handling the response:
-                            if key ~= NO_KEY
+                            if strcmp('categorization', task)
+                                % Ge the response:
+                                [key,Resp_Time] = getInput();
 
-                                %                         % Sending response trigger for the eyetracker
-                                %                         if EYE_TRACKER
-                                %                             trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
-                                %                                 blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                                %                                 blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                                %                             Eyelink('Message',trigger_str);
-                                %                         end
+                                % Handling the response:
+                                if key ~= NO_KEY
 
-                                % If the experiment was aborted:
-                                if key == abortKey
-                                    error('Experiment has been aborted');
+                                    % Log the response received:
+                                    blk_mat.trial_response(tr) = key;
+                                    blk_mat.time_of_resp(tr) =  Resp_Time;
 
-                                    % if pressed key is not a valid response key
-                                elseif ~ismember(key, valid_resp_keys)
-                                    showMessage('Invalid response key!');
-
-                                    % wait for correct response bar
-                                    [~, ~, wait_resp] = KbCheck();
-                                    while ~wait_resp(valid_resp_keys)
-                                        [~, ~, wait_resp] = KbCheck();
-                                    end
-
+                                    % logging reaction
+                                    hasInput = TRUE;
                                 end
 
+                            else
+                                 [resp,Resp_Time] = responseWheel();
+
                                 % Log the response received:
-                                blk_mat.trial_response(tr) = key;
+                                blk_mat.trial_response(tr) = resp;
                                 blk_mat.time_of_resp(tr) =  Resp_Time;
 
                                 % logging reaction
                                 hasInput = TRUE;
-                            end
+                                key = [];
+
+                             end
+
+                                    %                         % Sending response trigger for the eyetracker
+                                    %                         if EYE_TRACKER
+                                    %                             trigger_str = get_et_trigger('response', blk_mat.task_relevance{tr}, ...
+                                    %                                 blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                                    %                                 blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                                    %                             Eyelink('Message',trigger_str);
+                                    %                         end
+
+
+
                         end
 
                         %% mask
@@ -469,7 +468,7 @@ catch e
         %         end
 
         % If the log all already exists, save it as well:
-        if exist('log_all', 'var')
+        if exist('log_all', 'var') && ~isempty(log_all)
             [log_all] = compute_performance(log_all);
             saveTable(log_all, "all");
         end

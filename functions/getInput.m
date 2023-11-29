@@ -8,7 +8,7 @@
 % recorded to make sure we account for it when starting again!
 function [ key, Resp_Time ] = getInput()
 
-global NO_KEY 
+global NO_KEY valid_resp_keys
 
 %%
 key = NO_KEY;
@@ -21,5 +21,20 @@ end
 
 if key == NO_KEY
     Resp_Time = [];
+
+elseif key == abortKey
+    error('Experiment has been aborted');
+
+% if pressed key is not a valid response key
+elseif ~ismember(key, valid_resp_keys)
+    showMessage('Invalid response key!');
+
+    % wait for correct response bar
+    [~, ~, wait_resp] = KbCheck();
+    while ~wait_resp(valid_resp_keys)
+        [~, Resp_Time, wait_resp] = KbCheck();
+    end
+
 end
+
 end
