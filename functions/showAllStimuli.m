@@ -1,7 +1,7 @@
 function [] = showAllStimuli(file_list)
 
-global gray w ScreenHeight originalHeight originalWidth ScreenWidth category spaceBar
-Screen('FillRect', w, gray);
+global gray_color w ScreenHeight originalHeight originalWidth ScreenWidth category spaceBar
+Screen('FillRect', w, gray_color);
 drawFrame();
 
 % check which images to show

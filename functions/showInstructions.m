@@ -6,8 +6,8 @@
 
 function [ ] = showInstructions(slide)
 
-    global gray w ScreenWidth ScreenHeight PHOTODIODE;
-    Screen('FillRect', w, gray);
+    global gray_color w ScreenWidth ScreenHeight PHOTODIODE;
+    Screen('FillRect', w, gray_color);
 
     %show main stimuli
     x = Screen('MakeTexture', w, imread(fullfile(pwd, 'instructions', slide)));

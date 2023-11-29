@@ -4,7 +4,7 @@ function [] = drawFrame()
 
     global FRAME_COLOR
     global stimSizeHeight  VIEWING_DISTANCE MAX_VISUAL_ANGEL
-    global w center gray FRAME_WIDTH
+    global w center gray_color FRAME_WIDTH
 
     frameSizeLength = getVisualAngel(VIEWING_DISTANCE,MAX_VISUAL_ANGEL(2)); % in px;
 
@@ -12,6 +12,6 @@ function [] = drawFrame()
     y = transpose(center) + [frameSizeLength/2 stimSizeHeight/2];
 
     Screen('FillRect', w, FRAME_COLOR, [x y] + [-FRAME_WIDTH -FRAME_WIDTH FRAME_WIDTH FRAME_WIDTH]);
-    Screen('FillRect', w, gray, [x y]);
+    Screen('FillRect', w, gray_color, [x y]);
 
 end

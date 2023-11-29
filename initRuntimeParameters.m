@@ -24,7 +24,7 @@ global F_Key J_Key KITCHEN_KEY BATHROOM_KEY RightKey LeftKey
 % text
 global fontType fontSize fontColor
 % colors
-global black gray red green
+global black gray_color red green
 % optics
 global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION FILE_POSTFIX
 % other
@@ -76,7 +76,7 @@ fontColor = 0; % black;
 
 % color
 black = [255, 255, 255];
-gray = [125, 125, 125];
+gray_color = [125, 125, 125];
 red = [255, 0, 0];
 green = [0, 255, 0];
 

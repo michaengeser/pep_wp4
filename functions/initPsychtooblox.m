@@ -1,7 +1,7 @@
 
 
 function [] = initPsychtooblox()
-    global DEBUG ScreenHeight stimSizeHeight ScreenWidth refRate screenScaler fontType fontSize fontColor text gray w REF_RATE_OPTIMAL center
+    global DEBUG ScreenHeight stimSizeHeight ScreenWidth refRate screenScaler fontType fontSize fontColor text gray_color w REF_RATE_OPTIMAL center
     global WINDOW_RESOLUTION debugFactor NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd
     disp('WELCOME to initPsychtooblox')
     
@@ -35,24 +35,24 @@ function [] = initPsychtooblox()
     % Use the last screen preferentially:
     screenNumber = max(screens);
     % Set the gray:
-    gray = [125,125,125];
+    gray_color = [125,125,125];
 
     % Open a graphic window:
     try
         if NO_FULLSCREEN 
             % For debugging purposes, we can run the experiment with not
             % full screen
-            [w, wRect] = Screen('OpenWindow',screenNumber, gray, WINDOW_RESOLUTION); 
+            [w, wRect] = Screen('OpenWindow',screenNumber, gray_color, WINDOW_RESOLUTION); 
         else
             % But here again, for  the real experiment go for full screen
-            [w, wRect]  =  Screen('OpenWindow',screenNumber, gray); 
+            [w, wRect]  =  Screen('OpenWindow',screenNumber, gray_color); 
         end
     catch
         % Try again in case something went wrong
         if NO_FULLSCREEN 
-            [w, wRect] = Screen('OpenWindow',screenNumber, gray, WINDOW_RESOLUTION); 
+            [w, wRect] = Screen('OpenWindow',screenNumber, gray_color, WINDOW_RESOLUTION); 
         else
-            [w, wRect]  =  Screen('OpenWindow',screenNumber, gray); 
+            [w, wRect]  =  Screen('OpenWindow',screenNumber, gray_color); 
         end
     end
     
@@ -61,7 +61,7 @@ function [] = initPsychtooblox()
         HideCursor;
     end
         % this enables us to use the alpha transparency
-    Screen('BlendFunction', w, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA', [gray 128]);
+    Screen('BlendFunction', w, 'GL_SRC_ALPHA', 'GL_ONE_MINUS_SRC_ALPHA', [gray_color 128]);
 
     % Setting priority to max, such that the experiment has full priority
     % on the CPU:

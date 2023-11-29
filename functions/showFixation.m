@@ -8,7 +8,7 @@
 function [ fixation_time ] = showFixation(Photodiode, feedback_color)
 
 
-global gray w PHOTODIODE black
+global gray_color w PHOTODIODE black
 
 % if no color is specified its black
 if nargin<2
@@ -16,7 +16,7 @@ if nargin<2
 end
 
 % Draw the fixation
-Screen('FillRect', w, gray);
+Screen('FillRect', w, gray_color);
 drawFixation(feedback_color);
 % % Depending on the Photodiode variable, turn the photodiode on or off
 if PHOTODIODE

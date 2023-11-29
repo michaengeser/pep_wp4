@@ -10,9 +10,9 @@
 
 function [ message_time ] = showMessage( message )
 
-    global gray w text PHOTODIODE
+    global gray_color w text PHOTODIODE
 
-    Screen('FillRect', w, gray);
+    Screen('FillRect', w, gray_color);
 
     DrawFormattedText(w, message, 'center', 'center', text.Color);
     

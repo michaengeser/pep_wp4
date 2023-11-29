@@ -13,10 +13,10 @@
 function [ stimuliTiming ] = showStimuli(texture) % miniBlocks, blockNum, tr, Photodiode)
 global PHOTODIODE
 global stimSizeLength stimSizeHeight % texture
-global gray w center  originalHeight originalWidth
+global gray_color w center  originalHeight originalWidth
 stimSizeLength = round((stimSizeHeight/originalHeight) * originalWidth);
 
-Screen('FillRect', w, gray);
+Screen('FillRect', w, gray_color);
 
 drawFrame();
 
