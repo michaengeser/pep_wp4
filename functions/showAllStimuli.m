@@ -15,7 +15,8 @@ end
 image_height = round(ScreenHeight/6 - ScreenHeight*0.01);
 image_width = round((image_height/originalHeight) * originalWidth);
 
-for show_cate = show_cates
+for show_cate = {show_cates}
+    show_cate = char(show_cate);
 
     % get texture pointers
     texture_array = [file_list.raw.(show_cate).texture];

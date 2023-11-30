@@ -14,8 +14,22 @@ function [] = saveTable(input_table, blk_num)
 
 global sub_num session category task
 
+
+% make files names 
+if length(category) > 1
+    dir = string(fullfile(pwd,'data',['sub-', num2str(sub_num)],...
+        ['ses-',num2str(session)], task, category));
+    fileName = fullfile(dir, ['sub-', num2str(sub_num), '_ses-', num2str(session),...
+        '_run-', num2str(blk_num), '_task-', task, '_', category, '_events']);
+else
+    dir = string(fullfile(pwd,'data',['sub-', num2str(sub_num)],...
+        ['ses-',num2str(session)], task));
+    fileName = fullfile(dir, ['sub-', num2str(sub_num), '_ses-', num2str(session),...
+        '_run-', num2str(blk_num), '_task-', task, '_events']);
+end
+
+
 % Creating the directories if they don't already exist:
-dir = string(fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], task, category));
 if ~exist(dir, 'dir')
     mkdir(dir);
 end
@@ -27,15 +41,6 @@ if isnumeric(blk_num)
     blk_num = num2str(blk_num);
 end
 
-if length(category) > 1
-    category_name = ['_', category];
-else 
-    category_name = [];
-end 
-
-% make files names 
-fileName = fullfile(dir, ['sub-', num2str(sub_num), '_ses-', num2str(session),...
-    '_run-', num2str(blk_num), '_task-', task, category_name, '_events']);
 
 % check if they already exist and add repetition to file name
 repetition = 0;

@@ -11,7 +11,7 @@ rng('shuffle');
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
 global RESTART_KEY NO_KEY spaceBar valid_resp_keys
-global KITCHEN_KEY BATHROOM_KEY oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey
+global KITCHEN_KEY BATHROOM_KEY
 global expDir
 
 expDir = pwd;
@@ -325,11 +325,8 @@ try
                         % Present fixation while waiting for response
                         if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
 
-                            if strcmp('categorization', task)
-                                fix_time = showFixation('PhotodiodeOn');
-                            else
-                                fix_time = showMessage('Please provide your rating response');
-                            end
+                            % show fixation
+                            fix_time = showFixation('PhotodiodeOn');
                             DiodFrame = CurrentFrame;
 
                             %                     % Sending response trigger for the eyetracker

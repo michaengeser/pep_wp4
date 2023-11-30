@@ -8,7 +8,7 @@
 % recorded to make sure we account for it when starting again!
 function [ key, Resp_Time ] = getInput()
 
-global NO_KEY valid_resp_keys
+global NO_KEY valid_resp_keys abortKey
 
 %%
 key = NO_KEY;
@@ -17,6 +17,7 @@ key = NO_KEY;
 
 if KeyIsDown
     key = find(Resp1);
+    key = key(1);
 end
 
 if key == NO_KEY
@@ -26,7 +27,7 @@ elseif key == abortKey
     error('Experiment has been aborted');
 
 % if pressed key is not a valid response key
-elseif ~ismember(key, valid_resp_keys)
+elseif ~min(ismember(key, valid_resp_keys))
     showMessage('Invalid response key!');
 
     % wait for correct response bar
@@ -34,7 +35,8 @@ elseif ~ismember(key, valid_resp_keys)
     while ~wait_resp(valid_resp_keys)
         [~, Resp_Time, wait_resp] = KbCheck();
     end
-
+    key = find(wait_resp);
+    key = key(1);
 end
 
 end
