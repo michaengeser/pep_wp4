@@ -25,7 +25,7 @@ global oneKey twoKey threeKey fourKey fiveKey sixKey sevenKey eightKey spaceBar 
 % text
 global fontType fontSize fontColor 
 % optics
-global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION
+global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR FIXATION_FONT_SIZE DIAMOUT_FIXATION DIAMIN_FIXATION FILE_POSTFIX
 % other
 global TRUE FALSE
 
@@ -58,7 +58,7 @@ SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 0; % the program will complain if optimal refresh rate is not possible on this screen
 NO_FULLSCREEN = 0; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
-FRAME_ANTICIPATION = 0.5;
+FRAME_ANTICIPATION = 0.1; % optimizes timing in PTB
 
 %% Experimental parameters
 % Set all the catagories:
@@ -77,6 +77,9 @@ fontSize = 50; % general text size, not target
 FIXATION_COLOR = [205 33 42];
 FIXATION_FONT_SIZE = 20;
 fontColor = 0; % black;
+
+% image format
+FILE_POSTFIX = '*tif';
 
 VIEWING_DISTANCE = viewDistance; % in centimeters
 MAX_VISUAL_ANGEL = [6,6]; % in degrees | "on a rectangular aperture at an average visual angle of 6? by 4?"

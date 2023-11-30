@@ -11,6 +11,9 @@ rng('shuffle');
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS
 global RESTART_KEY NO_KEY ABORT_KEY
+global expDir
+
+expDir = pwd;
 
 % Eye-tracking parameters
 % global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE compKbDevice 
@@ -47,6 +50,7 @@ dlmwrite(dfile,Str,'delimiter','');
 SubSesFolder = fullfile(pwd,'data',['sub-', num2str(sub_num)],['ses-',num2str(session)], task);
 ExistFlag = exist(SubSesFolder,'dir');
 if ExistFlag
+    WaitSecs(1);
     warning ('This participant number and session was already attributed!')
     proceedInput = questdlg({'This participant number and session was already attributed!', 'Are you sure you want to proceed?'},'RestartPrompt','yes','no','yes');
     if strcmp(proceedInput,'no')
@@ -62,27 +66,29 @@ initRuntimeParameters
 % PTB:
 initPsychtooblox(); % initializes psychtoolbox window at correct resolution and refresh rate
 
+%% Load and prepare stimuli:
+showMessage('Loading...');
+
 %% Setup the trial matrix and log:
-[tr_mat] = load_trial_matrix(sub_num);
+[tr_mat, file_list] = load_trial_matrix(sub_num);
 
 % get trial matrix of the task
 task_mat = tr_mat(strcmp(tr_mat.task, task),:);
 
-%% Load and prepare stimuli:
+% get stimuli
+loadStimuli(file_list)
 
-showMessage('Loading...');
-loadStimuli()
+% get mask
+mask_texture = loadMask();
 
-% make jitter multiple of refresh rate
-for tr_jit = 1:length(task_mat.trial)
-    jit_multiplicator = round(task_mat.jitter(tr_jit)/refRate);
-    task_mat.jitter(tr_jit) = refRate*jit_multiplicator;
-end
+% make durations multiple of refresh rate
+[task_mat] = durationXrefRate(task_mat);
 
 %% Instructions
 % displays instructions
 if SHOW_INSTRUCTIONS
     instructions(task);
+    WaitSecs(1);
 end
 
 %% Main experimental loop:
@@ -153,7 +159,7 @@ try
         end
 
         % Wait a random amount of time and show fixation:
-        fixOnset = showFixation('PhotodiodeOff');
+        showFixation('PhotodiodeOff');
         WaitSecs(rand + 2);
 
         %% Trials loop:
@@ -161,6 +167,8 @@ try
 
             % flags needs to be initialized
             fixShown = FALSE;
+            blankShown = FALSE;
+            maskShown = FALSE;
             jitterLogged = FALSE;
             hasInput = FALSE;
 
@@ -193,9 +201,9 @@ try
             elapsedTime = 0;
 
             % define total trial duration
-            min_trial_duration = blk_mat.duration(tr) - (refRate*FRAME_ANTICIPATION);
+            min_trial_duration = blk_mat.duration(tr) + blk_mat.blank(tr) + blk_mat.mask_dur(tr);
 
-            while elapsedTime < min_trial_duration && ~hasInput
+            while elapsedTime < min_trial_duration || ~hasInput
 
                 %% Get response:
                 if ~hasInput
@@ -226,10 +234,57 @@ try
                     end
                 end
 
+                %% blank interval
+
+                % check if trial has a blank interval
+                if blk_mat.mask_dur(tr) > 0
+
+                    % Present fixation 
+                    if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && blankShown == FALSE
+                        blank_time = showFixation('PhotodiodeOn');
+                        DiodFrame = CurrentFrame;
+
+                        %                     % Sending response trigger for the eyetracker
+                        %                     if EYE_TRACKER
+                        %                         trigger_str = get_et_trigger('blank_onset', blk_mat.task_relevance{tr}, ...
+                        %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                        %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                        %                         Eyelink('Message',trigger_str);
+                        %                     end
+
+                        % log fixation
+                        blk_mat.blank_time(tr) = blank_time;
+                        blankShown = TRUE;
+                    end
+                end
+                %% mask
+
+                % check if trial has a mask
+                if blk_mat.mask_dur(tr) > 0
+
+                    % Present b
+                    if elapsedTime >= (blk_mat.duration(tr) + blk_mat.blank(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
+                        mask_time = showStimuli(mask_texture);
+                        DiodFrame = CurrentFrame;
+
+                        %                     % Sending response trigger for the eyetracker
+                        %                     if EYE_TRACKER
+                        %                         trigger_str = get_et_trigger('mask_onset', blk_mat.task_relevance{tr}, ...
+                        %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                        %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                        %                         Eyelink('Message',trigger_str);
+                        %                     end
+
+                        % log fixation
+                        blk_mat.mask_time(tr) = mask_time;
+                        maskShown = TRUE;
+                    end
+                end
+
                 %% Waiting for response
 
                 % Present fixation while waiting for response
-                if elapsedTime >= ((blk_mat.duration(tr)/1000) - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
+                if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && fixShown == FALSE
                     fix_time = showFixation('PhotodiodeOn');
                     DiodFrame = CurrentFrame;
 

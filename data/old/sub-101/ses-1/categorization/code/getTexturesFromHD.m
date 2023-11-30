@@ -11,8 +11,7 @@
 
 function [ textureArray ] = getTexturesFromHD(folder, w)
    global originalHeight originalWidth FILE_POSTFIX
-    FILE_POSTFIX = '*jpg';
-
+    
     fileList = dir(fullfile(folder,FILE_POSTFIX));
     %disp('----------------Here comes the file list ------------');
 

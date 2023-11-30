@@ -19,7 +19,7 @@ picrectangle2=[stimpositionmid(1)+stimSizeHeight,stimpositionmid(2)+stimSizeHeig
 middle_rec=[picrectangle1,picrectangle2];  %Rectangle for the Picture
 
 % rectangle in the middle
-sf=0.98;
+sf=0.98; % scaling factor
 picrectangle1=[stimpositionmid(1)-stimSizeHeight*sf,stimpositionmid(2)-stimSizeHeight*sf];
 picrectangle2=[stimpositionmid(1)+stimSizeHeight*sf,stimpositionmid(2)+stimSizeHeight*sf];
 middle_rec2=[picrectangle1,picrectangle2];  %Rectangle for the heel
