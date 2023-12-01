@@ -272,7 +272,7 @@ try
                                 end
 
                             else
-                                 [resp,Resp_Time] = responseWheel();
+                                [resp,Resp_Time] = responseWheel(tr);
 
                                 % Log the response received:
                                 blk_mat.trial_response(tr) = resp;

@@ -1,10 +1,13 @@
 % adapted from Daniel Kaiser (https://doi.org/10.1162/jocn_a_01891)
 
-function [resp, resp_time] = responseWheel()
+function [resp, resp_time] = responseWheel(tr)
 
-global w center stimSizeHeight white black green gray_color spaceBar ScreenHeight ScreenWidth abortKey
+global w center stimSizeHeight white black green gray_color spaceBar ScreenHeight ScreenWidth abortKey task
 
 %% set up
+
+% all participants should have same random numbers
+rng(tr)
 
 stimpositionmid=center;
 fixposition=stimpositionmid;
@@ -54,12 +57,19 @@ for i=1:7
     DrawFormattedText(w,num2str(i),x_text,y_text,black);
 end
 
-% fill inner part of response wheel
+% make inner black line of response wheel
 Screen('FillOval', w, black, middle_rec);
+
+% leave one position open
+a0=start_angle+(8-1)*a1;
+Screen('FillArc',w,gray_color,large_rec,a0,a1);
+r=1.2*(large_rec(3)-large_rec(1))/2;
+
+% fill inner gray part of response wheel
 Screen('FillOval', w, gray_color, middle_rec2);
 
 % make text and flip
-DrawFormattedText(w,'Your rating please','center','center',black);
+DrawFormattedText(w,task,'center','center',black);
 Screen('Flip',w);
 
 % keep waiting for them to select something
@@ -113,11 +123,16 @@ while resp == 0 || keyCode(spaceBar) ~= 1
                     DrawFormattedText(w,num2str(j),x_text,y_text,black);
                 end
 
+                % make inner black line of response wheel
                 Screen('FillOval', w, black, middle_rec);
-                Screen('FillOval', w, gray_color, middle_rec2);
-                DrawFormattedText(w,'Your rating please','center','center',black);
-                Screen('Flip', w);
 
+                % leave one position open
+                a0=start_angle+(8-1)*a1;
+                Screen('FillArc',w,gray_color,large_rec,a0,a1);
+                r=1.2*(large_rec(3)-large_rec(1))/2;
+
+                % fill inner gray part of response wheel
+                Screen('FillOval', w, gray_color, middle_rec2);
                 % store response
                 resp=i;
             end
