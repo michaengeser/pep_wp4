@@ -12,14 +12,13 @@
 
 function [ stimuliTiming ] = showStimuli(texture) % miniBlocks, blockNum, tr, Photodiode)
 global PHOTODIODE
-global stimSizeLength stimSizeHeight % texture
-global gray_color w center  originalHeight originalWidth
+global gray_color w x_pos_stim y_pos_stim
 
 Screen('FillRect', w, gray_color);
 
 drawFrame();
 
-Screen('DrawTexture',w, texture,[],[x_pos y_pos]);
+Screen('DrawTexture',w, texture,[],[x_pos_stim y_pos_stim]);
 if PHOTODIODE
     drawPhotodiodBlock('on');
 end

@@ -2,7 +2,7 @@
 
 function [] = initPsychtooblox()
     global DEBUG ScreenHeight stimSizeHeight ScreenWidth refRate screenScaler fontType fontSize fontColor text gray_color w REF_RATE_OPTIMAL center
-    global WINDOW_RESOLUTION NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd hz x_pos y_pos originalHeight originalWidth
+    global WINDOW_RESOLUTION NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd hz x_pos_stim y_pos_stim x_pos_frame y_pos_frame originalWidth originalHeight
     disp('WELCOME to initPsychtooblox')
     
     %% Set preferences and open graphic window:
@@ -132,12 +132,17 @@ function [] = initPsychtooblox()
 
     stimSizeLength = round((stimSizeHeight/originalHeight) * originalWidth);
 
-    Screen('FillRect', w, gray_color);
+    x_pos_stim = transpose(center) - [stimSizeLength/2 stimSizeHeight/2];
+    y_pos_stim = transpose(center) + [stimSizeLength/2 stimSizeHeight/2];
 
-    drawFrame();
 
-    x_pos = transpose(center) - [stimSizeLength/2 stimSizeHeight/2];
-    y_pos = transpose(center) + [stimSizeLength/2 stimSizeHeight/2];
+    %% make frame size
+
+
+    frameSizeLength = getVisualAngel(VIEWING_DISTANCE,MAX_VISUAL_ANGEL(2)); % in px;
+
+    x_pos_frame = transpose(center) - [frameSizeLength/2 stimSizeHeight/2];
+    y_pos_frame = transpose(center) + [frameSizeLength/2 stimSizeHeight/2];
 
 
 end
