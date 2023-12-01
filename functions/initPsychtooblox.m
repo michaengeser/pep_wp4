@@ -2,7 +2,7 @@
 
 function [] = initPsychtooblox()
     global DEBUG ScreenHeight stimSizeHeight ScreenWidth refRate screenScaler fontType fontSize fontColor text gray_color w REF_RATE_OPTIMAL center
-    global WINDOW_RESOLUTION debugFactor NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd
+    global WINDOW_RESOLUTION NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd hz x_pos y_pos originalHeight originalWidth
     disp('WELCOME to initPsychtooblox')
     
     %% Set preferences and open graphic window:
@@ -74,12 +74,9 @@ function [] = initPsychtooblox()
     ScreenWidth     =  wRect(3);
     ScreenHeight    =  wRect(4);
     center          =  [ScreenWidth/2; ScreenHeight/2];
-    % Get hte refresh rate:
+    % Get the refresh rate:
     hz = Screen('NominalFrameRate', w);
     refRate = hz.^(-1);
-    if DEBUG == 2 
-        refRate = refRate / debugFactor ;
-    end
     % If we are not in debug mode and that the screen refresh rate does not
     % match the expected one, abort:
     if ~DEBUG && round(hz) ~= REF_RATE_OPTIMAL
@@ -130,5 +127,17 @@ function [] = initPsychtooblox()
     if ~NO_FULLSCREEN
         ListenChar(2);
     end
+
+    %% Make stimuli sizes
+
+    stimSizeLength = round((stimSizeHeight/originalHeight) * originalWidth);
+
+    Screen('FillRect', w, gray_color);
+
+    drawFrame();
+
+    x_pos = transpose(center) - [stimSizeLength/2 stimSizeHeight/2];
+    y_pos = transpose(center) + [stimSizeLength/2 stimSizeHeight/2];
+
 
 end
