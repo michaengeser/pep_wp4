@@ -18,25 +18,26 @@ key = NO_KEY;
 if KeyIsDown
     key = find(Resp1);
     key = key(1);
-end
 
-if key == NO_KEY
-    Resp_Time = [];
 
-elseif key == abortKey
-    error('Experiment has been aborted');
+    if key == NO_KEY
+        Resp_Time = [];
 
-% if pressed key is not a valid response key
-elseif ~min(ismember(key, valid_resp_keys))
-    showMessage('Invalid response key!');
+    elseif key == abortKey
+        error('Experiment has been aborted');
 
-    % wait for correct response bar
-    [~, ~, wait_resp] = KbCheck();
-    while ~wait_resp(valid_resp_keys)
-        [~, Resp_Time, wait_resp] = KbCheck();
+        % if pressed key is not a valid response key
+    elseif ~min(ismember(key, valid_resp_keys))
+        showMessage('Invalid response key!');
+
+        % wait for correct response bar
+        [~, ~, wait_resp] = KbCheck();
+        while ~wait_resp(valid_resp_keys)
+            [~, Resp_Time, wait_resp] = KbCheck();
+        end
+        key = find(wait_resp);
+        key = key(1);
     end
-    key = find(wait_resp);
-    key = key(1);
 end
 
 end
