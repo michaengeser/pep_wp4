@@ -257,7 +257,7 @@ try
                         if blk_mat.mask_dur(tr) > 0
 
                             % Present mask
-                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
+                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION*4) && maskShown == FALSE
 
                                 test_time(tr) = GetSecs - blk_mat.stim_time(tr);
                                 mask_time = showStimuli(mask_texture);

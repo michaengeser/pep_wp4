@@ -37,7 +37,7 @@ SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 1; % the program will complain if optimal refresh rate is not possible on this screen
 NO_FULLSCREEN = 0; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
-FRAME_ANTICIPATION = 0.1; % optimizes timing in PTB
+FRAME_ANTICIPATION = 0.3; % optimizes timing in PTB
 
 %% Recording modalities
 EYE_TRACKER = 0; % Must be set to 1 if recording with Eyetracker
