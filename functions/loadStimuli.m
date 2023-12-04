@@ -13,7 +13,7 @@ disp('WELCOME to loadStimuli')
 global texture_struct w x_pos_stim y_pos_stim stimSizeHeight originalHeight originalWidth center
 
 % path to stimuli folder
-PreFolderName = [pwd,filesep,'stimuli\'];
+PreFolderName = [pwd,filesep,'stimuli',filesep];
 img_types = fieldnames(file_list);
 cate = fieldnames(file_list.(img_types{1}));
 texture_struct = file_list;

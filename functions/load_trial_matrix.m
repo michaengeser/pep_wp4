@@ -6,7 +6,7 @@ function [tr_mat, file_list] = load_trial_matrix(sub_num)
 % TablePath = fullfile(MatFolderName, TableName);
 
 % check if this subject has a trial matrix alraedy, if not make one
-matrix_folder = [pwd,filesep,'trial_matrices\'];
+matrix_folder = [pwd,filesep,'trial_matrices',filesep];
 addpath(matrix_folder)
 
 file_name = fullfile(matrix_folder, sprintf("sub-%d_%s_trials.csv", sub_num, 'wp4_beh'));
