@@ -10,7 +10,7 @@ function [] = loadStimuli(file_list)
 
 disp('WELCOME to loadStimuli')
 
-global texture_struct w
+global texture_struct w x_pos_stim y_pos_stim stimSizeHeight originalHeight originalWidth center
 
 % path to stimuli folder
 PreFolderName = [pwd,filesep,'stimuli\'];
@@ -40,3 +40,11 @@ for j = 1:length(img_types)
         end
     end
 end
+
+    %% Make stimuli sizes
+
+    stimSizeLength = round((stimSizeHeight/originalHeight) * originalWidth);
+
+    x_pos_stim = transpose(center) - [stimSizeLength/2 stimSizeHeight/2];
+    y_pos_stim = transpose(center) + [stimSizeLength/2 stimSizeHeight/2];
+

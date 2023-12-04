@@ -1,4 +1,4 @@
-jjjj% SAVELOG_TABLE saves a matrix as mat and csv
+% SAVELOG_TABLE saves a matrix as mat and csv
 % input:
 % ------
 % input_table - the table to be saved

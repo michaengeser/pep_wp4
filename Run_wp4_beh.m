@@ -2,7 +2,7 @@
 % Clearing the command window before we start saving it
 sca;
 close all;
-clear
+clear all
 
 % To get different seeds for matlab randomization functions.
 rng('shuffle');
@@ -20,7 +20,7 @@ expDir = pwd;
 % global el EYE_TRACKER CalibrationKey ValidationKey EYETRACKER_CALIBRATION_MESSAGE compKbDevice
 
 % Add functions folder to path (when we separate all functions)
-function_folder = [pwd,filesep,'functions\'];
+function_folder = [pwd,filesep,'functions',filesep];
 addpath(function_folder)
 
 %% User input
