@@ -1,4 +1,4 @@
-% SAVELOG_TABLE saves a matrix as mat and csv
+jjjj% SAVELOG_TABLE saves a matrix as mat and csv
 % input:
 % ------
 % input_table - the table to be saved
@@ -46,7 +46,7 @@ end
 repetition = 0;
 new_fileName = fileName; 
 
-while exist(new_fileName, 'file') 
+while exist(new_fileName + '.mat', 'file') 
     repetition = repetition+1;
     new_fileName = insertAfter(fileName,'events',['_repetition_',num2str(repetition)]);
 end 

@@ -31,11 +31,11 @@ global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR 
 global TRUE FALSE
 
 %% DEBUG parameters
-DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 1; % the program will complain if optimal refresh rate is not possible on this screen
-NO_FULLSCREEN = 0; % enable windowed mode for dubugging
+NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
 FRAME_ANTICIPATION = 0.3; % optimizes timing in PTB
 
