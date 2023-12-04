@@ -12,21 +12,17 @@
 
 function [ stimuliTiming ] = showStimuli(texture) % miniBlocks, blockNum, tr, Photodiode)
 global PHOTODIODE
-global stimSizeLength stimSizeHeight % texture
-global gray_color w center  originalHeight originalWidth
-stimSizeLength = round((stimSizeHeight/originalHeight) * originalWidth);
+global gray_color w x_pos_stim y_pos_stim
 
 Screen('FillRect', w, gray_color);
 
 drawFrame();
 
-x = transpose(center) - [stimSizeLength/2 stimSizeHeight/2];
-y = transpose(center) + [stimSizeLength/2 stimSizeHeight/2];
-
-Screen('DrawTexture',w, texture,[],[x y]);
+Screen('DrawTexture',w, texture,[],[x_pos_stim y_pos_stim]);
 if PHOTODIODE
     drawPhotodiodBlock('on');
 end
+
 drawFixation()
 [~,stimuliTiming] = Screen('Flip', w, [], 1);
 end

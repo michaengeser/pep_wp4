@@ -2,7 +2,7 @@
 % Clearing the command window before we start saving it
 sca;
 close all;
-clear all;
+clear
 
 % To get different seeds for matlab randomization functions.
 rng('shuffle');
@@ -129,7 +129,6 @@ try
                 task_mat = tr_mat(strcmp(tr_mat.task, task) & strcmp(tr_mat.category, category),:);
             end
 
-
             % define which keys are valid response keys
             if strcmp(task, 'categorization')
                 % cagtegorization response keys
@@ -219,7 +218,7 @@ try
                     jitterLogged = FALSE;
                     hasInput = FALSE;
 
-                    % show stimulus
+                    %% show stimulus
                     blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
                     DiodFrame = 0;
 
@@ -235,7 +234,7 @@ try
 
                     %--------------------------------------------------------
 
-                    %% TIME LOOP
+                    %% TIME LOOP 
 
                     % I then set a frame counter. The flip of the stimulus
                     % presentation is frame 0. It is already the previous frame because it already occured:
@@ -252,9 +251,36 @@ try
 
                     while elapsedTime < min_trial_duration || ~hasInput
 
+                        %% mask
+
+                        % check if trial has a mask
+                        if blk_mat.mask_dur(tr) > 0
+
+                            % Present mask
+                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION*4) && maskShown == FALSE
+
+                                test_time(tr) = GetSecs - blk_mat.stim_time(tr);
+                                mask_time = showStimuli(mask_texture);
+                                test_time2(tr) = GetSecs - blk_mat.stim_time(tr);
+                                DiodFrame = CurrentFrame;
+
+                                %                     % Sending response trigger for the eyetracker
+                                %                     if EYE_TRACKER
+                                %                         trigger_str = get_et_trigger('mask_onset', blk_mat.task_relevance{tr}, ...
+                                %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
+                                %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
+                                %                         Eyelink('Message',trigger_str);
+                                %                     end
+
+                                % log fixation
+                                blk_mat.mask_time(tr) = mask_time;
+                                maskShown = TRUE;
+                            end
+                        end
+
                         %% Get response:
                         % Current implementation disables repsonse while stimulus is shown
-                        if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && ~hasInput
+                        if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) && ~hasInput
 
                             if strcmp('categorization', task)
                                 % Ge the response:
@@ -296,29 +322,6 @@ try
 
                         end
 
-                        %% mask
-
-                        % check if trial has a mask
-                        if blk_mat.mask_dur(tr) > 0
-
-                            % Present mask
-                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
-                                mask_time = showStimuli(mask_texture);
-                                DiodFrame = CurrentFrame;
-
-                                %                     % Sending response trigger for the eyetracker
-                                %                     if EYE_TRACKER
-                                %                         trigger_str = get_et_trigger('mask_onset', blk_mat.task_relevance{tr}, ...
-                                %                             blk_mat.duration(tr), blk_mat.category{tr}, orientation, vis_stim_id, ...
-                                %                             blk_mat.SOA(tr), blk_mat.SOA_lock(tr), blk_mat.pitch(tr));
-                                %                         Eyelink('Message',trigger_str);
-                                %                     end
-
-                                % log fixation
-                                blk_mat.mask_time(tr) = mask_time;
-                                maskShown = TRUE;
-                            end
-                        end
 
                         %% Waiting for response
 
@@ -365,7 +368,7 @@ try
                     % start timer
                     elapsedTime = 0;
 
-                    % define total trial duration
+                    % get jitter duration
                     jitter_duration = blk_mat.jitter(tr) - (refRate*FRAME_ANTICIPATION) ;
 
                     while elapsedTime < jitter_duration

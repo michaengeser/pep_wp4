@@ -10,14 +10,11 @@ if nargin<1
     innerCross = white;
 end
 
-outerOval = black; % color of the two circles [R G B]
-
 %Change size based on dva
 cx = center(1,1);
 cy = center(2,1);
 
-
-Screen('FillOval', w, outerOval, [cx-DIAMOUT_FIXATION/2*ppd, cy-DIAMOUT_FIXATION/2*ppd, cx+DIAMOUT_FIXATION/2*ppd, cy+DIAMOUT_FIXATION/2 * ppd], DIAMOUT_FIXATION*ppd);
+Screen('FillOval', w, black, [cx-DIAMOUT_FIXATION/2*ppd, cy-DIAMOUT_FIXATION/2*ppd, cx+DIAMOUT_FIXATION/2*ppd, cy+DIAMOUT_FIXATION/2 * ppd], DIAMOUT_FIXATION*ppd);
 Screen('FillOval', w, innerCross, [cx-DIAMIN_FIXATION/2*ppd, cy-DIAMIN_FIXATION/2*ppd, cx+DIAMIN_FIXATION/2*ppd, cy+DIAMIN_FIXATION/2 * ppd], DIAMOUT_FIXATION*ppd);
 
 % comment out cross
