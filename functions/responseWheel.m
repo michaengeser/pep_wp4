@@ -2,7 +2,7 @@
 
 function [resp, resp_time] = responseWheel(tr)
 
-global w center stimSizeHeight white black green gray_color spaceBar ScreenHeight ScreenWidth abortKey task
+global w kb center stimSizeHeight white black green gray_color spaceBar ScreenHeight ScreenWidth abortKey task
 
 %% set up
 
@@ -76,7 +76,7 @@ Screen('Flip',w);
 resp = 0;
 while resp == 0 || keyCode(spaceBar) ~= 1
 
-    [~,resp_time,keyCode]=KbCheck(-1);
+    [~,resp_time,keyCode] = KbCheck(kb);
     [x,y,buttons]=GetMouse;
 
     % add option to abort using esc

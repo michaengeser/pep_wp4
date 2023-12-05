@@ -3,7 +3,7 @@
 function [ ] = instructions()
 
 global category task
-global RightKey LeftKey
+global RightKey LeftKey kb
 
 % decide which slides to take (based on task and subject number)
 if strcmp(task, 'categorization')
@@ -50,7 +50,7 @@ while instrSlideNum<= size(instrsPaths,1) % Looping until we went through all sl
 
     CorrectKey = 0; % Setting the CorrectKey to 0 to initiate the loop
     while ~CorrectKey % As long as a non-accepted key is pressed, keep on asking
-        [~, ~, instrsResp] = KbCheck();
+        [~, ~, instrsResp] = KbCheck(kb);
 
         if instrsResp(RightKey) % If the participant press the right key, increment by 1 the slide number
             instrSlideNum = instrSlideNum + 1;

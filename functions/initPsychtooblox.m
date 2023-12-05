@@ -2,7 +2,7 @@
 
 function [] = initPsychtooblox()
     global DEBUG ScreenHeight stimSizeHeight ScreenWidth refRate screenScaler fontType fontSize fontColor text gray_color w REF_RATE_OPTIMAL center
-    global WINDOW_RESOLUTION NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd hz x_pos_frame y_pos_frame
+    global WINDOW_RESOLUTION NO_FULLSCREEN  VIEWING_DISTANCE MAX_VISUAL_ANGEL STIM_DURATION TRIAL_DURATION ppd hz x_pos_frame y_pos_frame kb
     disp('WELCOME to initPsychtooblox')
     
     %% Set preferences and open graphic window:
@@ -105,7 +105,7 @@ function [] = initPsychtooblox()
 
     %% Set text params
 
-    Screen('TextFont',w, fontType);
+    %Screen('TextFont',w, fontType);
     Screen('TextStyle', w, 0);
     Screen('TextSize', w, round(fontSize*screenScaler));
     text.Color = fontColor; %black
@@ -138,4 +138,20 @@ function [] = initPsychtooblox()
     y_pos_frame = transpose(center) + [frameSizeLength/2 stimSizeHeight/2];
 
 
+    %% get keyboard 
+KeyBoards = GetKeyboardIndices();
+
+
+KeyIsDown = 0;
+while ~KeyIsDown
+
+    showMessage('Press space for keybaord check');
+
+    for check_kb = KeyBoards
+    [KeyIsDown, ~, ~] = KbCheck(check_kb);
+    end 
+
+end
+
+kb = check_kb;
 end

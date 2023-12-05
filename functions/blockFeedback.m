@@ -1,6 +1,6 @@
 function [blk] = blockFeedback(blk_mat, task_mat)
 
-global spaceBar RestartKey
+global spaceBar RestartKey kb
 
 blk = blk_mat.block(1);
 
@@ -46,7 +46,7 @@ blk = blk_mat.block(1);
         % wait for response ("r" = repeats practice, "space bar" = proceeds)
         key_pressed = 0;
         while key_pressed == 0
-            [~, ~, Resp] = KbCheck();
+            [~, ~, Resp] = KbCheck(kb);
 
             if Resp(RestartKey)
                 key_pressed = 1;

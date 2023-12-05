@@ -31,20 +31,20 @@ global FRAME_WIDTH MAX_VISUAL_ANGEL VIEWING_DISTANCE FRAME_COLOR FIXATION_COLOR 
 global TRUE FALSE
 
 %% DEBUG parameters
-DEBUG = 1; % 0 = no debug | 1 = regular debug | 2 = fast debug
+DEBUG = 0; % 0 = no debug | 1 = regular debug | 2 = fast debug
 SHOW_INSTRUCTIONS = 1;
 SHOW_PRACTICE = 1; % skip the practice run
 RESOLUTION_FORCE = 1; % the program will complain if optimal refresh rate is not possible on this screen
 NO_FULLSCREEN = 1; % enable windowed mode for dubugging
 WINDOW_RESOLUTION = [10 10 1200 800];
-FRAME_ANTICIPATION = 0.3; % optimizes timing in PTB
+FRAME_ANTICIPATION = 0.5; % optimizes timing in PTB
 
 %% Recording modalities
 EYE_TRACKER = 0; % Must be set to 1 if recording with Eyetracker
 Behavior = 1; %Set to 1 if recording with Behavior only
 
 %% Hardware and physical parameters:
-REF_RATE_OPTIMAL = 59; % in Hz. Screen refresh rate.
+REF_RATE_OPTIMAL = 60; % in Hz. Screen refresh rate.
 viewDistance = 58.5; % Default viewing distance (if no viewDist argument sent with the function call)
 SCREEN_SIZE_CM = [59.8 64.3]; % screen [width, height] in centimeters, change it to fit your setting
 viewDistanceBottomTop = [72 72]; % IN CM!! Distance between the participant head and the top and bottom of the screen. Only needed if HEAD_FIXED on.

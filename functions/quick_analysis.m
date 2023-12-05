@@ -33,7 +33,7 @@ end
 
 if ~ ismember('trial_accuracy', event_table.Properties.VariableNames)
     % Add functions folder to path (when we separate all functions)
-    function_folder = [parent_dir,filesep,'functions',filesep];
+    function_folder = [parent_dir,filesep,'functions\'];
     addpath(function_folder)
 
     [event_table, ~] = compute_performance(event_table);

@@ -10,7 +10,7 @@ rng('shuffle');
 % global parameters:
 global sub_num TRUE FALSE refRate task SHOW_PRACTICE  session
 global FRAME_ANTICIPATION PHOTODIODE DIOD_DURATION SHOW_INSTRUCTIONS category
-global RESTART_KEY NO_KEY spaceBar valid_resp_keys
+global RESTART_KEY NO_KEY spaceBar valid_resp_keys kb
 global KITCHEN_KEY BATHROOM_KEY
 global expDir
 
@@ -200,9 +200,9 @@ try
                 end
 
                 % wait for space bar
-                [~, ~, wait_resp] = KbCheck();
+                [~, ~, wait_resp] = KbCheck(kb);
                 while ~wait_resp(spaceBar)
-                    [~, ~, wait_resp] = KbCheck();
+                    [~, ~, wait_resp] = KbCheck(kb);
                 end
 
                 % Wait a random amount of time and show fixation:
@@ -256,8 +256,8 @@ try
                         % check if trial has a mask
                         if blk_mat.mask_dur(tr) > 0
 
-                            % Present mask
-                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION*4) && maskShown == FALSE
+                            % Present mask       
+                            if elapsedTime >= (blk_mat.duration(tr) - refRate*FRAME_ANTICIPATION) && maskShown == FALSE
 
                                 test_time(tr) = GetSecs - blk_mat.stim_time(tr);
                                 mask_time = showStimuli(mask_texture);

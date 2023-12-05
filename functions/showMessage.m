@@ -10,11 +10,11 @@
 
 function [ message_time ] = showMessage( message )
 
-    global gray_color w text PHOTODIODE
+    global gray_color w text PHOTODIODE black
 
     Screen('FillRect', w, gray_color);
 
-    DrawFormattedText(w, message, 'center', 'center', text.Color);
+    DrawFormattedText(w, message, 'center', 'center', black);
     
     if PHOTODIODE
             drawPhotodiodBlock('off')

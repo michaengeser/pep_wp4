@@ -8,12 +8,12 @@
 % recorded to make sure we account for it when starting again!
 function [ key, Resp_Time ] = getInput()
 
-global NO_KEY valid_resp_keys abortKey
+global NO_KEY valid_resp_keys abortKey kb
 
 %%
 key = NO_KEY;
 
-[KeyIsDown, Resp_Time, Resp1] = KbCheck();
+[KeyIsDown, Resp_Time, Resp1] = KbCheck(kb);
 
 if KeyIsDown
     key = find(Resp1);
@@ -31,9 +31,9 @@ if KeyIsDown
         showMessage('Invalid response key!');
 
         % wait for correct response bar
-        [~, ~, wait_resp] = KbCheck();
+        [~, ~, wait_resp] = KbCheck(kb);
         while ~wait_resp(valid_resp_keys)
-            [~, Resp_Time, wait_resp] = KbCheck();
+            [~, Resp_Time, wait_resp] = KbCheck(kb);
         end
         key = find(wait_resp);
         key = key(1);
