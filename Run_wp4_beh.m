@@ -219,6 +219,7 @@ try
                     hasInput = FALSE;
 
                     %% show stimulus
+                    showFixation('PhotodiodeOn');
                     blk_mat.stim_time(tr) = showStimuli(blk_mat.texture(tr));
                     DiodFrame = 0;
 
@@ -361,6 +362,15 @@ try
                             end
                             PreviousFrame = CurrentFrame;
                         end
+                    end
+
+
+                    if fixShown
+                        % compensate for timing (make it multiple of
+                        % refresh rate)
+                        wait_for_resp_time = ceil((GetSecs - blk_mat.fix_time(tr))/refRate)*refRate;
+
+                        WaitSecs('UntilTime', blk_mat.fix_time(tr) + wait_for_resp_time);
                     end
 
                     %% Jitter TIME LOOP

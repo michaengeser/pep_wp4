@@ -19,7 +19,8 @@ try
 
     % Create the save directory:
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
-        ['ses-',num2str(session)], task, category, 'code');
+        ['ses-',num2str(session)], task, category_name, 'code');
+
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
@@ -52,7 +53,7 @@ catch  % Try again if something went wrong:
     
     % Create the save directory:
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
-        ['ses-',num2str(session)], task, category, 'code');
+        ['ses-',num2str(session)], task, category_name, 'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
