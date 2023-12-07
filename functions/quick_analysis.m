@@ -98,6 +98,8 @@ full_event_table = event_table;
 output_struct.real_dur = event_table.mask_time - event_table.stim_time;
 output_struct.dur_diff = output_struct.real_dur - event_table.duration;
 output_struct.dur_diff_max = max(output_struct.dur_diff);
+output_struct.dur_diff_min = min(output_struct.dur_diff);
+output_struct.dur_diff_std = std(output_struct.dur_diff);
 output_struct.dur_diff_mean = mean(output_struct.dur_diff);
 
 % check currect frames
@@ -120,14 +122,18 @@ output_struct.diff_trial_durs = output_struct.trial_durs - output_struct.target_
 output_struct.ctr_mask_real_dur = event_table.fix_time - event_table.stim_time;
 output_struct.ctr_mask_dur_diff = output_struct.ctr_mask_real_dur - (event_table.duration + event_table.mask_dur);
 output_struct.ctr_mask_dur_diff_max = max(output_struct.ctr_mask_dur_diff);
+output_struct.ctr_mask_dur_diff_min = min(output_struct.ctr_mask_dur_diff);
 output_struct.ctr_mask_dur_diff_mean = mean(output_struct.ctr_mask_dur_diff);
+output_struct.ctr_mask_dur_diff_std = std(output_struct.ctr_mask_dur_diff);
 
 
 % control masking timing
 output_struct.mask_real_dur = event_table.fix_time - event_table.mask_time;
 output_struct.mask_dur_diff = output_struct.mask_real_dur - (event_table.mask_dur);
 output_struct.mask_dur_diff_max = max(output_struct.mask_dur_diff);
+output_struct.mask_dur_diff_min = min(output_struct.mask_dur_diff);
 output_struct.mask_dur_diff_mean = mean(output_struct.mask_dur_diff);
+output_struct.mask_dur_diff_std = std(output_struct.mask_dur_diff);
 
 
 
