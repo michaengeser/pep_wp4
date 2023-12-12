@@ -45,8 +45,8 @@ Behavior = 1; %Set to 1 if recording with Behavior only
 
 %% Hardware and physical parameters:
 REF_RATE_OPTIMAL = 60; % in Hz. Screen refresh rate.
-viewDistance = 58.5; % Default viewing distance (if no viewDist argument sent with the function call)
-SCREEN_SIZE_CM = [59.8 64.3]; % screen [width, height] in centimeters, change it to fit your setting
+viewDistance = 55.5; % Default viewing distance (if no viewDist argument sent with the function call)
+SCREEN_SIZE_CM = [56.5 59]; % screen [width, height] in centimeters, change it to fit your setting
 viewDistanceBottomTop = [72 72]; % IN CM!! Distance between the participant head and the top and bottom of the screen. Only needed if HEAD_FIXED on.
 
 %% Eyetracker parameters:

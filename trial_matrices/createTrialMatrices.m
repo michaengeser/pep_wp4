@@ -75,7 +75,7 @@ for sub_num = first_sub_num:first_sub_num + (n-1)
             rng(sub_num) % different random number for each subject
             repeats = 12; % how often each image is shown
             pics_per_blk = 50; % how many images are one block
-            duration = (1/60)*5; % for how long is the image shown
+            duration = (1/60)*4; % for how long is the image shown
             img_type = 'SHINEd'; % images properties are normalized with SHINE toolbox
             mask_dur = (1/60)*4; % mask duration
 
