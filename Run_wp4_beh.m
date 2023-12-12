@@ -344,6 +344,11 @@ try
                             fixShown = TRUE;
                         end
 
+                        % show a message if waiting for too long
+                        if elapsedTime >= (min_trial_duration - refRate*FRAME_ANTICIPATION) + 3
+                            showMessage('waiting for response...');
+                        end
+
                         % Updating clock:
                         elapsedTime = GetSecs - blk_mat.stim_time(tr);
 
