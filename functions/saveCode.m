@@ -13,13 +13,15 @@ try
 
     if length(category) > 1
         category_name = ['_', category];
+        cat_folder =  category;
     else
         category_name = [];
+        cat_folder =  [];
     end
 
     % Create the save directory:
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
-        ['ses-',num2str(session)], task, category_name, 'code');
+        ['ses-',num2str(session)], task, cat_folder, 'code');
 
     if ~exist(char(directory),'dir')
         mkdir(directory);
@@ -53,7 +55,7 @@ catch  % Try again if something went wrong:
     
     % Create the save directory:
     directory = fullfile(pwd, 'data',['sub-', num2str(sub_num)],...
-        ['ses-',num2str(session)], task, category_name, 'code');
+        ['ses-',num2str(session)], task, cat_folder, 'code');
     if ~exist(char(directory),'dir')
         mkdir(directory);
     end
