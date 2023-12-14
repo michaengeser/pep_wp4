@@ -418,6 +418,11 @@ try
                     end
                 end  % End of trial loop
 
+                % get performance
+                if strcmp('categorization', task)
+                    blk_mat = compute_performance(blk_mat);
+                end 
+
                 % Save the data of this block:
                 saveTable(blk_mat, blk);
 
@@ -453,13 +458,13 @@ try
             % Save the whole table:
             saveTable(log_all, "all");
 
-            % Save the code:
-            saveCode(task);
-
             WaitSecs(2);
             showMessage('saving...');
         end % end of slide show statement
     end % end task loop
+
+    % Save the code:
+    saveCode();
 
     % save everything from command window
     Str = CmdWinTool('getText');

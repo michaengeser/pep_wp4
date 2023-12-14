@@ -29,6 +29,9 @@ for sub = sub_nums
                     input_mat = load(fullfile(CateFolderName, cell2mat(file_name)));
                     ses_mat = input_mat.input_table;
 
+                    % get performance 
+                    ses_mat = compute_performance(ses_mat);
+
                     % concatanate matrices to one big one
                     if ~exist('all_mat', 'var')
                         all_mat = ses_mat;
