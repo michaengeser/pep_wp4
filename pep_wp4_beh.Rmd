@@ -113,13 +113,24 @@ com_table = all_event_table %>% filter(is_practice == 0 & task == 'complexity')
 cate_table_bath = cate_table %>% filter(category == 'bathroom')
 cate_table_kit = cate_table %>% filter(category == 'kitchen')
 
-# image identiy table
+# image identity table
+img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
+  summarise(mean_RT = mean(RT, na.rm = TRUE),
+            sd_RT = sd(RT, na.rm = TRUE),
+            mean_acc = mean(trial_accuracy, na.rm = TRUE),
+            sd_acc = sd(trial_accuracy, na.rm = TRUE))
 
-SOA_SOA_lock_duration_data3 = SOA_SOA_lock_duration_subj_data3 %>%  group_by(onset_SOA, SOA_lock,duration, task_relevance) %>%
-  summarise(mean_RT = mean(RT_mean, na.rm = TRUE),
-            sd_RT = sd(RT_mean, na.rm = TRUE),
-            sem_RT = sd_RT / sqrt(n))
+# sort based on image name 
+img_id_table = img_id_table %>% arrange(sub_num, category, image)
 
+# add ratings
+# img_id_table = img_id_table %>% mutate(typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
+# img_id_table = img_id_table %>% mutate(familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
+# img_id_table = img_id_table %>% mutate(aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
+# img_id_table = img_id_table %>% mutate(usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
+# img_id_table = img_id_table %>% mutate(complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
+
+##### CHECK IS RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
 
 
 ```
@@ -180,12 +191,12 @@ perf = perf %>% add_row(sub_num = 'sd',
 
 # reaction time
 hist_RT = ggplot(cate_table, aes(x=RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Duration histogram")
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("RT histogram")
 hist_RT
 
-# accuracy - bathroom
-hist_acc = ggplot(cate_table_bath, aes(x=trial_accuracy, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Duration histogram")
+# accuracy - per image
+hist_acc = ggplot(img_id_table, aes(x=mean_acc, fill=category)) +
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")
 hist_acc
 
 
