@@ -30,7 +30,7 @@ pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rst
 
 ```{r loading}
 # details of subjects  
-subNums = c(101) # 105, 106, 108, 109, 110, 113, 114, 115, 118, 122) # 101 excluded
+subNums = c(101, 107, 108) # 105, 106, 108, 109, 110, 113, 114, 115, 118, 122) # 101 excluded
 n = length(subNums)
 sessions = c(1,2)
 tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
@@ -68,14 +68,14 @@ for (subNum in subNums ){
         setwd(wd)
         
         if (task == 'categorization'){
-        file = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, file_name)
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, file_name)
         } else {
-        file = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, category, file_name)
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, category, file_name)
         }
           
-          
-        # load file
-        event_table = read.csv(file)
+        if (file.exists(file_name)) {
+          # load file
+          event_table = read.csv(file_name)}
         
         # concatenate the tables
         if ( exists('all_event_table')){
@@ -130,7 +130,15 @@ img_id_table = img_id_table %>% arrange(sub_num, category, image)
 # img_id_table = img_id_table %>% mutate(usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
 # img_id_table = img_id_table %>% mutate(complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
 
-##### CHECK IS RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
+
+# image identity table
+just_img_id_table = cate_table %>%  group_by(image, category) %>%
+  summarise(mean_RT = mean(RT, na.rm = TRUE),
+            sd_RT = sd(RT, na.rm = TRUE),
+            mean_acc = mean(trial_accuracy, na.rm = TRUE),
+            sd_acc = sd(trial_accuracy, na.rm = TRUE))
+
+##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
 
 
 ```
@@ -150,15 +158,15 @@ perf$mean_use = NaN
 perf$mean_com = NaN
 perf = perf[-c(1), ]
 
-for (sub_num in subNums) {
-  perf = perf %>% add_row(sub_num = as.character(sub_num),
-                          mean_acc = mean(all_event_table %>% filter(sub_num == sub_num & task == 'categorization') %>% pull(trial_accuracy)),
-                          mean_RT = mean(all_event_table %>% filter(sub_num == sub_num & task == 'categorization') %>% pull(RT)),
-                          mean_typ = mean(all_event_table %>% filter(sub_num == sub_num & task == 'typicality') %>% pull(trial_response)),
-                          mean_fam = mean(all_event_table %>% filter(sub_num == sub_num & task == 'familiarity') %>% pull(trial_response)),
-                          mean_aes = mean(all_event_table %>% filter(sub_num == sub_num & task == 'aesthetic') %>% pull(trial_response)),
-                          mean_use = mean(all_event_table %>% filter(sub_num == sub_num & task == 'usability') %>% pull(trial_response)),
-                          mean_com = mean(all_event_table %>% filter(sub_num == sub_num & task == 'complexity') %>% pull(trial_response)))
+for (subNum in subNums) {
+  perf = perf %>% add_row(sub_num = as.character(subNum),
+                          mean_acc = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)),
+                          mean_RT = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)),
+                          mean_typ = mean(all_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)),
+                          mean_fam = mean(all_event_table %>% filter(sub_num == subNum & task == 'familiarity') %>% pull(trial_response)),
+                          mean_aes = mean(all_event_table %>% filter(sub_num == subNum & task == 'aesthetic') %>% pull(trial_response)),
+                          mean_use = mean(all_event_table %>% filter(sub_num == subNum & task == 'usability') %>% pull(trial_response)),
+                          mean_com = mean(all_event_table %>% filter(sub_num == subNum & task == 'complexity') %>% pull(trial_response)))
   }
 
 
@@ -197,30 +205,28 @@ sub_acc_table = cate_table %>%  group_by(sub_num, category) %>%
             sd_acc = sd(trial_accuracy, na.rm = TRUE))
 
 hist_sub_acc = ggplot(sub_acc_table, aes(x=mean_acc, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")+
-  xlim(c(0.5,1))
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0.4,1)) + ggtitle("Subject accuracy histogram")
 hist_sub_acc
 
 
 # reaction time
 hist_RT = ggplot(cate_table, aes(x=RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("RT histogram")
+  geom_histogram(alpha=0.6, position='identity') + ggtitle("RT histogram")
 hist_RT
 
 # accuracy - per image
 hist_acc = ggplot(img_id_table, aes(x=mean_acc, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")+
-  xlim(c(0.5,1))
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,1)) + ggtitle("Image accuracy histogram")
 hist_acc
 
 # RT - per image
 hist_img_RT = ggplot(img_id_table, aes(x=mean_RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image RT histogram")
+  geom_histogram(alpha=0.6, position='identity') + ggtitle("Image RT histogram")
 hist_img_RT
 
 # RT sd - per image
 hist_img_acc = ggplot(img_id_table, aes(x=sd_RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image RT SD histogram")
+  geom_histogram(alpha=0.6, position='identity') + ggtitle("Image RT SD histogram")
 hist_img_acc
 
 
