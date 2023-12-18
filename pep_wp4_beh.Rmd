@@ -30,7 +30,7 @@ pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rst
 
 ```{r loading}
 # details of subjects  
-subNums = c(101, 107, 108) # 105, 106, 108, 109, 110, 113, 114, 115, 118, 122) # 101 excluded
+subNums = c(101,102,103, 106,107,108) # 105, 106, 108, 109, 110, 113, 114, 115, 118, 122) # 101 excluded
 n = length(subNums)
 sessions = c(1,2)
 tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
@@ -232,6 +232,58 @@ hist_img_acc
 
 ```
 
+# timing
+
+``` {r perfromance}
+timing = data.frame(matrix(ncol = 0, nrow = 1))
+timing$sub_num = 'NaN'
+timing$mean_stim_diff = NaN
+timing$max_stim_diff = NaN
+timing$min_stim_diff = NaN
+timing$mean_mask_diff = NaN
+timing$max_mask_diff = NaN
+timing$min_mask_diff = NaN
+timing$trial_dur = NaN
+timing = timing[-c(1), ]
+
+all_event_table = all_event_table %>% mutate(real_stim_dur = mask_time - stim_time)
+all_event_table = all_event_table %>% mutate(real_stim_diff = real_stim_dur - duration)
+all_event_table = all_event_table %>% mutate(real_mask_dur = fix_time - mask_time)
+all_event_table = all_event_table %>% mutate(real_mask_diff = real_mask_dur - mask_dur)
+all_event_table = all_event_table %>% mutate(real_trial_dur = trial_end - stim_time)
+
+
+for (subNum in subNums) {
+  timing = timing %>% add_row(sub_num = as.character(subNum),
+                          mean_stim_diff = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
+                          max_stim_diff = max(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
+                          min_stim_diff = min(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
+                          mean_mask_diff = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
+                          max_mask_diff = max(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
+                          min_mask_diff = min(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
+                          trial_dur = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_trial_dur)),)
+  }
+
+
+# add mean and SD
+timing = timing %>% add_row(sub_num = 'mean',
+                        mean_stim_diff = mean(timing$mean_stim_diff),
+                        max_stim_diff = mean(timing$max_stim_diff),
+                        min_stim_diff = mean(timing$min_stim_diff),
+                        mean_mask_diff = mean(timing$mean_mask_diff),
+                        max_mask_diff = mean(timing$max_mask_diff),
+                        min_mask_diff = mean(timing$min_mask_diff),
+                        trial_dur = mean(timing$trial_dur))
+
+timing = timing %>% add_row(sub_num = 'sd',
+                        mean_stim_diff = sd(timing$mean_stim_diff[1:n]),
+                        max_stim_diff = sd(timing$max_stim_diff[1:n]),
+                        min_stim_diff = sd(timing$min_stim_diff[1:n]),
+                        mean_mask_diff = sd(timing$mean_mask_diff[1:n]),
+                        max_mask_diff = sd(timing$max_mask_diff[1:n]),
+                        min_mask_diff = sd(timing$min_mask_diff[1:n]),
+                        trial_dur = sd(timing$trial_dur[1:n]))
+```
 # main plotting - iT 
 
 ```{R main_plotting_IT}
