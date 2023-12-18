@@ -189,6 +189,19 @@ perf = perf %>% add_row(sub_num = 'sd',
 
 ### HISTOGRAMS
 
+# subject accuracy
+sub_acc_table = cate_table %>%  group_by(sub_num, category) %>%
+  summarise(mean_RT = mean(RT, na.rm = TRUE),
+            sd_RT = sd(RT, na.rm = TRUE),
+            mean_acc = mean(trial_accuracy, na.rm = TRUE),
+            sd_acc = sd(trial_accuracy, na.rm = TRUE))
+
+hist_sub_acc = ggplot(sub_acc_table, aes(x=mean_acc, fill=category)) +
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")+
+  xlim(c(0.5,1))
+hist_sub_acc
+
+
 # reaction time
 hist_RT = ggplot(cate_table, aes(x=RT, fill=category)) +
   geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("RT histogram")
@@ -196,18 +209,19 @@ hist_RT
 
 # accuracy - per image
 hist_acc = ggplot(img_id_table, aes(x=mean_acc, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")
+  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image accuracy histogram")+
+  xlim(c(0.5,1))
 hist_acc
 
 # RT - per image
-hist_acc = ggplot(img_id_table, aes(x=mean_RT, fill=category)) +
+hist_img_RT = ggplot(img_id_table, aes(x=mean_RT, fill=category)) +
   geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image RT histogram")
-hist_acc
+hist_img_RT
 
 # RT sd - per image
-hist_acc = ggplot(img_id_table, aes(x=sd_RT, fill=category)) +
+hist_img_acc = ggplot(img_id_table, aes(x=sd_RT, fill=category)) +
   geom_histogram(alpha=0.6, position='identity') + xlim(c(0,2)) + ggtitle("Image RT SD histogram")
-hist_acc
+hist_img_acc
 
 
 ```
