@@ -30,7 +30,7 @@ pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rst
 
 ```{r loading}
 # details of subjects  
-subNums = c(101) # ,102,103, 106,107,108)
+subNums = c(101,102,103,104,106,107,108)
 n = length(subNums)
 sessions = c(1,2)
 tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
@@ -124,18 +124,29 @@ img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
 img_id_table = img_id_table %>% arrange(sub_num, category, image)
 
 # add ratings
-img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+# 
+# # image identity table
+# just_img_id_table = img_id_table %>%  group_by(image, category) %>%
+#   summarise(RT_mean = mean(mean_RT, na.rm = TRUE),
+#             RT_sd = sd(mean_RT, na.rm = TRUE),
+#             acc_mean = mean(mean_acc, na.rm = TRUE),
+#             acc_sd = sd(mean_acc, na.rm = TRUE),
+#             typ_mean = mean(typicality, na.rm = TRUE),
+#             typ_sd = sd(typicality, na.rm = TRUE), 
+#             fam_mean = mean(familiarity, na.rm = TRUE),
+#             fam_sd = sd(familiarity, na.rm = TRUE),
+#             aes_mean = mean(aesthetic, na.rm = TRUE),
+#             aes_sd = sd(aesthetic, na.rm = TRUE),
+#             use_mean = mean(usability, na.rm = TRUE),
+#             use_sd = sd(usability, na.rm = TRUE),
+#             com_mean = mean(complexity, na.rm = TRUE),
+#             com_sd = sd(complexity, na.rm = TRUE))
 
-# image identity table
-just_img_id_table = img_id_table %>%  group_by(image, category) %>%
-  summarise(mean_RT = mean(RT, na.rm = TRUE),
-            sd_RT = sd(RT, na.rm = TRUE),
-            mean_acc = mean(trial_accuracy, na.rm = TRUE),
-            sd_acc = sd(trial_accuracy, na.rm = TRUE))
 
 ##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
 
