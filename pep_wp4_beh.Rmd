@@ -336,7 +336,8 @@ variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability',
 cor_matrix = cor(img_id_table[, variables_of_interest])
 cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
 cor_plot
-pair_plot = ggpairs(img_id_table[, variables_of_interest])  
+pair_plot = ggpairs(img_id_table[, variables_of_interest],
+                              lower = list(continuous = wrap("points", position = position_jitter(width = 0.4, height = 0.4), size = 0.5)))  
 pair_plot
 
 ```
