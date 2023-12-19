@@ -23,8 +23,6 @@ library(pacman)
 
 pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rstatix', 'car', 'rsq', 'sjPlot', 'brms')
 
-library(pairs)
-
 ```
 
 

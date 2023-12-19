@@ -150,28 +150,47 @@ just_img_id_table = img_id_table %>%  group_by(image, category) %>%
 
 # set parameters
 sim_subs = 10
-RT_sd = 1
-acc_sd = 1
-rating_sd = 1
-baseline_sd = 1
+RT_sd = 0.3
+acc_sd = 0.5
+rating_sd = 0.5
+baseline_sd = 0.1
 
+# delete table before start new simulation
+if (exists('sim_event_table')){
+  rm(sim_event_table)
+} 
 
-for (subNum in subNums ){
+for (subNum in subNums){
   
-  # get distributions
+  # get baseline distributions
   baseline_dis = rnorm(sim_subs, 0, baseline_sd)
-  RT_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)), RT_sd)
-  acc_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)), acc_sd)
-  typ_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)), rating_sd)
   
-  for (sim_sub in 1:sim_subs ){  
-    count = count + 1
+  for (sim_sub in 1:sim_subs ){
     
     # get table for one subject 
     sub_table = all_event_table %>% filter(sub_num == subNum)
     
+    # make new subject number
+    sub_table$sub_num = sub_table$sub_num + sim_sub*100
     
+    for (row in 1:dim(sub_table)[1]){
+      
+      # generate new categorization performance
+      sub_table$RT[row] = sub_table$RT[row] + rnorm(1, baseline_dis[sim_sub], RT_sd)
+      sub_table$trial_accuracy[row] = round(sub_table$trial_accuracy[row] + rnorm(1, baseline_dis[sim_sub], acc_sd))
+      
+      # generate new ratings
+      sub_table$trial_response[row] = round(sub_table$trial_response[row] + rnorm(1, baseline_dis[sim_sub], rating_sd))
+      
+      
+    }
     
+    # concatenate the tables
+    if ( exists('sim_event_table')){
+      sim_event_table = rbind(sim_event_table, sub_table)
+    } else {
+      sim_event_table = sub_table
+    }
   }}
 
 ```
