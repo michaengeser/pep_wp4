@@ -31,7 +31,7 @@ library(pairs)
 # loading files
 
 ```{r loading}
-# details of subjects  
+# details of subjects to simulate from
 subNums = c(101) # ,102,103, 106,107,108)
 n = length(subNums)
 sessions = c(1,2)
@@ -97,52 +97,6 @@ for (subNum in subNums ){
 
 ```
 
-# transfrom data
-
-``` {r transform_data}
-
-# does data need any other transforamtion
-
-# make task tables
-cate_table = all_event_table %>% filter(is_practice == 0 & task == 'categorization')
-typ_table = all_event_table %>% filter(is_practice == 0 & task == 'typicality')
-fam_table = all_event_table %>% filter(is_practice == 0 & task == 'familiarity')
-aes_table = all_event_table %>% filter(is_practice == 0 & task == 'aesthetic')
-use_table = all_event_table %>% filter(is_practice == 0 & task == 'usability')
-com_table = all_event_table %>% filter(is_practice == 0 & task == 'complexity')
-
-# split by category
-cate_table_bath = cate_table %>% filter(category == 'bathroom')
-cate_table_kit = cate_table %>% filter(category == 'kitchen')
-
-# image identity table
-img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
-  summarise(mean_RT = mean(RT, na.rm = TRUE),
-            sd_RT = sd(RT, na.rm = TRUE),
-            mean_acc = mean(trial_accuracy, na.rm = TRUE),
-            sd_acc = sd(trial_accuracy, na.rm = TRUE))
-
-# sort based on image name 
-img_id_table = img_id_table %>% arrange(sub_num, category, image)
-
-# add ratings
-img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-
-# image identity table
-just_img_id_table = img_id_table %>%  group_by(image, category) %>%
-  summarise(mean_RT = mean(RT, na.rm = TRUE),
-            sd_RT = sd(RT, na.rm = TRUE),
-            mean_acc = mean(trial_accuracy, na.rm = TRUE),
-            sd_acc = sd(trial_accuracy, na.rm = TRUE))
-
-##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
-
-
-```
 
 # simulate new data
 
@@ -171,7 +125,7 @@ for (subNum in subNums){
     sub_table = all_event_table %>% filter(sub_num == subNum)
     
     # make new subject number
-    sub_table$sub_num = sub_table$sub_num + sim_sub*100
+    sub_table$sub_num = sub_table$sub_num + sim_sub*50
     
     for (row in 1:dim(sub_table)[1]){
       
@@ -193,6 +147,110 @@ for (subNum in subNums){
     }
   }}
 
+# get subject numbers and n of simulated data
+sim_subNums = unique(sim_event_table$sub_num)
+sim_n = length(sim_subNums)
+
 ```
 
+# performance
 
+``` {r perfromance}
+sim_perf = data.frame(matrix(ncol = 0, nrow = 1))
+sim_perf$sub_num = 'NaN'
+sim_perf$mean_acc = NaN
+sim_perf$mean_RT = NaN
+sim_perf$mean_typ = NaN
+sim_perf$mean_fam = NaN
+sim_perf$mean_aes = NaN
+sim_perf$mean_use = NaN
+sim_perf$mean_com = NaN
+sim_perf = sim_perf[-c(1), ]
+
+for (subNum in sim_subNums) {
+  sim_perf = sim_perf %>% add_row(sub_num = as.character(subNum),
+                          mean_acc = mean(sim_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)),
+                          mean_RT = mean(sim_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)),
+                          mean_typ = mean(sim_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)),
+                          mean_fam = mean(sim_event_table %>% filter(sub_num == subNum & task == 'familiarity') %>% pull(trial_response)),
+                          mean_aes = mean(sim_event_table %>% filter(sub_num == subNum & task == 'aesthetic') %>% pull(trial_response)),
+                          mean_use = mean(sim_event_table %>% filter(sub_num == subNum & task == 'usability') %>% pull(trial_response)),
+                          mean_com = mean(sim_event_table %>% filter(sub_num == subNum & task == 'complexity') %>% pull(trial_response)))
+  }
+
+
+# add mean and SD
+sim_perf = sim_perf %>% add_row(sub_num = 'mean',
+                        mean_acc = mean(sim_perf$mean_acc),
+                        mean_RT = mean(sim_perf$mean_RT),
+                        mean_typ = mean(sim_perf$mean_typ),
+                        mean_fam = mean(sim_perf$mean_fam),
+                        mean_aes = mean(sim_perf$mean_aes),
+                        mean_use = mean(sim_perf$mean_use),
+                        mean_com = mean(sim_perf$mean_com))
+
+sim_perf = sim_perf %>% add_row(sub_num = 'sd',
+                        mean_acc = sd(sim_perf$mean_acc[1:sim_n]),
+                        mean_RT = sd(sim_perf$mean_RT[1:sim_n]),
+                        mean_typ = sd(sim_perf$mean_typ[1:sim_n]),
+                        mean_fam = sd(sim_perf$mean_fam[1:sim_n]),
+                        mean_aes = sd(sim_perf$mean_aes[1:sim_n]),
+                        mean_use = sd(sim_perf$mean_use[1:sim_n]),
+                        mean_com = sd(sim_perf$mean_com[1:sim_n]))
+```
+# transfrom data
+
+``` {r transform_data}
+
+# does data need any other transforamtion
+
+# make task tables
+cate_table = sim_event_table %>% filter(is_practice == 0 & task == 'categorization')
+typ_table = sim_event_table %>% filter(is_practice == 0 & task == 'typicality')
+fam_table = sim_event_table %>% filter(is_practice == 0 & task == 'familiarity')
+aes_table = sim_event_table %>% filter(is_practice == 0 & task == 'aesthetic')
+use_table = sim_event_table %>% filter(is_practice == 0 & task == 'usability')
+com_table = sim_event_table %>% filter(is_practice == 0 & task == 'complexity')
+
+# split by category
+cate_table_bath = cate_table %>% filter(category == 'bathroom')
+cate_table_kit = cate_table %>% filter(category == 'kitchen')
+
+# image identity table
+img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
+  summarise(mean_RT = mean(RT, na.rm = TRUE),
+            sd_RT = sd(RT, na.rm = TRUE),
+            mean_acc = mean(trial_accuracy, na.rm = TRUE),
+            sd_acc = sd(trial_accuracy, na.rm = TRUE))
+
+# sort based on image name 
+img_id_table = img_id_table %>% arrange(sub_num, category, image)
+
+# add ratings
+img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+
+# image identity table
+just_img_id_table = img_id_table %>%  group_by(image, category) %>%
+  summarise(RT_mean = mean(mean_RT, na.rm = TRUE),
+            RT_sd = sd(mean_RT, na.rm = TRUE),
+            acc_mean = mean(mean_acc, na.rm = TRUE),
+            acc_sd = sd(mean_acc, na.rm = TRUE),
+            typ_mean = mean(typicality, na.rm = TRUE),
+            typ_sd = sd(typicality, na.rm = TRUE), 
+            fam_mean = mean(familiarity, na.rm = TRUE),
+            fam_sd = sd(familiarity, na.rm = TRUE),
+            aes_mean = mean(aesthetic, na.rm = TRUE),
+            aes_sd = sd(aesthetic, na.rm = TRUE),
+            use_mean = mean(usability, na.rm = TRUE),
+            use_sd = sd(usability, na.rm = TRUE),
+            com_mean = mean(complexity, na.rm = TRUE),
+            com_sd = sd(complexity, na.rm = TRUE))
+
+##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
+
+
+```
