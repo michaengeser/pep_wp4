@@ -23,8 +23,6 @@ library(pacman)
 
 pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rstatix', 'car', 'rsq', 'sjPlot', 'brms')
 
-library(pairs)
-
 ```
 
 
@@ -122,7 +120,7 @@ for (subNum in subNums){
   for (sim_sub in 1:sim_subs ){
     
     # get table for one subject 
-    sub_table = all_event_table %>% filter(sub_num == subNum)
+    sub_table = all_event_table %>% filter(sub_num == subNum & is_practice == 0)
     
     # make new subject number
     sub_table$sub_num = sub_table$sub_num + sim_sub*50
@@ -202,7 +200,7 @@ sim_perf = sim_perf %>% add_row(sub_num = 'sd',
 
 ``` {r transform_data}
 
-# does data need any other transforamtion
+# does data need any other transformation?
 
 # make task tables
 cate_table = sim_event_table %>% filter(is_practice == 0 & task == 'categorization')
@@ -211,10 +209,6 @@ fam_table = sim_event_table %>% filter(is_practice == 0 & task == 'familiarity')
 aes_table = sim_event_table %>% filter(is_practice == 0 & task == 'aesthetic')
 use_table = sim_event_table %>% filter(is_practice == 0 & task == 'usability')
 com_table = sim_event_table %>% filter(is_practice == 0 & task == 'complexity')
-
-# split by category
-cate_table_bath = cate_table %>% filter(category == 'bathroom')
-cate_table_kit = cate_table %>% filter(category == 'kitchen')
 
 # image identity table
 img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
@@ -252,5 +246,38 @@ just_img_id_table = img_id_table %>%  group_by(image, category) %>%
 
 ##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
 
+
+```
+
+# rating correlation
+
+```{r rating correlation}
+
+# typ - fam
+typ_fam = ggplot(img_id_table, aes(x = typicality, y = familiarity)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  xlab("typicality") +
+  ylab("familiarity") +
+  facet_grid(. ~ sub_num)+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(linetype = "solid"),
+        panel.background = element_blank())+
+  stat_cor(color = 'black', method = "pearson", show.legend = FALSE)
+typ_fam
+
+
+# Selecting only the variables of interest
+variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+
+# Create a correlation plot
+cor_matrix = cor(img_id_table[, variables_of_interest])
+cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
+cor_plot
+pair_plot = ggpairs(img_id_table[, variables_of_interest])  
+pair_plot
 
 ```
