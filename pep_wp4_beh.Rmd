@@ -23,6 +23,8 @@ library(pacman)
 
 pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rstatix', 'car', 'rsq', 'sjPlot', 'brms')
 
+library(pairs)
+
 ```
 
 
@@ -30,7 +32,7 @@ pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rst
 
 ```{r loading}
 # details of subjects  
-subNums = c(101,102,103, 106,107,108) # 105, 106, 108, 109, 110, 113, 114, 115, 118, 122) # 101 excluded
+subNums = c(101) # ,102,103, 106,107,108)
 n = length(subNums)
 sessions = c(1,2)
 tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
@@ -124,15 +126,14 @@ img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
 img_id_table = img_id_table %>% arrange(sub_num, category, image)
 
 # add ratings
-# img_id_table = img_id_table %>% mutate(typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
-# img_id_table = img_id_table %>% mutate(familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
-# img_id_table = img_id_table %>% mutate(aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
-# img_id_table = img_id_table %>% mutate(usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
-# img_id_table = img_id_table %>% mutate(complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response))
-
+img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
 
 # image identity table
-just_img_id_table = cate_table %>%  group_by(image, category) %>%
+just_img_id_table = img_id_table %>%  group_by(image, category) %>%
   summarise(mean_RT = mean(RT, na.rm = TRUE),
             sd_RT = sd(RT, na.rm = TRUE),
             mean_acc = mean(trial_accuracy, na.rm = TRUE),
@@ -296,6 +297,38 @@ hist_stim_time = ggplot(all_event_table, aes(x=real_stim_diff, group=as.characte
   geom_histogram(alpha=0.6, position='identity') + ggtitle("Stimulus timing")
 hist_stim_time
 
+
+```
+# rating correlation
+
+```{r rating correlation}
+
+# typ - fam
+typ_fam = ggplot(img_id_table, aes(x = typicality, y = familiarity)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  xlab("typicality") +
+  ylab("familiarity") +
+  facet_grid(. ~ sub_num)+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(linetype = "solid"),
+        panel.background = element_blank())+
+  stat_cor(color = 'black', method = "pearson", show.legend = FALSE)
+typ_fam
+
+
+# Selecting only the variables of interest
+variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+
+# Create a correlation plot
+cor_matrix = cor(img_id_table[, variables_of_interest])
+cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
+cor_plot
+pair_plot = ggpairs(img_id_table[, variables_of_interest])  
+pair_plot
 
 ```
 
