@@ -46,46 +46,46 @@ table_size = 1:18
 # loading the files 
 
 for (subNum in subNums ){
-    for (task in tasks ){
-      for (category in categories ){    
-        count = count + 1
-
-        # make session number
-        if (task == 'categorization'){ ses = 1 }
-        else { ses = 2 }
-        
-        sub_folder = paste0('sub-', subNum)
-        ses_folder = paste0('ses-', ses)
-        
-        # make file name
-        if (task == 'categorization'){
-          file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task,'_events.csv')
-        } else {
-          file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task , '_' ,category, '_events.csv')
-        }
-        
-        # make path
-        setwd("..")
-        parent_dir = getwd()
-        setwd(wd)
-        
-        if (task == 'categorization'){
+  for (task in tasks ){
+    for (category in categories ){    
+      count = count + 1
+      
+      # make session number
+      if (task == 'categorization'){ ses = 1 }
+      else { ses = 2 }
+      
+      sub_folder = paste0('sub-', subNum)
+      ses_folder = paste0('ses-', ses)
+      
+      # make file name
+      if (task == 'categorization'){
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task,'_events.csv')
+      } else {
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task , '_' ,category, '_events.csv')
+      }
+      
+      # make path
+      setwd("..")
+      parent_dir = getwd()
+      setwd(wd)
+      
+      if (task == 'categorization'){
         file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, file_name)
-        } else {
+      } else {
         file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, category, file_name)
-        }
-          
-        if (file.exists(file_name)) {
-          # load file
-          event_table = read.csv(file_name)}
-        
-        # concatenate the tables
-        if ( exists('all_event_table')){
-          all_event_table = rbind(all_event_table, event_table)
-        } else {
-          all_event_table = event_table
-        }
-      }}}
+      }
+      
+      if (file.exists(file_name)) {
+        # load file
+        event_table = read.csv(file_name)}
+      
+      # concatenate the tables
+      if ( exists('all_event_table')){
+        all_event_table = rbind(all_event_table, event_table)
+      } else {
+        all_event_table = event_table
+      }
+    }}}
 
 ```
 
@@ -144,191 +144,35 @@ just_img_id_table = img_id_table %>%  group_by(image, category) %>%
 
 ```
 
+# simulate new data
 
-# performance
+```{r simulate new data}
 
-``` {r perfromance}
-perf = data.frame(matrix(ncol = 0, nrow = 1))
-perf$sub_num = 'NaN'
-perf$mean_acc = NaN
-perf$mean_RT = NaN
-perf$mean_typ = NaN
-perf$mean_fam = NaN
-perf$mean_aes = NaN
-perf$mean_use = NaN
-perf$mean_com = NaN
-perf = perf[-c(1), ]
-
-for (subNum in subNums) {
-  perf = perf %>% add_row(sub_num = as.character(subNum),
-                          mean_acc = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)),
-                          mean_RT = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)),
-                          mean_typ = mean(all_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)),
-                          mean_fam = mean(all_event_table %>% filter(sub_num == subNum & task == 'familiarity') %>% pull(trial_response)),
-                          mean_aes = mean(all_event_table %>% filter(sub_num == subNum & task == 'aesthetic') %>% pull(trial_response)),
-                          mean_use = mean(all_event_table %>% filter(sub_num == subNum & task == 'usability') %>% pull(trial_response)),
-                          mean_com = mean(all_event_table %>% filter(sub_num == subNum & task == 'complexity') %>% pull(trial_response)))
-  }
+# set parameters
+sim_subs = 10
+RT_sd = 1
+acc_sd = 1
+rating_sd = 1
+baseline_sd = 1
 
 
-# add mean and SD
-perf = perf %>% add_row(sub_num = 'mean',
-                        mean_acc = mean(perf$mean_acc),
-                        mean_RT = mean(perf$mean_RT),
-                        mean_typ = mean(perf$mean_typ),
-                        mean_fam = mean(perf$mean_fam),
-                        mean_aes = mean(perf$mean_aes),
-                        mean_use = mean(perf$mean_use),
-                        mean_com = mean(perf$mean_com))
-
-perf = perf %>% add_row(sub_num = 'sd',
-                        mean_acc = sd(perf$mean_acc[1:n]),
-                        mean_RT = sd(perf$mean_RT[1:n]),
-                        mean_typ = sd(perf$mean_typ[1:n]),
-                        mean_fam = sd(perf$mean_fam[1:n]),
-                        mean_aes = sd(perf$mean_aes[1:n]),
-                        mean_use = sd(perf$mean_use[1:n]),
-                        mean_com = sd(perf$mean_com[1:n]))
-```
-
-# plotting - categorization performance 
-
-```{R plotting_RT}
-
-
-### HISTOGRAMS
-
-# subject accuracy
-sub_acc_table = cate_table %>%  group_by(sub_num, category) %>%
-  summarise(mean_RT = mean(RT, na.rm = TRUE),
-            sd_RT = sd(RT, na.rm = TRUE),
-            mean_acc = mean(trial_accuracy, na.rm = TRUE),
-            sd_acc = sd(trial_accuracy, na.rm = TRUE))
-
-hist_sub_acc = ggplot(sub_acc_table, aes(x=mean_acc, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0.4,1)) + ggtitle("Subject accuracy histogram")
-hist_sub_acc
-
-
-# reaction time
-hist_RT = ggplot(cate_table, aes(x=RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + ggtitle("RT histogram")
-hist_RT
-
-# accuracy - per image
-hist_acc = ggplot(img_id_table, aes(x=mean_acc, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + xlim(c(0,1)) + ggtitle("Image accuracy histogram")
-hist_acc
-
-# RT - per image
-hist_img_RT = ggplot(img_id_table, aes(x=mean_RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + ggtitle("Image RT histogram")
-hist_img_RT
-
-# RT sd - per image
-hist_img_acc = ggplot(img_id_table, aes(x=sd_RT, fill=category)) +
-  geom_histogram(alpha=0.6, position='identity') + ggtitle("Image RT SD histogram")
-hist_img_acc
-
-
-```
-
-# timing
-
-``` {r perfromance}
-timing = data.frame(matrix(ncol = 0, nrow = 1))
-timing$sub_num = 'NaN'
-timing$mean_stim_diff = NaN
-timing$max_stim_diff = NaN
-timing$min_stim_diff = NaN
-timing$mean_mask_diff = NaN
-timing$max_mask_diff = NaN
-timing$min_mask_diff = NaN
-timing$trial_dur = NaN
-timing = timing[-c(1), ]
-
-all_event_table = all_event_table %>% mutate(real_stim_dur = mask_time - stim_time)
-all_event_table = all_event_table %>% mutate(real_stim_diff = real_stim_dur - duration)
-all_event_table = all_event_table %>% mutate(real_mask_dur = fix_time - mask_time)
-all_event_table = all_event_table %>% mutate(real_mask_diff = real_mask_dur - mask_dur)
-all_event_table = all_event_table %>% mutate(real_trial_dur = trial_end - stim_time)
-
-
-for (subNum in subNums) {
-  timing = timing %>% add_row(sub_num = as.character(subNum),
-                          mean_stim_diff = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
-                          max_stim_diff = max(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
-                          min_stim_diff = min(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_stim_diff)),
-                          mean_mask_diff = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
-                          max_mask_diff = max(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
-                          min_mask_diff = min(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_mask_diff)),
-                          trial_dur = mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(real_trial_dur)),)
-  }
-
-
-# add mean and SD
-timing = timing %>% add_row(sub_num = 'mean',
-                        mean_stim_diff = mean(timing$mean_stim_diff),
-                        max_stim_diff = mean(timing$max_stim_diff),
-                        min_stim_diff = mean(timing$min_stim_diff),
-                        mean_mask_diff = mean(timing$mean_mask_diff),
-                        max_mask_diff = mean(timing$max_mask_diff),
-                        min_mask_diff = mean(timing$min_mask_diff),
-                        trial_dur = mean(timing$trial_dur))
-
-timing = timing %>% add_row(sub_num = 'sd',
-                        mean_stim_diff = sd(timing$mean_stim_diff[1:n]),
-                        max_stim_diff = sd(timing$max_stim_diff[1:n]),
-                        min_stim_diff = sd(timing$min_stim_diff[1:n]),
-                        mean_mask_diff = sd(timing$mean_mask_diff[1:n]),
-                        max_mask_diff = sd(timing$max_mask_diff[1:n]),
-                        min_mask_diff = sd(timing$min_mask_diff[1:n]),
-                        trial_dur = sd(timing$trial_dur[1:n]))
-
-# plot timing
-
-# mask timing
-hist_mask_time = ggplot(all_event_table, aes(x=real_mask_diff, group=as.character(sub_num), fill=as.character(sub_num))) +
-  geom_histogram(alpha=0.6, position='identity') + ggtitle("Mask timing")
-hist_mask_time
-
-# stimulus timing
-hist_stim_time = ggplot(all_event_table, aes(x=real_stim_diff, group=as.character(sub_num), fill=as.character(sub_num))) +
-  geom_histogram(alpha=0.6, position='identity') + ggtitle("Stimulus timing")
-hist_stim_time
-
-
-```
-# rating correlation
-
-```{r rating correlation}
-
-# typ - fam
-typ_fam = ggplot(img_id_table, aes(x = typicality, y = familiarity)) +
-  geom_point() +
-  geom_smooth(method = "lm", se = TRUE) +
-  xlab("typicality") +
-  ylab("familiarity") +
-  facet_grid(. ~ sub_num)+
-  theme_bw() +
-  theme(axis.line = element_line(colour = "black"),
-        panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank(),
-        panel.border = element_rect(linetype = "solid"),
-        panel.background = element_blank())+
-  stat_cor(color = 'black', method = "pearson", show.legend = FALSE)
-typ_fam
-
-
-# Selecting only the variables of interest
-variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
-
-# Create a correlation plot
-cor_matrix = cor(img_id_table[, variables_of_interest])
-cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
-cor_plot
-pair_plot = ggpairs(img_id_table[, variables_of_interest])  
-pair_plot
+for (subNum in subNums ){
+  
+  # get distributions
+  baseline_dis = rnorm(sim_subs, 0, baseline_sd)
+  RT_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)), RT_sd)
+  acc_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)), acc_sd)
+  typ_dis = rnorm(sim_subs,mean(all_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)), rating_sd)
+  
+  for (sim_sub in 1:sim_subs ){  
+    count = count + 1
+    
+    # get table for one subject 
+    sub_table = all_event_table %>% filter(sub_num == subNum)
+    
+    
+    
+  }}
 
 ```
 
