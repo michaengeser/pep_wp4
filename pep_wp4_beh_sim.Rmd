@@ -21,7 +21,8 @@ library(pacman)
 
 # install all needed packages 
 
-pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rstatix', 'car', 'rsq', 'sjPlot', 'brms')
+pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally')
+
 
 ```
 
@@ -145,6 +146,14 @@ for (subNum in subNums){
     }
   }}
 
+# adjust unrealistic values´
+sim_event_table = sim_event_table %>% mutate(trial_accuracy = ifelse(trial_accuracy > 1, 1, trial_accuracy))
+sim_event_table = sim_event_table %>% mutate(trial_accuracy = ifelse(trial_accuracy < 0 , 0, trial_accuracy))
+sim_event_table = sim_event_table %>% mutate(trial_response = ifelse(trial_response < 1 , 1, trial_response))
+sim_event_table = sim_event_table %>% mutate(trial_response = ifelse(trial_response > 7 & task != 'categorization', 7, trial_response))
+
+
+
 # get subject numbers and n of simulated data
 sim_subNums = unique(sim_event_table$sub_num)
 sim_n = length(sim_subNums)
@@ -196,6 +205,7 @@ sim_perf = sim_perf %>% add_row(sub_num = 'sd',
                         mean_use = sd(sim_perf$mean_use[1:sim_n]),
                         mean_com = sd(sim_perf$mean_com[1:sim_n]))
 ```
+
 # transfrom data
 
 ``` {r transform_data}
@@ -271,7 +281,7 @@ typ_fam
 
 
 # Selecting only the variables of interest
-variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+variables_of_interest = c('mean_RT', 'mean_acc', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
 
 # Create a correlation plot
 cor_matrix = cor(img_id_table[, variables_of_interest])

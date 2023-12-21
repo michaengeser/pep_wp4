@@ -21,7 +21,7 @@ library(pacman)
 
 # install all needed packages 
 
-pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'lme4', 'emmeans', 'rstatix', 'car', 'rsq', 'sjPlot', 'brms')
+pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally')
 
 ```
 
