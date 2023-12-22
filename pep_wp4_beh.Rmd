@@ -30,7 +30,7 @@ pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally')
 
 ```{r loading}
 # details of subjects  
-subNums = c(101,102,103,104,106,107,108)
+subNums = c(101,104,106) # 102,103,104,106,107,108)
 n = length(subNums)
 sessions = c(1,2)
 tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
@@ -120,32 +120,36 @@ img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
             mean_acc = mean(trial_accuracy, na.rm = TRUE),
             sd_acc = sd(trial_accuracy, na.rm = TRUE))
 
+img_id_table = img_id_table %>% mutate(mean_neg_RT = mean_RT*-1)
+
 # sort based on image name 
 img_id_table = img_id_table %>% arrange(sub_num, category, image)
 
 # add ratings
-# img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-# img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-# img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-# img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-# img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
-# 
-# # image identity table
-# just_img_id_table = img_id_table %>%  group_by(image, category) %>%
-#   summarise(RT_mean = mean(mean_RT, na.rm = TRUE),
-#             RT_sd = sd(mean_RT, na.rm = TRUE),
-#             acc_mean = mean(mean_acc, na.rm = TRUE),
-#             acc_sd = sd(mean_acc, na.rm = TRUE),
-#             typ_mean = mean(typicality, na.rm = TRUE),
-#             typ_sd = sd(typicality, na.rm = TRUE), 
-#             fam_mean = mean(familiarity, na.rm = TRUE),
-#             fam_sd = sd(familiarity, na.rm = TRUE),
-#             aes_mean = mean(aesthetic, na.rm = TRUE),
-#             aes_sd = sd(aesthetic, na.rm = TRUE),
-#             use_mean = mean(usability, na.rm = TRUE),
-#             use_sd = sd(usability, na.rm = TRUE),
-#             com_mean = mean(complexity, na.rm = TRUE),
-#             com_sd = sd(complexity, na.rm = TRUE))
+img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+
+# image identity table
+just_img_id_table = img_id_table %>%  group_by(image, category) %>%
+  summarise(RT_mean = mean(mean_RT, na.rm = TRUE),
+            RT_sd = sd(mean_RT, na.rm = TRUE),
+            neg_RT_mean = sd(mean_neg_RT, na.rm = TRUE),
+            acc_mean = mean(mean_acc, na.rm = TRUE),
+            acc_sd = sd(mean_acc, na.rm = TRUE),
+            typ_mean = mean(typicality, na.rm = TRUE),
+            typ_sd = sd(typicality, na.rm = TRUE),
+            fam_mean = mean(familiarity, na.rm = TRUE),
+            fam_sd = sd(familiarity, na.rm = TRUE),
+            aes_mean = mean(aesthetic, na.rm = TRUE),
+            aes_sd = sd(aesthetic, na.rm = TRUE),
+            use_mean = mean(usability, na.rm = TRUE),
+            use_sd = sd(usability, na.rm = TRUE),
+            com_mean = mean(complexity, na.rm = TRUE),
+            com_sd = sd(complexity, na.rm = TRUE))
+
 
 
 ##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
@@ -330,16 +334,15 @@ typ_fam
 
 
 # Selecting only the variables of interest
-variables_of_interest = c('typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+variables_of_interest = c('neg_RT_mean', 'acc_mean', 'typ_mean', 'fam_mean', 'aes_mean', 'use_mean', 'com_mean')
 
 # Create a correlation plot
-cor_matrix = cor(img_id_table[, variables_of_interest])
+cor_matrix = cor(just_img_id_table[, variables_of_interest])
 cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
 cor_plot
-pair_plot = ggpairs(img_id_table[, variables_of_interest],
-                              lower = list(continuous = wrap("points", position = position_jitter(width = 0.4, height = 0.4), size = 0.5)))  
+pair_plot = ggpairs(just_img_id_table[, variables_of_interest],
+                              lower = list(continuous = wrap("points", size = 0.5)))  
 pair_plot
-
 ```
 
 
