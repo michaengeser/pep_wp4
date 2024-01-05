@@ -71,29 +71,4 @@ PTB-WARNING: DrawText: Type 'help DrawTextPlugin' at the command prompt to recei
 blaaaa
 WELCOME to loadStimuli
 WELCOME to loadMask
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
 
