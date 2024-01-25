@@ -1,5 +1,5 @@
 >> Run_wp4_beh
-Subject number [101-199, default: 101]: 130
+Subject number [101-199, default: 101]: 113
 Session number [default: 1]: 
 Tasks [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, 5: Usability, 6: Complexity, default: 1]: 
 WELCOME to initPsychtooblox
@@ -36,7 +36,7 @@ PTB-INFO: Renderer has 10922 MB of VRAM and a maximum 10922 MB of texture memory
 PTB-INFO: VBL startline = 1080 , VBL Endline = -1
 PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
 PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
-PTB-INFO: Measured monitor refresh interval from VBLsync = 14.536716 ms [68.791327 Hz]. (58 valid samples taken, stddev=0.437206 ms.)
+PTB-INFO: Measured monitor refresh interval from VBLsync = 14.701495 ms [68.020294 Hz]. (57 valid samples taken, stddev=0.422533 ms.)
 PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
 PTB-INFO: Small deviations between reported values are normal and no reason to worry.
 
@@ -67,29 +67,4 @@ PTB-WARNING: DrawText: Type 'help DrawTextPlugin' at the command prompt to recei
 blaaaa
 WELCOME to loadStimuli
 WELCOME to loadMask
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
-WELCOME TO compute_performance
 
