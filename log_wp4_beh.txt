@@ -1,5 +1,9 @@
 >> Run_wp4_beh
+<<<<<<< Updated upstream
 Subject number [101-199, default: 101]: 135
+=======
+Subject number [101-199, default: 101]: 129
+>>>>>>> Stashed changes
 Session number [default: 1]: 2
 Tasks [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, 5: Usability, 6: Complexity, default: 1]: [0,2,3,4,5,6]
 Category dor rating task [0: Bathroom, 1: Kitchen, default: 1]: 0
@@ -37,7 +41,11 @@ PTB-INFO: Renderer has 10922 MB of VRAM and a maximum 10922 MB of texture memory
 PTB-INFO: VBL startline = 1080 , VBL Endline = -1
 PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
 PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+<<<<<<< Updated upstream
 PTB-INFO: Measured monitor refresh interval from VBLsync = 14.842940 ms [67.372097 Hz]. (57 valid samples taken, stddev=0.572759 ms.)
+=======
+PTB-INFO: Measured monitor refresh interval from VBLsync = 14.696245 ms [68.044592 Hz]. (58 valid samples taken, stddev=0.571437 ms.)
+>>>>>>> Stashed changes
 PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
 PTB-INFO: Small deviations between reported values are normal and no reason to worry.
 
@@ -65,22 +73,34 @@ PTB-WARNING: DrawText: Failed to load external drawtext plugin 'libptbdrawtext_f
 PTB-WARNING: DrawText: Functionality of Screen('DrawText') and Screen('TextBounds') may be limited and text quality may be impaired.
 PTB-WARNING: DrawText: Type 'help DrawTextPlugin' at the command prompt to receive instructions for troubleshooting.
 
-hello
+blaaaa
 WELCOME to loadStimuli
 WELCOME to loadMask
 
 ans =
 
+<<<<<<< Updated upstream
    5.5634e+03
+=======
+   4.8943e+03
+>>>>>>> Stashed changes
 
 
 ans =
 
+<<<<<<< Updated upstream
    5.6394e+03
 
 
 
 PTB-INFO: There are still 236 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+=======
+   4.9215e+03
+
+
+
+PTB-INFO: There are still 238 textures, offscreen windows or proxy windows open. Screen('CloseAll') will auto-close them.
+>>>>>>> Stashed changes
 PTB-INFO: This may be fine for studies where you only use a few textures or windows, but a large number of open
 PTB-INFO: textures or offscreen windows can be an indication that you forgot to dispose no longer needed items
 PTB-INFO: via a proper call to Screen('Close', [windowOrTextureIndex]); , e.g., at the end of each trial. These
@@ -91,7 +111,11 @@ PTB-INFO: crashes. Please check your code. (Screen('Close') is a quick way to re
 
 
 INFO: PTB's Screen('Flip', 10) command seems to have missed the requested stimulus presentation deadline
+<<<<<<< Updated upstream
 INFO: a total of 93 times out of a total of 25658 flips during this session.
+=======
+INFO: a total of 55 times out of a total of 17829 flips during this session.
+>>>>>>> Stashed changes
 
 INFO: This number is fairly accurate (and indicative of real timing problems in your own code or your system)
 INFO: if you provided requested stimulus onset times with the 'when' argument of Screen('Flip', window [, when]);
@@ -107,7 +131,11 @@ WARNING: This means that some internal self-tests and calibrations were skipped.
 WARNING: may have been wrong. This is fine for development and debugging of your experiment, but for running the real
 WARNING: study, please make sure to set Screen('Preference', 'SkipSyncTests', 0) for maximum accuracy and reliability.
 >> Run_wp4_beh
+<<<<<<< Updated upstream
 Subject number [101-199, default: 101]: 135
+=======
+Subject number [101-199, default: 101]: 129
+>>>>>>> Stashed changes
 Session number [default: 1]: 2
 Tasks [0: Slide show, 1: Categorization, 2: Typicality, 3: Familiarity, 4: Aesthetic, 5: Usability, 6: Complexity, default: 1]: [0,2,3,4,5,6]
 Category dor rating task [0: Bathroom, 1: Kitchen, default: 1]: 1
@@ -145,7 +173,11 @@ PTB-INFO: Renderer has 10922 MB of VRAM and a maximum 10922 MB of texture memory
 PTB-INFO: VBL startline = 1080 , VBL Endline = -1
 PTB-INFO: Beamposition queries unsupported or defective on this system. Using basic timestamping as fallback.
 PTB-INFO: Timestamps returned by Screen('Flip') will be therefore less robust and accurate.
+<<<<<<< Updated upstream
 PTB-INFO: Measured monitor refresh interval from VBLsync = 14.689923 ms [68.073875 Hz]. (58 valid samples taken, stddev=0.492151 ms.)
+=======
+PTB-INFO: Measured monitor refresh interval from VBLsync = 14.495691 ms [68.986018 Hz]. (58 valid samples taken, stddev=0.257103 ms.)
+>>>>>>> Stashed changes
 PTB-INFO: Reported monitor refresh interval from operating system = 16.666667 ms [60.000000 Hz].
 PTB-INFO: Small deviations between reported values are normal and no reason to worry.
 
@@ -179,11 +211,16 @@ WELCOME to loadMask
 
 ans =
 
+<<<<<<< Updated upstream
    7.3619e+03
+=======
+   6.5403e+03
+>>>>>>> Stashed changes
 
 
 ans =
 
+<<<<<<< Updated upstream
    7.4314e+03
 
 
@@ -401,5 +438,8 @@ ans =
 ans =
 
    1.2569e+04
+=======
+   6.5944e+03
+>>>>>>> Stashed changes
 
 
