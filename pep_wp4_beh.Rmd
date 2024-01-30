@@ -20,7 +20,7 @@ if (!('pacman' %in% installed.packages()))
 library(pacman)
 
 # install all needed packages 
-pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally', 'lme4', 'car', 'broom', 'lmridge', 'glmnet')
+pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally', 'lme4', 'car', 'broom', 'lmridge', 'glmnet', 'lares')
 
 ```
 
@@ -496,6 +496,10 @@ ssr_cv <- t(y - y_hat_cv) %*% (y - y_hat_cv)
 rsq_ridge_cv <- cor(y, y_hat_cv)^2
 summary(model_cv)
 coef(model_cv)
+
+
+# Dimensionality reduction to a single dimension
+# reduced_mat = cmdscale(as.dist(cor_matrix),1)
 
 }
 ```
