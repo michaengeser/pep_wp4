@@ -198,7 +198,7 @@ transform_data = function(all_event_table) {
   # Add inverse efficiency score (IES) and Rate-correct score (RCS)
   epsilon = 1e-6
   IES_vec = numeric(nrow( img_id_table))
-  RDC_vec = numeric(nrow( img_id_table))
+  RCS_vec = numeric(nrow( img_id_table))
   
   for (row in 1:nrow( img_id_table)) {
     sub_table =  all_event_table[all_event_table$image ==  img_id_table$image[row] &  all_event_table$sub_num ==  img_id_table$sub_num[row], ]
@@ -208,13 +208,13 @@ transform_data = function(all_event_table) {
     mean_acc = mean(sub_table$trial_accuracy) + epsilon
     IES_vec[row] = mean_RT / mean_acc
     
-    # RDC
-    RDC_vec[row] = sum(sub_table$trial_accuracy) / (sum(sub_table$RT) + epsilon)
+    # RCS
+    RCS_vec[row] = sum(sub_table$trial_accuracy) / (sum(sub_table$RT) + epsilon)
   }
   
   # Add to table
   img_id_table$IES = IES_vec
-  img_id_table$RDC = RDC_vec
+  img_id_table$RCS = RCS_vec
   
   
   # Sort based on subject, categroy and image name
@@ -233,11 +233,11 @@ transform_data = function(all_event_table) {
   img_id_table$complexity =  com_table$trial_response
   
   #Add z-scored values for variables of interest 
-  variables_of_interest = c("RT","neg_RT", "trial_accuracy", "IES", "RDC", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+  variables_of_interest = c("RT","neg_RT", "trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
   img_id_table = img_id_table %>%  mutate(across(all_of(variables_of_interest), list(z = ~ scale(.)), .names = "{col}_z"))
   
   # just image identity table
-  just_img_id_table = aggregate(cbind(RT, neg_RT, trial_accuracy, IES, RDC, typicality, familiarity, aesthetic, usability, complexity) ~ image + category,  img_id_table, function(x) c(mean(x)))
+  just_img_id_table = aggregate(cbind(RT, neg_RT, trial_accuracy, IES, RCS, typicality, familiarity, aesthetic, usability, complexity) ~ image + category,  img_id_table, function(x) c(mean(x)))
   
   # Return a list of tables
   return(list(all_event_table = all_event_table, cate_table = cate_table, typ_table = typ_table, fam_table = fam_table, aes_table = aes_table, use_table = use_table, com_table = com_table,bath_data = bath_data, kit_data = kit_data, img_id_table = img_id_table, just_img_id_table = just_img_id_table))
@@ -322,7 +322,7 @@ list2env(result, envir = .GlobalEnv)
 ```{r rating correlation}
 
 # Selecting only the variables of interest
-variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RDC", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
 
 # Create a correlation plot
 cor_matrix = cor(just_img_id_table[, variables_of_interest])
@@ -338,7 +338,7 @@ pair_plot
 ```{r glm}
 
 # Selecting only the variables of interest
-variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RDC", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
 
 n_voi = length(variables_of_interest)
 cate_models = list()
@@ -391,7 +391,7 @@ for(row in 1:n_voi) {
  ```{r lm}
 # 
 # # Selecting only the variables of interest
-# variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RDC", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+# variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
 # 
 # n_voi = length(variables_of_interest)
 # cate_models2 = list()
@@ -427,13 +427,13 @@ for(row in 1:n_voi) {
  ```
 
 
-# RDC by ratings
+# RCS by ratings
 
-```{r  RDC by ratings}
+```{r  RCS by ratings}
 
-variables_of_interest = c("RDC", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+variables_of_interest = c("RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
 z_voi = variables_of_interest
-RDC_models = list()
+RCS_models = list()
 top_fixed_effects = list()
 
 for (voi in 1:length(z_voi)){
@@ -450,11 +450,11 @@ for (cat in categories){
 filtered_data = img_id_table %>% filter(category == cat)
 model = lmer(formula_str, data=filtered_data)
 
-RDC_models[[cat]]$model = model
-RDC_models[[cat]]$results = summary(model)
-RDC_models[[cat]]$anova = Anova(model)
+RCS_models[[cat]]$model = model
+RCS_models[[cat]]$results = summary(model)
+RCS_models[[cat]]$anova = Anova(model)
 
-tidy_anova = tidy(RDC_models[[cat]]$anova)
+tidy_anova = tidy(RCS_models[[cat]]$anova)
 tidy_anova = tidy_anova %>% arrange(desc(statistic))
 top_fixed_effects[[cat]] = tidy_anova %>%
   top_n(5, wt = abs(statistic))
@@ -463,17 +463,17 @@ top_fixed_effects[[cat]] = tidy_anova %>%
  
 ```
  
-# RDC by ratings
+# RCS by ratings
 
-```{r  RDC by ratings}
+```{r  RCS by ratings}
 for (cat in categories){
   
-filtered_data = img_id_table %>% filter(category == cat & !is.nan(img_id_table$RDC_z))
+filtered_data = img_id_table %>% filter(category == cat & !is.nan(img_id_table$RCS_z))
 
-mod <- lmridge(RDC_z ~ typicality_z + familiarity_z + aesthetic_z + usability_z + complexity_z, data = filtered_data)
+mod <- lmridge(RCS_z ~ typicality_z + familiarity_z + aesthetic_z + usability_z + complexity_z, data = filtered_data)
 
-y <- filtered_data %>% select(RDC_z) %>% as.matrix()
-x_vars = z_voi[z_voi != 'RDC_z']
+y <- filtered_data %>% select(RCS_z) %>% as.matrix()
+x_vars = z_voi[z_voi != 'RCS_z']
 X <- filtered_data %>% select(all_of(x_vars)) %>% as.matrix()
 
 # Perform 10-fold cross-validation to select lambda -
