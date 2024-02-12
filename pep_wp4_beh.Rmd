@@ -463,9 +463,10 @@ top_fixed_effects[[cat]] = tidy_anova %>%
  
 ```
  
-# RCS by ratings
+# ridge regression
 
-```{r  RCS by ratings}
+```{r  ridge regression}
+
 for (cat in categories){
   
 filtered_data = img_id_table %>% filter(category == cat & !is.nan(img_id_table$RCS_z))
