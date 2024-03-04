@@ -1,0 +1,307 @@
+---
+title: "PEP_wp4_beh"
+output: html_document
+date: "2023-12-15"
+---
+
+# housekeeping
+
+```{r huosekeeping}
+# clear workspace
+rm(list = ls())
+
+wd = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_analysis'
+setwd(wd)
+dir()
+
+# get package manager package
+if (!('pacman' %in% installed.packages()))
+{install.packages("pacman")}
+library(pacman)
+
+# install all needed packages 
+
+pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally')
+
+
+```
+
+
+# loading files
+
+```{r loading}
+# details of subjects to simulate from
+subNums = c(101, 104, 106) # ,102,103, 106,107,108)
+n = length(subNums)
+sessions = c(1,2)
+tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+categories = c('bathroom', 'kitchen')
+
+# prepare loading
+count = 0
+sub_ids = NaN
+table_size = 1:18
+
+# loading the files 
+
+for (subNum in subNums ){
+  for (task in tasks ){
+    for (category in categories ){    
+      count = count + 1
+      
+      # make session number
+      if (task == 'categorization'){ ses = 1 }
+      else { ses = 2 }
+      
+      sub_folder = paste0('sub-', subNum)
+      ses_folder = paste0('ses-', ses)
+      
+      # make file name
+      if (task == 'categorization'){
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task,'_events.csv')
+      } else {
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task , '_' ,category, '_events.csv')
+      }
+      
+      # make path
+      setwd("..")
+      parent_dir = getwd()
+      setwd(wd)
+      
+      if (task == 'categorization'){
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, file_name)
+      } else {
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, category, file_name)
+      }
+      
+      if (file.exists(file_name)) {
+        # load file
+        event_table = read.csv(file_name)}
+      
+      # concatenate the tables
+      if ( exists('all_event_table')){
+        all_event_table = rbind(all_event_table, event_table)
+      } else {
+        all_event_table = event_table
+      }
+    }}}
+
+```
+
+# apply trial exclusion
+
+```{r trial_exclusion}
+
+# come up with trial removal
+
+```
+
+
+# simulate new data
+
+```{r simulate new data}
+
+# set parameters
+sim_subs = 10
+RT_sd = 0.3
+acc_sd = 0.5
+rating_sd = 0.5
+baseline_sd = 0.1
+
+# delete table before start new simulation
+if (exists('sim_event_table')){
+  rm(sim_event_table)
+} 
+
+for (subNum in subNums){
+  
+  # get baseline distributions
+  baseline_dis = rnorm(sim_subs, 0, baseline_sd)
+  
+  for (sim_sub in 1:sim_subs ){
+    
+    # get table for one subject 
+    sub_table = all_event_table %>% filter(sub_num == subNum & is_practice == 0)
+    
+    # make new subject number
+    sub_table$sub_num = sub_table$sub_num + sim_sub*50
+    
+    for (row in 1:dim(sub_table)[1]){
+      
+      # generate new categorization performance
+      sub_table$RT[row] = sub_table$RT[row] + rnorm(1, baseline_dis[sim_sub], RT_sd)
+      sub_table$trial_accuracy[row] = round(sub_table$trial_accuracy[row] + rnorm(1, baseline_dis[sim_sub], acc_sd))
+      
+      # generate new ratings
+      sub_table$trial_response[row] = round(sub_table$trial_response[row] + rnorm(1, baseline_dis[sim_sub], rating_sd))
+      
+      
+    }
+    
+    # concatenate the tables
+    if ( exists('sim_event_table')){
+      sim_event_table = rbind(sim_event_table, sub_table)
+    } else {
+      sim_event_table = sub_table
+    }
+  }}
+
+# adjust unrealistic values´
+sim_event_table = sim_event_table %>% mutate(trial_accuracy = ifelse(trial_accuracy > 1, 1, trial_accuracy))
+sim_event_table = sim_event_table %>% mutate(trial_accuracy = ifelse(trial_accuracy < 0 , 0, trial_accuracy))
+sim_event_table = sim_event_table %>% mutate(trial_response = ifelse(trial_response < 1 , 1, trial_response))
+sim_event_table = sim_event_table %>% mutate(trial_response = ifelse(trial_response > 7 & task != 'categorization', 7, trial_response))
+
+
+
+# get subject numbers and n of simulated data
+sim_subNums = unique(sim_event_table$sub_num)
+sim_n = length(sim_subNums)
+
+```
+
+# performance
+
+``` {r perfromance}
+sim_perf = data.frame(matrix(ncol = 0, nrow = 1))
+sim_perf$sub_num = 'NaN'
+sim_perf$mean_acc = NaN
+sim_perf$mean_RT = NaN
+sim_perf$mean_typ = NaN
+sim_perf$mean_fam = NaN
+sim_perf$mean_aes = NaN
+sim_perf$mean_use = NaN
+sim_perf$mean_com = NaN
+sim_perf = sim_perf[-c(1), ]
+
+for (subNum in sim_subNums) {
+  sim_perf = sim_perf %>% add_row(sub_num = as.character(subNum),
+                          mean_acc = mean(sim_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(trial_accuracy)),
+                          mean_RT = mean(sim_event_table %>% filter(sub_num == subNum & task == 'categorization') %>% pull(RT)),
+                          mean_typ = mean(sim_event_table %>% filter(sub_num == subNum & task == 'typicality') %>% pull(trial_response)),
+                          mean_fam = mean(sim_event_table %>% filter(sub_num == subNum & task == 'familiarity') %>% pull(trial_response)),
+                          mean_aes = mean(sim_event_table %>% filter(sub_num == subNum & task == 'aesthetic') %>% pull(trial_response)),
+                          mean_use = mean(sim_event_table %>% filter(sub_num == subNum & task == 'usability') %>% pull(trial_response)),
+                          mean_com = mean(sim_event_table %>% filter(sub_num == subNum & task == 'complexity') %>% pull(trial_response)))
+  }
+
+
+# add mean and SD
+sim_perf = sim_perf %>% add_row(sub_num = 'mean',
+                        mean_acc = mean(sim_perf$mean_acc),
+                        mean_RT = mean(sim_perf$mean_RT),
+                        mean_typ = mean(sim_perf$mean_typ),
+                        mean_fam = mean(sim_perf$mean_fam),
+                        mean_aes = mean(sim_perf$mean_aes),
+                        mean_use = mean(sim_perf$mean_use),
+                        mean_com = mean(sim_perf$mean_com))
+
+sim_perf = sim_perf %>% add_row(sub_num = 'sd',
+                        mean_acc = sd(sim_perf$mean_acc[1:sim_n]),
+                        mean_RT = sd(sim_perf$mean_RT[1:sim_n]),
+                        mean_typ = sd(sim_perf$mean_typ[1:sim_n]),
+                        mean_fam = sd(sim_perf$mean_fam[1:sim_n]),
+                        mean_aes = sd(sim_perf$mean_aes[1:sim_n]),
+                        mean_use = sd(sim_perf$mean_use[1:sim_n]),
+                        mean_com = sd(sim_perf$mean_com[1:sim_n]))
+```
+
+# transfrom data
+
+``` {r transform_data}
+
+# does data need any other transformation?
+
+# make task tables
+cate_table = sim_event_table %>% filter(is_practice == 0 & task == 'categorization')
+typ_table = sim_event_table %>% filter(is_practice == 0 & task == 'typicality')
+fam_table = sim_event_table %>% filter(is_practice == 0 & task == 'familiarity')
+aes_table = sim_event_table %>% filter(is_practice == 0 & task == 'aesthetic')
+use_table = sim_event_table %>% filter(is_practice == 0 & task == 'usability')
+com_table = sim_event_table %>% filter(is_practice == 0 & task == 'complexity')
+
+# image identity table
+img_id_table = cate_table %>%  group_by(sub_num, image, category) %>%
+  summarise(mean_RT = mean(RT, na.rm = TRUE),
+            sd_RT = sd(RT, na.rm = TRUE),
+            mean_acc = mean(trial_accuracy, na.rm = TRUE),
+            sd_acc = sd(trial_accuracy, na.rm = TRUE))
+
+# sort based on image name 
+img_id_table = img_id_table %>% arrange(sub_num, category, image)
+
+# add ratings
+img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+
+img_id_table = img_id_table %>% mutate(mean_neg_RT = mean_RT*-1)
+
+# sort based on image name 
+img_id_table = img_id_table %>% arrange(sub_num, category, image)
+
+# add ratings
+img_id_table$typicality = typ_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$familiarity = fam_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$aesthetic = aes_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$usability = use_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+img_id_table$complexity = com_table %>% arrange(sub_num, category, image) %>% pull(trial_response)
+
+# image identity table
+just_img_id_table = img_id_table %>%  group_by(image, category) %>%
+  summarise(RT_mean = mean(mean_RT, na.rm = TRUE),
+            RT_sd = sd(mean_RT, na.rm = TRUE),
+            neg_RT_mean = sd(mean_neg_RT, na.rm = TRUE),
+            acc_mean = mean(mean_acc, na.rm = TRUE),
+            acc_sd = sd(mean_acc, na.rm = TRUE),
+            typ_mean = mean(typicality, na.rm = TRUE),
+            typ_sd = sd(typicality, na.rm = TRUE),
+            fam_mean = mean(familiarity, na.rm = TRUE),
+            fam_sd = sd(familiarity, na.rm = TRUE),
+            aes_mean = mean(aesthetic, na.rm = TRUE),
+            aes_sd = sd(aesthetic, na.rm = TRUE),
+            use_mean = mean(usability, na.rm = TRUE),
+            use_sd = sd(usability, na.rm = TRUE),
+            com_mean = mean(complexity, na.rm = TRUE),
+            com_sd = sd(complexity, na.rm = TRUE))
+
+##### CHECK If RATING ARE CORRECT #### ALSO CHECK IF RT AND ACC MAKE SENSE (compare with matlab script)
+
+
+```
+
+# rating correlation
+
+```{r rating correlation}
+
+# typ - fam
+typ_fam = ggplot(img_id_table, aes(x = typicality, y = familiarity)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  xlab("typicality") +
+  ylab("familiarity") +
+  facet_grid(. ~ sub_num)+
+  theme_bw() +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_rect(linetype = "solid"),
+        panel.background = element_blank())+
+  stat_cor(color = 'black', method = "pearson", show.legend = FALSE)
+typ_fam
+
+
+# Selecting only the variables of interest
+variables_of_interest = c('neg_RT_mean', 'acc_mean', 'typ_mean', 'fam_mean', 'aes_mean', 'use_mean', 'com_mean')
+
+# Create a correlation plot
+cor_matrix = cor(just_img_id_table[, variables_of_interest])
+cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
+cor_plot
+pair_plot = ggpairs(just_img_id_table[, variables_of_interest],
+                              lower = list(continuous = wrap("points", size = 0.5)))  
+pair_plot
+
+```

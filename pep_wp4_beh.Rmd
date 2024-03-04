@@ -1,0 +1,507 @@
+---
+title: "PEP_wp4_beh"
+output: html_document
+date: "2023-12-15"
+---
+
+# housekeeping
+
+```{r huosekeeping}
+# clear workspace
+rm(list = ls())
+
+wd = 'C:/Users/JLU-SU/OneDrive - Justus-Liebig-Universität Gießen/Dokumente/GitHub/pep_wp4_analysis'
+setwd(wd)
+dir()
+
+# get package manager package
+if (!('pacman' %in% installed.packages()))
+{install.packages("pacman")}
+library(pacman)
+
+# install all needed packages 
+pacman::p_load('dplyr', 'ggdist', 'ggeffects', 'ggpubr', 'corrplot', 'GGally', 'lme4', 'car', 'broom', 'lmridge', 'glmnet', 'lares')
+
+```
+
+# loading files
+
+```{r loading}
+# details of subjects  
+subNums = c(101, 102, 103, 104, 105, 106, 109, 110, 112, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 125, 126) # ,102,103, 106,107,108)
+n = length(subNums)
+sessions = c(1,2)
+tasks = c('categorization', 'typicality', 'familiarity', 'aesthetic', 'usability', 'complexity')
+categories = c('bathroom', 'kitchen')
+
+# prepare loading
+sub_ids = NaN
+table_size = 1:18
+
+# loading the files 
+
+for (subNum in subNums ){
+  for (task in tasks ){
+    for (category in categories ){    
+      
+      # make session number
+      if (task == 'categorization'){ ses = 1 }
+      else { ses = 2 }
+      
+      sub_folder = paste0('sub-', subNum)
+      ses_folder = paste0('ses-', ses)
+      
+      # make file name
+      if (task == 'categorization'){
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task,'_events.csv')
+      } else {
+        file_name = paste0(sub_folder, '_', ses_folder, '_run-all_task-', task , '_' ,category, '_events.csv')
+      }
+      
+      # make path
+      setwd("..")
+      parent_dir = getwd()
+      setwd(wd)
+      
+      if (task == 'categorization'){
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, file_name)
+      } else {
+        file_name = file.path(parent_dir, 'pep_wp4', 'data', sub_folder, ses_folder, task, category, file_name)
+      }
+      
+      if (file.exists(file_name)) {
+        # load file
+        event_table = read.csv(file_name)}
+      
+      # concatenate the tables
+      if ( exists('all_event_table')){
+        all_event_table = rbind(all_event_table, event_table)
+      } else {
+        all_event_table = event_table
+      }
+      
+      if (task == 'categorization'){
+        break
+      }
+    }}}
+
+```
+
+# timing
+
+```{r timing}
+
+# Calculate real stimulus duration, real stimulus difference, real mask duration, real mask difference, and real trial duration
+all_event_table$real_stim_dur = all_event_table$mask_time - all_event_table$stim_time
+all_event_table$real_stim_diff = all_event_table$real_stim_dur - all_event_table$duration
+all_event_table$real_mask_dur = all_event_table$fix_time - all_event_table$mask_time
+all_event_table$real_mask_diff = all_event_table$real_mask_dur - all_event_table$mask_dur
+all_event_table$real_trial_dur = all_event_table$trial_end - all_event_table$stim_time
+
+# Create an empty data frame for timing
+timing = data.frame(
+  sub_num = character(),
+  mean_stim_diff = double(),
+  max_stim_diff = double(),
+  min_stim_diff = double(),
+  mean_mask_diff = double(),
+  max_mask_diff = double(),
+  min_mask_diff = double(),
+  trial_dur = double(),
+  stringsAsFactors = FALSE
+)
+
+# Loop through each subject using add_row
+for (subNum in unique(all_event_table$sub_num)) {
+  timing = timing %>%
+    add_row(
+      sub_num = as.character(subNum),
+      mean_stim_diff = mean(all_event_table %>%
+                              filter(sub_num == subNum, task == 'categorization') %>%
+                              pull(real_stim_diff)),
+      max_stim_diff = max(all_event_table %>%
+                            filter(sub_num == subNum, task == 'categorization') %>%
+                            pull(real_stim_diff)),
+      min_stim_diff = min(all_event_table %>%
+                            filter(sub_num == subNum, task == 'categorization') %>%
+                            pull(real_stim_diff)),
+      mean_mask_diff = mean(all_event_table %>%
+                              filter(sub_num == subNum, task == 'categorization') %>%
+                              pull(real_mask_diff)),
+      max_mask_diff = max(all_event_table %>%
+                            filter(sub_num == subNum, task == 'categorization') %>%
+                            pull(real_mask_diff)),
+      min_mask_diff = min(all_event_table %>%
+                            filter(sub_num == subNum, task == 'categorization') %>%
+                            pull(real_mask_diff)),
+      trial_dur = mean(all_event_table %>%
+                         filter(sub_num == subNum, task == 'categorization') %>%
+                         pull(real_trial_dur))
+    )
+}
+
+# Add mean and SD
+timing = rbind(timing, c(
+  'mean',
+  mean(timing$mean_stim_diff),
+  mean(timing$max_stim_diff),
+  mean(timing$min_stim_diff),
+  mean(timing$mean_mask_diff),
+  mean(timing$max_mask_diff),
+  mean(timing$min_mask_diff),
+  mean(timing$trial_dur)
+))
+
+timing = rbind(timing, c(
+  'sd',
+  sd(timing$mean_stim_diff[1:nrow(timing)]),
+  sd(timing$max_stim_diff[1:nrow(timing)]),
+  sd(timing$min_stim_diff[1:nrow(timing)]),
+  sd(timing$mean_mask_diff[1:nrow(timing)]),
+  sd(timing$max_mask_diff[1:nrow(timing)]),
+  sd(timing$min_mask_diff[1:nrow(timing)]),
+  sd(timing$trial_dur[1:nrow(timing)])
+))
+
+# Plot mask timing
+hist_mask_time = hist(all_event_table$real_mask_diff, main = 'Mask timing', xlab = 'Time Difference', col = 'lightblue', border = 'darkblue')
+hist_mask_time
+
+# Plot stimulus timing
+hist_stim_time = hist(all_event_table$real_stim_diff, main = 'Stimulus timing', xlab = 'Time Difference', col = 'lightcoral', border = 'darkred')
+hist_stim_time
+
+```
+
+# transfrom data function
+
+``` {r transform_data_function}
+
+transform_data = function(all_event_table) {
+  
+  # Make task tables
+  cate_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'categorization', ]
+  typ_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'typicality', ]
+  fam_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'familiarity', ]
+  aes_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'aesthetic', ]
+  use_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'usability', ]
+  com_table =  all_event_table[ all_event_table$is_practice == 0 &  all_event_table$task == 'complexity', ]
+  
+  # Split by category
+  bath_data =  all_event_table[ all_event_table$category == 'bathroom', ]
+  kit_data =  all_event_table[ all_event_table$category == 'kitchen', ]
+  
+  # Image identity table
+  img_id_table = aggregate(cbind(RT, trial_accuracy) ~ sub_num + image + category,  cate_table, mean)
+  img_id_table = img_id_table %>% mutate(neg_RT = RT * -1)
+  
+  # Add inverse efficiency score (IES) and Rate-correct score (RCS)
+  epsilon = 1e-6
+  IES_vec = numeric(nrow( img_id_table))
+  RCS_vec = numeric(nrow( img_id_table))
+  
+  for (row in 1:nrow( img_id_table)) {
+    sub_table =  all_event_table[all_event_table$image ==  img_id_table$image[row] &  all_event_table$sub_num ==  img_id_table$sub_num[row], ]
+    
+    # IES
+    mean_RT = mean(sub_table$RT)
+    mean_acc = mean(sub_table$trial_accuracy) + epsilon
+    IES_vec[row] = mean_RT / mean_acc
+    
+    # RCS
+    RCS_vec[row] = sum(sub_table$trial_accuracy) / (sum(sub_table$RT) + epsilon)
+  }
+  
+  # Add to table
+  img_id_table$IES = IES_vec
+  img_id_table$RCS = RCS_vec
+  
+  
+  # Sort based on subject, categroy and image name
+  img_id_table =  img_id_table[order( img_id_table$sub_num,  img_id_table$category,  img_id_table$image), ]
+  typ_table =  typ_table[order( typ_table$sub_num,  typ_table$category,  typ_table$image), ]
+  fam_table =  fam_table[order( fam_table$sub_num,  fam_table$category,  fam_table$image), ]
+  aes_table =  aes_table[order( aes_table$sub_num,  aes_table$category,  aes_table$image), ]
+  use_table =  use_table[order( use_table$sub_num,  use_table$category,  use_table$image), ]
+  com_table =  com_table[order( com_table$sub_num,  com_table$category,  com_table$image), ]
+  
+  # Add ratings
+  img_id_table$typicality =  typ_table$trial_response
+  img_id_table$familiarity =  fam_table$trial_response
+  img_id_table$aesthetic =  aes_table$trial_response
+  img_id_table$usability =  use_table$trial_response
+  img_id_table$complexity =  com_table$trial_response
+  
+  #Add z-scored values for variables of interest 
+  variables_of_interest = c("RT","neg_RT", "trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+  img_id_table = img_id_table %>%  mutate(across(all_of(variables_of_interest), list(z = ~ scale(.)), .names = "{col}_z"))
+  
+  # just image identity table
+  just_img_id_table = aggregate(cbind(RT, neg_RT, trial_accuracy, IES, RCS, typicality, familiarity, aesthetic, usability, complexity) ~ image + category,  img_id_table, function(x) c(mean(x)))
+  
+  # Return a list of tables
+  return(list(all_event_table = all_event_table, cate_table = cate_table, typ_table = typ_table, fam_table = fam_table, aes_table = aes_table, use_table = use_table, com_table = com_table,bath_data = bath_data, kit_data = kit_data, img_id_table = img_id_table, just_img_id_table = just_img_id_table))
+  
+}
+
+```
+
+# transfrom data
+
+``` {r transform_data}
+
+## Trial exclusion
+
+# Copy the data to raw_data
+raw_data = all_event_table
+
+# Select trials with RT > 3 sec and RT < 100 ms
+all_event_table$sub_num[all_event_table$RT > 3 | all_event_table$RT < 0.1] = NA
+
+# Select trials with presentation timing that is off more than one frame
+all_event_table$sub_num[all_event_table$real_stim_diff > 1/60 | all_event_table$real_stim_diff < -1/60] = NA
+all_event_table$sub_num[all_event_table$real_mask_diff > 1/60 | all_event_table$real_mask_diff < -1/60] = NA
+
+# Remove rows with NA in the sub_num column
+all_event_table = all_event_table[complete.cases(all_event_table$sub_num), , drop = FALSE]
+excluded_trials = nrow(raw_data) - nrow(all_event_table)
+prop_excluded_trials = excluded_trials / nrow(raw_data)
+
+
+# tranform data
+result = transform_data(all_event_table)
+
+# Unpack the list into separate variables
+list2env(result, envir = .GlobalEnv)
+
+
+## Remove subject with accuracy below chance
+
+# Loop through subjects and remove subjects
+removal_flag = FALSE
+
+for (sub in subNums) {
+  
+  # Get image table of subject
+  sub_table = img_id_table[img_id_table$sub_num == sub, ]
+  sub_table2 = all_event_table[all_event_table$sub_num == sub, ]
+  
+  # Check if each image has enough repetitions
+  for (img in unique(sub_table$image)) {
+    if (sum(sub_table2$image == img) < 10) {
+      warning(paste('Subject ', sub, ' has only ', sum(sub_table$image == img), ' trials on ', img))
+    }
+  }
+  
+  # Check if mean_accuracy of subject is higher than 0 (One-sided t-test against 0)
+  t_test_result = t.test(sub_table$trial_accuracy, mu = 0.5, alternative = 'greater')
+  
+  if (t_test_result$p.value > 0.05) {
+    removal_flag = TRUE
+    warning(paste('Remove subject ', sub, '. Mean accuracy is not greater than chance'))
+    
+    # Remove subject from event table
+    all_event_table = all_event_table[all_event_table$sub_num != sub, ]
+    subNums = subNums[subNums != sub]
+    n = length(subNums)
+  }
+}
+
+if (removal_flag) {
+  # Repeat data transformation
+result = transform_data(all_event_table)
+
+# Unpack the list into separate variables
+list2env(result, envir = .GlobalEnv)
+}
+
+```
+
+# rating correlation
+
+```{r rating correlation}
+
+# Selecting only the variables of interest
+variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+
+# Create a correlation plot
+cor_matrix = cor(just_img_id_table[, variables_of_interest])
+cor_plot = corrplot(cor_matrix, method = "color", title = "Correlation Plot")
+cor_plot
+pair_plot = ggpairs(just_img_id_table[, variables_of_interest],
+                    lower = list(continuous = wrap("points", size = 0.5)))  
+pair_plot
+```
+
+# GLM
+
+```{r glm}
+
+# Selecting only the variables of interest
+variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+
+n_voi = length(variables_of_interest)
+cate_models = list()
+cate_p_matrix = matrix(0, nrow = n_voi, ncol = n_voi)
+cate_chi_matrix = matrix(0, nrow = n_voi, ncol = n_voi)
+
+for(row in 1:n_voi) {
+  for(col in 1:n_voi) {
+    
+    if (row == col){
+      
+    cate_chi_matrix[row, col] = 0
+    cate_p_matrix[row, col] = 0
+      
+    }else{
+      
+    row_val = variables_of_interest[row]
+    col_val = variables_of_interest[col]
+    voi_pair = paste0(row_val,'_vs_',col_val)
+    
+    # Constructing the formula
+    fixed_effcets = paste0(col_val, '_z[,1]', ' * category ')
+    formula_str = paste0(row_val, '_z[,1]', " ~ ", fixed_effcets, '+ (1 | sub_num)')
+    
+    model = lmer(formula_str, data=img_id_table)
+    
+    cate_models$models[[voi_pair]] = model
+    cate_models$summary[[voi_pair]] = summary(model)
+    cate_models$anova[[voi_pair]] = Anova(model)
+    
+    anova_result=Anova(model)
+    cate_p_matrix[row, col] = cate_models$anova[[voi_pair]]$"Pr(>Chisq)"[3]
+    cate_chi_matrix[row, col] = cate_models$anova[[voi_pair]]$"Chisq"[3]
+   
+    }
+  }
+}
+
+# test_amt = -log(cate_p_matrix)
+# diag(test_amt) = 0
+# heatmap(test_amt, 
+#         Rowv = NA, Colv = NA)
+# 
+# heatmap(cate_chi_matrix, 
+#         Rowv = NA, Colv = NA)
+```
+
+# LM
+
+ ```{r lm}
+# 
+# # Selecting only the variables of interest
+# variables_of_interest = c("neg_RT","trial_accuracy", "IES", "RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+# 
+# n_voi = length(variables_of_interest)
+# cate_models2 = list()
+# cate_matrix2 = matrix(0, nrow = n_voi, ncol = n_voi)
+# cate_matrix3 = matrix(0, nrow = n_voi, ncol = n_voi)
+# 
+# for(row in 1:n_voi) {
+#   for(col in 1:n_voi) {
+#     
+#     if (row == col){
+#       
+#       cate_matrix2[row, col] = 0
+#       
+#     }else{
+#       
+#     row_val = variables_of_interest[row]
+#     col_val = variables_of_interest[col]
+#     voi_pair = paste0(row_val,'_vs_',col_val)
+#     
+#     # Constructing the formula
+#     formula_str = paste0(row_val, '_z[,1]', " ~ ", col_val, '_z[,1]')
+#     model = lm(formula_str, data=img_id_table)
+#     
+#     cate_models2$models[[voi_pair]] = model
+#     cate_models2$summary[[voi_pair]] = summary(model)
+# 
+#     cate_matrix2[row, col] = cate_models2$summary[[voi_pair]]$coefficients[2,4]
+#     cate_matrix3[row, col] = cate_models2$summary[[voi_pair]]$coefficients[2,1]
+#     }
+#     
+#   }}
+# 
+ ```
+
+
+# RCS by ratings
+
+```{r  RCS by ratings}
+
+variables_of_interest = c("RCS", "typicality", "familiarity", "aesthetic", "usability", "complexity")
+z_voi = variables_of_interest
+RCS_models = list()
+top_fixed_effects = list()
+
+for (voi in 1:length(z_voi)){
+  z_voi[voi] = paste0(variables_of_interest[voi], '_z')
+} 
+
+# Constructing the formula
+depend_var = z_voi[1]
+fixed_effcets = paste(z_voi[z_voi != depend_var], collapse = ' * ')
+formula_str = paste0(depend_var, " ~ ", fixed_effcets, '+ (1 | sub_num)')
+
+for (cat in categories){
+  
+filtered_data = img_id_table %>% filter(category == cat)
+model = lmer(formula_str, data=filtered_data)
+
+RCS_models[[cat]]$model = model
+RCS_models[[cat]]$results = summary(model)
+RCS_models[[cat]]$anova = Anova(model)
+
+tidy_anova = tidy(RCS_models[[cat]]$anova)
+tidy_anova = tidy_anova %>% arrange(desc(statistic))
+top_fixed_effects[[cat]] = tidy_anova %>%
+  top_n(5, wt = abs(statistic))
+
+}
+ 
+```
+ 
+# ridge regression
+
+```{r  ridge regression}
+
+for (cat in categories){
+  
+filtered_data = img_id_table %>% filter(category == cat & !is.nan(img_id_table$RCS_z))
+
+mod <- lmridge(RCS_z ~ typicality_z + familiarity_z + aesthetic_z + usability_z + complexity_z, data = filtered_data)
+
+y <- filtered_data %>% select(RCS_z) %>% as.matrix()
+x_vars = z_voi[z_voi != 'RCS_z']
+X <- filtered_data %>% select(all_of(x_vars)) %>% as.matrix()
+
+# Perform 10-fold cross-validation to select lambda -
+lambdas_to_try <- 10^seq(-3, 5, length.out = 100)
+ridge_cv <- cv.glmnet(X, y, alpha = 0, lambda = lambdas_to_try,
+                      standardize = FALSE, nfolds = 10)
+
+
+# Plot cross-validation results
+plot(ridge_cv)
+
+
+# Best cross-validated lambda
+lambda_cv <- ridge_cv$lambda.min
+
+# Fit final model, get its sum of squared residuals and multiple R-squared
+model_cv <- glmnet(X, y, alpha = 0, lambda = lambda_cv, standardize = FALSE)
+y_hat_cv <- predict(model_cv, X)
+ssr_cv <- t(y - y_hat_cv) %*% (y - y_hat_cv)
+rsq_ridge_cv <- cor(y, y_hat_cv)^2
+summary(model_cv)
+coef(model_cv)
+
+
+# Dimensionality reduction to a single dimension
+# reduced_mat = cmdscale(as.dist(cor_matrix),1)
+
+}
+```
+
