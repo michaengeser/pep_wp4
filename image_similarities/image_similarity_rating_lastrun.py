@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 05, 2024, at 14:03
+    on März 05, 2024, at 16:26
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -350,18 +350,19 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "trial" ---
     # Run 'Begin Experiment' code from positions
-    img1pos = -4.5
-    img2pos = 4.5
+    img_x_pos = 7
+    img1pos = -img_x_pos
+    img2pos = img_x_pos
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[0], height=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[1],
+        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[0], height=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[1],
+        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -403,7 +404,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         font='Verdana', labelHeight=0.35*y_scale,
         flip=False, ori=0.0, depth=-7, readOnly=False)
     question_2 = visual.TextStim(win=win, name='question_2',
-        text='Drawing style',
+        text='Drawing style/ability',
         font='Verdana',
         pos=[0,0], height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -447,18 +448,19 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "trial" ---
     # Run 'Begin Experiment' code from positions
-    img1pos = -4.5
-    img2pos = 4.5
+    img_x_pos = 7
+    img1pos = -img_x_pos
+    img2pos = img_x_pos
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[0], height=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[1],
+        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[0], height=(6*x_scale+0.005, 6*x_scale*0.75+0.005)[1],
+        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -500,7 +502,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         font='Verdana', labelHeight=0.35*y_scale,
         flip=False, ori=0.0, depth=-7, readOnly=False)
     question_2 = visual.TextStim(win=win, name='question_2',
-        text='Drawing style',
+        text='Drawing style/ability',
         font='Verdana',
         pos=[0,0], height=1.0, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -794,26 +796,26 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         thisExp.addData('trial.started', globalClock.getTime())
         # Run 'Begin Routine' code from positions
         if random() > 0.5:
-            img1pos = -4.5
-            img2pos = 4.5
+            img1pos = -img_x_pos
+            img2pos = img_x_pos
         else:
-            img1pos = 4.5
-            img2pos = -4.5
+            img1pos = img_x_pos
+            img2pos = -img_x_pos
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((6*x_scale, 6*x_scale*0.75))
+        image1.setSize((10*x_scale, 10*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
-        image2.setSize((6*x_scale, 6*x_scale*0.75))
+        image2.setSize((10*x_scale, 10*x_scale*0.75))
         image2.setImage(stim2)
         slider.reset()
-        slider.setPos((0, -2.5*y_scale))
-        slider.setSize((12*x_scale, 0.5*y_scale))
-        question.setPos((0, -1*y_scale))
+        slider.setPos((0, -3.5*y_scale))
+        slider.setSize((12*x_scale, 0.75*y_scale))
+        question.setPos((0, -2*y_scale))
         question.setHeight(0.7*y_scale)
         slider_2.reset()
-        slider_2.setPos((0, -6.5*y_scale))
-        slider_2.setSize((12*x_scale, 0.5*y_scale))
-        question_2.setPos((0, -5*y_scale))
+        slider_2.setPos((0, -7*y_scale))
+        slider_2.setSize((12*x_scale, 0.75*y_scale))
+        question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
         press_spce.keys = []
         press_spce.rt = []
@@ -1536,26 +1538,26 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         thisExp.addData('trial.started', globalClock.getTime())
         # Run 'Begin Routine' code from positions
         if random() > 0.5:
-            img1pos = -4.5
-            img2pos = 4.5
+            img1pos = -img_x_pos
+            img2pos = img_x_pos
         else:
-            img1pos = 4.5
-            img2pos = -4.5
+            img1pos = img_x_pos
+            img2pos = -img_x_pos
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((6*x_scale, 6*x_scale*0.75))
+        image1.setSize((10*x_scale, 10*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
-        image2.setSize((6*x_scale, 6*x_scale*0.75))
+        image2.setSize((10*x_scale, 10*x_scale*0.75))
         image2.setImage(stim2)
         slider.reset()
-        slider.setPos((0, -2.5*y_scale))
-        slider.setSize((12*x_scale, 0.5*y_scale))
-        question.setPos((0, -1*y_scale))
+        slider.setPos((0, -3.5*y_scale))
+        slider.setSize((12*x_scale, 0.75*y_scale))
+        question.setPos((0, -2*y_scale))
         question.setHeight(0.7*y_scale)
         slider_2.reset()
-        slider_2.setPos((0, -6.5*y_scale))
-        slider_2.setSize((12*x_scale, 0.5*y_scale))
-        question_2.setPos((0, -5*y_scale))
+        slider_2.setPos((0, -7*y_scale))
+        slider_2.setSize((12*x_scale, 0.75*y_scale))
+        question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
         press_spce.keys = []
         press_spce.rt = []
