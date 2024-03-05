@@ -15,7 +15,7 @@ def resize_images_in_folder(folder_path):
                     resized_img = img.resize(new_size, Image.LANCZOS)
 
                     # Save the resized image, overwrite the original
-                    resized_img.save(image_path, quality=80)
+                    resized_img.save(image_path, quality=95)
 
 if __name__ == "__main__":
     # Example usage with relative path from the current directory

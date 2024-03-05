@@ -172,10 +172,10 @@
       <CodeComponent name="positions" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="// disable contect menu for right mouse clicks&amp;#10;document.addEventListener('contextmenu',event =&gt; event.preventDefault());" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="if random() &gt; 0.5:&amp;#10;    img1pos = -4.5&amp;#10;    img2pos = 4.5&amp;#10;else:&amp;#10;    img1pos = 4.5&amp;#10;    img2pos = -4.5" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="if ((Math.random() &gt; 0.5)) {&amp;#10;    img1pos = (-4.5);&amp;#10;    img2pos = 4.5;&amp;#10;} else {&amp;#10;    img1pos = 4.5;&amp;#10;    img2pos = (-4.5);&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="img1pos = -4.5&amp;#10;img2pos = 4.5&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="img1pos = (-4.5);&amp;#10;img2pos = 4.5;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((Math.random() &gt; 0.5)) {&amp;#10;    img1pos = (-4.5);&amp;#10;    img2pos = 4.5;&amp;#10;} else {&amp;#10;    img1pos = 4.5;&amp;#10;    img2pos = (-4.5);&amp;#10;}" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="if random() &gt; 0.5:&amp;#10;    img1pos = -4.5&amp;#10;    img2pos = 4.5&amp;#10;else:&amp;#10;    img1pos = 4.5&amp;#10;    img2pos = -4.5" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -257,7 +257,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="$(img1pos*x_scale, 4*y_scale)" valType="list" updates="set every repeat" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(4*x_scale, 4*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
+        <Param val="(6*x_scale, 6*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0" valType="code" updates="None" name="startVal"/>
