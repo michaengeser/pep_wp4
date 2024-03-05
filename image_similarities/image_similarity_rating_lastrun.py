@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 05, 2024, at 13:18
+    on März 05, 2024, at 14:03
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -800,7 +800,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             img1pos = 4.5
             img2pos = -4.5
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((4*x_scale, 4*x_scale*0.75))
+        image1.setSize((6*x_scale, 6*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
         image2.setSize((6*x_scale, 6*x_scale*0.75))
@@ -1542,7 +1542,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             img1pos = 4.5
             img2pos = -4.5
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((4*x_scale, 4*x_scale*0.75))
+        image1.setSize((6*x_scale, 6*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
         image2.setSize((6*x_scale, 6*x_scale*0.75))
