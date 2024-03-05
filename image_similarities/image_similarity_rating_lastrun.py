@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 04, 2024, at 10:52
+    on Tue Mar  5 11:22:39 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -34,7 +34,6 @@ from numpy.random import random, randint, normal, shuffle, choice as randchoice
 import os  # handy system and path functions
 import sys  # to get file system encoding
 
-import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
 # --- Setup global variables (available in all functions) ---
@@ -48,7 +47,6 @@ expInfo = {
     'age': '',
     'gender': ['female','male','diverse'],
     'session': ['bathroom','kitchen'],
-    'projectID': 'pep_rating_own',
     'date': data.getDateStr(),  # add a simple timestamp
     'expName': expName,
     'psychopyVersion': psychopyVersion,
@@ -104,7 +102,7 @@ def setupData(expInfo, dataDir=None):
     # data file name stem = absolute path + name; later add .psyexp, .csv, .log, etc
     if dataDir is None:
         dataDir = _thisDir
-    filename = u'data/sub-%s/ses-%s/%s_%s_%s_events' % (expInfo['participant'], expInfo['session'], expInfo['participant'], expInfo['session'], expName)
+    filename = u'data/sub-%s/ses-%s/sub-%s_ses-%s_%s_events' % (expInfo['participant'], expInfo['session'], expInfo['participant'], expInfo['session'], expName)
     # make sure filename is relative to dataDir
     if os.path.isabs(filename):
         dataDir = os.path.commonprefix([dataDir, filename])
@@ -114,7 +112,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\JLU-SU\\OneDrive - Justus-Liebig-Universität Gießen\\Dokumente\\GitHub\\image_similarity\\image_similarity_rating_lastrun.py',
+        originPath='/Users/kaiserlab/Documents/GitHub/pep_wp4/image_similarities/image_similarity_rating_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -208,18 +206,10 @@ def setupInputs(expInfo, thisExp, win):
     # --- Setup input devices ---
     inputs = {}
     ioConfig = {}
-    
-    # Setup iohub keyboard
-    ioConfig['Keyboard'] = dict(use_keymap='psychopy')
-    
-    ioSession = '1'
-    if 'session' in expInfo:
-        ioSession = str(expInfo['session'])
-    ioServer = io.launchHubServer(window=win, **ioConfig)
-    eyetracker = None
+    ioSession = ioServer = eyetracker = None
     
     # create a default keyboard (e.g. to check for escape)
-    defaultKeyboard = keyboard.Keyboard(backend='iohub')
+    defaultKeyboard = keyboard.Keyboard(backend='event')
     # return inputs dict
     return {
         'ioServer': ioServer,
@@ -259,7 +249,7 @@ def pauseExperiment(thisExp, inputs=None, win=None, timers=[], playbackComponent
         # make sure we have a keyboard
         if inputs is None:
             inputs = {
-                'defaultKeyboard': keyboard.Keyboard(backend='ioHub')
+                'defaultKeyboard': keyboard.Keyboard(backend='Pyglet')
             }
         # check for quit (typically the Esc key)
         if inputs['defaultKeyboard'].getKeys(keyList=['escape']):
@@ -385,7 +375,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=128.0, interpolate=True, depth=-3.0)
+        texRes=32.0, interpolate=True, depth=-3.0)
     image2 = visual.ImageStim(
         win=win,
         name='image2', 
@@ -393,7 +383,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=512.0, interpolate=True, depth=-4.0)
+        texRes=512.0, interpolate=False, depth=-4.0)
     slider = visual.Slider(win=win, name='slider',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
@@ -485,7 +475,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=128.0, interpolate=True, depth=-3.0)
+        texRes=32.0, interpolate=True, depth=-3.0)
     image2 = visual.ImageStim(
         win=win,
         name='image2', 
@@ -493,7 +483,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=512.0, interpolate=True, depth=-4.0)
+        texRes=512.0, interpolate=False, depth=-4.0)
     slider = visual.Slider(win=win, name='slider',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
