@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on Tue Mar  5 11:22:39 2024
+    on März 05, 2024, at 11:57
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -112,7 +112,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/kaiserlab/Documents/GitHub/pep_wp4/image_similarities/image_similarity_rating_lastrun.py',
+        originPath='C:\\Users\\JLU-SU\\OneDrive - Justus-Liebig-Universität Gießen\\Dokumente\\GitHub\\pep_wp4_beh\\image_similarities\\image_similarity_rating_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -375,7 +375,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=32.0, interpolate=True, depth=-3.0)
+        texRes=128.0, interpolate=True, depth=-3.0)
     image2 = visual.ImageStim(
         win=win,
         name='image2', 
@@ -383,7 +383,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=512.0, interpolate=False, depth=-4.0)
+        texRes=512.0, interpolate=True, depth=-4.0)
     slider = visual.Slider(win=win, name='slider',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
@@ -475,7 +475,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=32.0, interpolate=True, depth=-3.0)
+        texRes=128.0, interpolate=True, depth=-3.0)
     image2 = visual.ImageStim(
         win=win,
         name='image2', 
@@ -483,7 +483,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         ori=0.0, pos=[0,0], size=1.0,
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
-        texRes=512.0, interpolate=False, depth=-4.0)
+        texRes=512.0, interpolate=True, depth=-4.0)
     slider = visual.Slider(win=win, name='slider',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
