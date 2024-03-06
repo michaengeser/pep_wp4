@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 05, 2024, at 16:26
+    on März 06, 2024, at 15:50
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -382,7 +382,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=512.0, interpolate=True, depth=-4.0)
-    slider = visual.Slider(win=win, name='slider',
+    rating_1 = visual.Slider(win=win, name='rating_1',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
         style='rating', styleTweaks=('triangleMarker',), opacity=None,
@@ -396,7 +396,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-6.0);
-    slider_2 = visual.Slider(win=win, name='slider_2',
+    rating_2 = visual.Slider(win=win, name='rating_2',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
         style='rating', styleTweaks=('triangleMarker',), opacity=None,
@@ -410,7 +410,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-8.0);
-    press_spce = keyboard.Keyboard()
     
     # --- Initialize components for Routine "ITI" ---
     text = visual.TextStim(win=win, name='text',
@@ -480,7 +479,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color=[1,1,1], colorSpace='rgb', opacity=None,
         flipHoriz=False, flipVert=False,
         texRes=512.0, interpolate=True, depth=-4.0)
-    slider = visual.Slider(win=win, name='slider',
+    rating_1 = visual.Slider(win=win, name='rating_1',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
         style='rating', styleTweaks=('triangleMarker',), opacity=None,
@@ -494,7 +493,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-6.0);
-    slider_2 = visual.Slider(win=win, name='slider_2',
+    rating_2 = visual.Slider(win=win, name='rating_2',
         startValue=None, size=1.0, pos=[0,0], units=win.units,
         labels=("1 - not similar at all", 2, 3, 4, 5, 6, "7 - very similar"), ticks=(1, 2, 3, 4, 5, 6, 7), granularity=1.0,
         style='rating', styleTweaks=('triangleMarker',), opacity=None,
@@ -508,7 +507,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-8.0);
-    press_spce = keyboard.Keyboard()
     
     # --- Initialize components for Routine "end" ---
     message_end = visual.TextStim(win=win, name='message_end',
@@ -807,21 +805,18 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         image2.setPos((img2pos*x_scale, 4*y_scale))
         image2.setSize((10*x_scale, 10*x_scale*0.75))
         image2.setImage(stim2)
-        slider.reset()
-        slider.setPos((0, -3.5*y_scale))
-        slider.setSize((12*x_scale, 0.75*y_scale))
+        rating_1.reset()
+        rating_1.setPos((0, -3.5*y_scale))
+        rating_1.setSize((12*x_scale, 0.75*y_scale))
         question.setPos((0, -2*y_scale))
         question.setHeight(0.7*y_scale)
-        slider_2.reset()
-        slider_2.setPos((0, -7*y_scale))
-        slider_2.setSize((12*x_scale, 0.75*y_scale))
+        rating_2.reset()
+        rating_2.setPos((0, -7*y_scale))
+        rating_2.setSize((12*x_scale, 0.75*y_scale))
         question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
-        press_spce.keys = []
-        press_spce.rt = []
-        _press_spce_allKeys = []
         # keep track of which components have finished
-        trialComponents = [polygon, polygon_2, image1, image2, slider, question, slider_2, question_2, press_spce]
+        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2]
         for thisComponent in trialComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -924,23 +919,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 # update params
                 pass
             
-            # *slider* updates
+            # *rating_1* updates
             
-            # if slider is starting this frame...
-            if slider.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+            # if rating_1 is starting this frame...
+            if rating_1.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                slider.frameNStart = frameN  # exact frame index
-                slider.tStart = t  # local t and not account for scr refresh
-                slider.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(slider, 'tStartRefresh')  # time at next scr refresh
+                rating_1.frameNStart = frameN  # exact frame index
+                rating_1.tStart = t  # local t and not account for scr refresh
+                rating_1.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(rating_1, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'slider.started')
+                thisExp.timestampOnFlip(win, 'rating_1.started')
                 # update status
-                slider.status = STARTED
-                slider.setAutoDraw(True)
+                rating_1.status = STARTED
+                rating_1.setAutoDraw(True)
             
-            # if slider is active this frame...
-            if slider.status == STARTED:
+            # if rating_1 is active this frame...
+            if rating_1.status == STARTED:
                 # update params
                 pass
             
@@ -964,23 +959,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 # update params
                 pass
             
-            # *slider_2* updates
+            # *rating_2* updates
             
-            # if slider_2 is starting this frame...
-            if slider_2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+            # if rating_2 is starting this frame...
+            if rating_2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                slider_2.frameNStart = frameN  # exact frame index
-                slider_2.tStart = t  # local t and not account for scr refresh
-                slider_2.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(slider_2, 'tStartRefresh')  # time at next scr refresh
+                rating_2.frameNStart = frameN  # exact frame index
+                rating_2.tStart = t  # local t and not account for scr refresh
+                rating_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(rating_2, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'slider_2.started')
+                thisExp.timestampOnFlip(win, 'rating_2.started')
                 # update status
-                slider_2.status = STARTED
-                slider_2.setAutoDraw(True)
+                rating_2.status = STARTED
+                rating_2.setAutoDraw(True)
             
-            # if slider_2 is active this frame...
-            if slider_2.status == STARTED:
+            # if rating_2 is active this frame...
+            if rating_2.status == STARTED:
                 # update params
                 pass
             
@@ -1003,34 +998,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if question_2.status == STARTED:
                 # update params
                 pass
+            # Run 'Each Frame' code from wait_for_both_sliders
+            keys = event.getKeys()
             
-            # *press_spce* updates
-            waitOnFlip = False
+            # need to manually check for escape, as our key checking will interfere with
+            # Builder's escape check:
+            if 'escape' in keys: 
+                core.quit()
             
-            # if press_spce is starting this frame...
-            if press_spce.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                press_spce.frameNStart = frameN  # exact frame index
-                press_spce.tStart = t  # local t and not account for scr refresh
-                press_spce.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(press_spce, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'press_spce.started')
-                # update status
-                press_spce.status = STARTED
-                # keyboard checking is just starting
-                waitOnFlip = True
-                win.callOnFlip(press_spce.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(press_spce.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if press_spce.status == STARTED and not waitOnFlip:
-                theseKeys = press_spce.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-                _press_spce_allKeys.extend(theseKeys)
-                if len(_press_spce_allKeys):
-                    press_spce.keys = _press_spce_allKeys[-1].name  # just the last key pressed
-                    press_spce.rt = _press_spce_allKeys[-1].rt
-                    press_spce.duration = _press_spce_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
+            if 'space' in keys:
+                # check how many ratings have been completed:
+                completed_ratings = 0
+                for scale in [rating_1, rating_2]:
+                    if scale.getRating() is not None:
+                        completed_ratings = completed_ratings + 1
+            
+                if completed_ratings == 2:
+                    continueRoutine = False # end now
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1063,17 +1047,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         thisExp.addData('stim2pos', img2pos)
         thisExp.addData('block', blockN-1)
         
-        practice.addData('slider.response', slider.getRating())
-        practice.addData('slider.rt', slider.getRT())
-        practice.addData('slider_2.response', slider_2.getRating())
-        practice.addData('slider_2.rt', slider_2.getRT())
-        # check responses
-        if press_spce.keys in ['', [], None]:  # No response was made
-            press_spce.keys = None
-        practice.addData('press_spce.keys',press_spce.keys)
-        if press_spce.keys != None:  # we had a response
-            practice.addData('press_spce.rt', press_spce.rt)
-            practice.addData('press_spce.duration', press_spce.duration)
+        practice.addData('rating_1.response', rating_1.getRating())
+        practice.addData('rating_1.rt', rating_1.getRT())
+        practice.addData('rating_2.response', rating_2.getRating())
+        practice.addData('rating_2.rt', rating_2.getRT())
         # the Routine "trial" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -1549,21 +1526,18 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         image2.setPos((img2pos*x_scale, 4*y_scale))
         image2.setSize((10*x_scale, 10*x_scale*0.75))
         image2.setImage(stim2)
-        slider.reset()
-        slider.setPos((0, -3.5*y_scale))
-        slider.setSize((12*x_scale, 0.75*y_scale))
+        rating_1.reset()
+        rating_1.setPos((0, -3.5*y_scale))
+        rating_1.setSize((12*x_scale, 0.75*y_scale))
         question.setPos((0, -2*y_scale))
         question.setHeight(0.7*y_scale)
-        slider_2.reset()
-        slider_2.setPos((0, -7*y_scale))
-        slider_2.setSize((12*x_scale, 0.75*y_scale))
+        rating_2.reset()
+        rating_2.setPos((0, -7*y_scale))
+        rating_2.setSize((12*x_scale, 0.75*y_scale))
         question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
-        press_spce.keys = []
-        press_spce.rt = []
-        _press_spce_allKeys = []
         # keep track of which components have finished
-        trialComponents = [polygon, polygon_2, image1, image2, slider, question, slider_2, question_2, press_spce]
+        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2]
         for thisComponent in trialComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -1666,23 +1640,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 # update params
                 pass
             
-            # *slider* updates
+            # *rating_1* updates
             
-            # if slider is starting this frame...
-            if slider.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+            # if rating_1 is starting this frame...
+            if rating_1.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                slider.frameNStart = frameN  # exact frame index
-                slider.tStart = t  # local t and not account for scr refresh
-                slider.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(slider, 'tStartRefresh')  # time at next scr refresh
+                rating_1.frameNStart = frameN  # exact frame index
+                rating_1.tStart = t  # local t and not account for scr refresh
+                rating_1.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(rating_1, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'slider.started')
+                thisExp.timestampOnFlip(win, 'rating_1.started')
                 # update status
-                slider.status = STARTED
-                slider.setAutoDraw(True)
+                rating_1.status = STARTED
+                rating_1.setAutoDraw(True)
             
-            # if slider is active this frame...
-            if slider.status == STARTED:
+            # if rating_1 is active this frame...
+            if rating_1.status == STARTED:
                 # update params
                 pass
             
@@ -1706,23 +1680,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 # update params
                 pass
             
-            # *slider_2* updates
+            # *rating_2* updates
             
-            # if slider_2 is starting this frame...
-            if slider_2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
+            # if rating_2 is starting this frame...
+            if rating_2.status == NOT_STARTED and tThisFlip >= 0-frameTolerance:
                 # keep track of start time/frame for later
-                slider_2.frameNStart = frameN  # exact frame index
-                slider_2.tStart = t  # local t and not account for scr refresh
-                slider_2.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(slider_2, 'tStartRefresh')  # time at next scr refresh
+                rating_2.frameNStart = frameN  # exact frame index
+                rating_2.tStart = t  # local t and not account for scr refresh
+                rating_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(rating_2, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'slider_2.started')
+                thisExp.timestampOnFlip(win, 'rating_2.started')
                 # update status
-                slider_2.status = STARTED
-                slider_2.setAutoDraw(True)
+                rating_2.status = STARTED
+                rating_2.setAutoDraw(True)
             
-            # if slider_2 is active this frame...
-            if slider_2.status == STARTED:
+            # if rating_2 is active this frame...
+            if rating_2.status == STARTED:
                 # update params
                 pass
             
@@ -1745,34 +1719,23 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             if question_2.status == STARTED:
                 # update params
                 pass
+            # Run 'Each Frame' code from wait_for_both_sliders
+            keys = event.getKeys()
             
-            # *press_spce* updates
-            waitOnFlip = False
+            # need to manually check for escape, as our key checking will interfere with
+            # Builder's escape check:
+            if 'escape' in keys: 
+                core.quit()
             
-            # if press_spce is starting this frame...
-            if press_spce.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                press_spce.frameNStart = frameN  # exact frame index
-                press_spce.tStart = t  # local t and not account for scr refresh
-                press_spce.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(press_spce, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'press_spce.started')
-                # update status
-                press_spce.status = STARTED
-                # keyboard checking is just starting
-                waitOnFlip = True
-                win.callOnFlip(press_spce.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(press_spce.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if press_spce.status == STARTED and not waitOnFlip:
-                theseKeys = press_spce.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-                _press_spce_allKeys.extend(theseKeys)
-                if len(_press_spce_allKeys):
-                    press_spce.keys = _press_spce_allKeys[-1].name  # just the last key pressed
-                    press_spce.rt = _press_spce_allKeys[-1].rt
-                    press_spce.duration = _press_spce_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
+            if 'space' in keys:
+                # check how many ratings have been completed:
+                completed_ratings = 0
+                for scale in [rating_1, rating_2]:
+                    if scale.getRating() is not None:
+                        completed_ratings = completed_ratings + 1
+            
+                if completed_ratings == 2:
+                    continueRoutine = False # end now
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1805,17 +1768,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         thisExp.addData('stim2pos', img2pos)
         thisExp.addData('block', blockN-1)
         
-        trials.addData('slider.response', slider.getRating())
-        trials.addData('slider.rt', slider.getRT())
-        trials.addData('slider_2.response', slider_2.getRating())
-        trials.addData('slider_2.rt', slider_2.getRT())
-        # check responses
-        if press_spce.keys in ['', [], None]:  # No response was made
-            press_spce.keys = None
-        trials.addData('press_spce.keys',press_spce.keys)
-        if press_spce.keys != None:  # we had a response
-            trials.addData('press_spce.rt', press_spce.rt)
-            trials.addData('press_spce.duration', press_spce.duration)
+        trials.addData('rating_1.response', rating_1.getRating())
+        trials.addData('rating_1.rt', rating_1.getRT())
+        trials.addData('rating_2.response', rating_2.getRating())
+        trials.addData('rating_2.rt', rating_2.getRT())
         # the Routine "trial" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         thisExp.nextEntry()

@@ -294,7 +294,7 @@
         <Param val="512" valType="num" updates="constant" name="texture resolution"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
       </ImageComponent>
-      <SliderComponent name="slider" plugin="None">
+      <SliderComponent name="rating_1" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -309,7 +309,7 @@
         <Param val="" valType="code" updates="None" name="initVal"/>
         <Param val="(&quot;1 - not similar at all&quot;, 2, 3, 4, 5, 6, &quot;7 - very similar&quot;)" valType="list" updates="constant" name="labels"/>
         <Param val="0.35*y_scale" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider" valType="code" updates="None" name="name"/>
+        <Param val="rating_1" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, -3.5*y_scale)" valType="list" updates="set every repeat" name="pos"/>
@@ -355,7 +355,7 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <SliderComponent name="slider_2" plugin="None">
+      <SliderComponent name="rating_2" plugin="None">
         <Param val="White" valType="color" updates="constant" name="borderColor"/>
         <Param val="white" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
@@ -370,7 +370,7 @@
         <Param val="" valType="code" updates="None" name="initVal"/>
         <Param val="(&quot;1 - not similar at all&quot;, 2, 3, 4, 5, 6, &quot;7 - very similar&quot;)" valType="list" updates="constant" name="labels"/>
         <Param val="0.35*y_scale" valType="num" updates="constant" name="letterHeight"/>
-        <Param val="slider_2" valType="code" updates="None" name="name"/>
+        <Param val="rating_2" valType="code" updates="None" name="name"/>
         <Param val="" valType="num" updates="constant" name="opacity"/>
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="(0, -7*y_scale)" valType="list" updates="set every repeat" name="pos"/>
@@ -416,14 +416,14 @@
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
-      <KeyboardComponent name="press_spce" plugin="None">
+      <KeyboardComponent name="press_space" plugin="None">
         <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
         <Param val="" valType="str" updates="constant" name="correctAns"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="True" valType="bool" updates="constant" name="discard previous"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
-        <Param val="press_spce" valType="code" updates="None" name="name"/>
+        <Param val="press_space" valType="code" updates="None" name="name"/>
         <Param val="press" valType="str" updates="constant" name="registerOn"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
@@ -435,6 +435,23 @@
         <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
+      <CodeComponent name="wait_for_both_sliders" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="keys = event.getKeys()&amp;#10;&amp;#10;# need to manually check for escape, as our key checking will interfere with&amp;#10;# Builder's escape check:&amp;#10;if 'escape' in keys: &amp;#10;    core.quit()&amp;#10;&amp;#10;if 'space' in keys:&amp;#10;    # check how many ratings have been completed:&amp;#10;    completed_ratings = 0&amp;#10;    for scale in [rating_1, rating_2]:&amp;#10;        if scale.getRating() is not None:&amp;#10;            completed_ratings = completed_ratings + 1&amp;#10;&amp;#10;    if completed_ratings == 2:&amp;#10;        continueRoutine = False # end now" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="var _pj;&amp;#10;function _pj_snippets(container) {&amp;#10;    function in_es6(left, right) {&amp;#10;        if (((right instanceof Array) || ((typeof right) === &quot;string&quot;))) {&amp;#10;            return (right.indexOf(left) &gt; (- 1));&amp;#10;        } else {&amp;#10;            if (((right instanceof Map) || (right instanceof Set) || (right instanceof WeakMap) || (right instanceof WeakSet))) {&amp;#10;                return right.has(left);&amp;#10;            } else {&amp;#10;                return (left in right);&amp;#10;            }&amp;#10;        }&amp;#10;    }&amp;#10;    container[&quot;in_es6&quot;] = in_es6;&amp;#10;    return container;&amp;#10;}&amp;#10;_pj = {};&amp;#10;_pj_snippets(_pj);&amp;#10;keys = psychoJS.eventManager.getKeys();&amp;#10;if (_pj.in_es6(&quot;escape&quot;, keys)) {&amp;#10;    core.quit();&amp;#10;}&amp;#10;if (_pj.in_es6(&quot;space&quot;, keys)) {&amp;#10;    completed_ratings = 0;&amp;#10;    for (var scale, _pj_c = 0, _pj_a = [rating_1, rating_2], _pj_b = _pj_a.length; (_pj_c &lt; _pj_b); _pj_c += 1) {&amp;#10;        scale = _pj_a[_pj_c];&amp;#10;        if ((scale.getRating() !== null)) {&amp;#10;            completed_ratings = (completed_ratings + 1);&amp;#10;        }&amp;#10;    }&amp;#10;    if ((completed_ratings === 2)) {&amp;#10;        continueRoutine = false;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="wait_for_both_sliders" valType="code" updates="None" name="name"/>
+      </CodeComponent>
     </Routine>
     <Routine name="attentionCheck">
       <RoutineSettingsComponent name="attentionCheck" plugin="None">
