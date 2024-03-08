@@ -203,7 +203,7 @@
         <Param val="$(img1pos*x_scale, 4*y_scale)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="rectangle" valType="str" updates="None" name="shape"/>
-        <Param val="(10*x_scale, 10*x_scale*0.75)" valType="list" updates="constant" name="size"/>
+        <Param val="(8.5*x_scale, 8.5*x_scale*0.75)" valType="list" updates="constant" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
@@ -230,7 +230,7 @@
         <Param val="$(img2pos*x_scale, 4*y_scale)" valType="list" updates="constant" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="rectangle" valType="str" updates="None" name="shape"/>
-        <Param val="(10*x_scale, 10*x_scale*0.75)" valType="list" updates="constant" name="size"/>
+        <Param val="(8.5*x_scale, 8.5*x_scale*0.75)" valType="list" updates="constant" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0.0" valType="code" updates="None" name="startVal"/>
@@ -257,7 +257,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="$(img1pos*x_scale, 4*y_scale)" valType="list" updates="set every repeat" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(10*x_scale, 10*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
+        <Param val="(8*x_scale, 8*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0" valType="code" updates="None" name="startVal"/>
@@ -284,7 +284,7 @@
         <Param val="0" valType="num" updates="constant" name="ori"/>
         <Param val="$(img2pos*x_scale, 4*y_scale)" valType="list" updates="set every repeat" name="pos"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
-        <Param val="(10*x_scale, 10*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
+        <Param val="(8*x_scale, 8*x_scale*0.75)" valType="list" updates="set every repeat" name="size"/>
         <Param val="" valType="code" updates="None" name="startEstim"/>
         <Param val="time (s)" valType="str" updates="None" name="startType"/>
         <Param val="0" valType="code" updates="None" name="startVal"/>
@@ -625,7 +625,7 @@
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
-        <Param val="$endMsg" valType="str" updates="set every repeat" name="text"/>
+        <Param val="The end!&amp;#10;&amp;#10;Thank you for participating" valType="str" updates="set every repeat" name="text"/>
         <Param val="from exp settings" valType="str" updates="None" name="units"/>
         <Param val="" valType="num" updates="constant" name="wrapWidth"/>
       </TextComponent>
@@ -813,10 +813,10 @@
       <CodeComponent name="break_2" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="var blockN = 1;&amp;#10;var maxBlock = 6;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="blockN = 1&amp;#10;maxBlock = 6" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="blockN = 1&amp;#10;maxBlock = 10" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="break_instructions = new visual.TextStim({&amp;#10;    win: psychoJS.window,&amp;#10;    text: `Great job! You can take a break now. \n\n Press space to start block ${blockN} of ${maxBlock}.`,&amp;#10;    height: 0.05,&amp;#10;    color: new util.Color('black')&amp;#10;});&amp;#10;&amp;#10;    &amp;#10;//   do not show if block is not over yet&amp;#10;if (((trials.thisN &gt; 0) &amp;&amp; ((trials.thisN % 100) !== 0))) {&amp;#10;    continueRoutine = false;&amp;#10;} else {&amp;#10;    // do not show before first block&amp;#10;    if ((blockN === 1)) {&amp;#10;        blockN = (blockN + 1);&amp;#10;        continueRoutine = false;&amp;#10;    } else {&amp;#10;        console.log(blockN)&amp;#10;        break_instructions.setAutoDraw(true);&amp;#10;        blockN = (blockN + 1);&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="break_instructions = visual.TextStim(&amp;#10;    win = win,&amp;#10;    text = f&quot;Great job! You can take a break now. \n\n Press space to start block {blockN} of {maxBlock}.&quot;,&amp;#10;    height = 0.05,&amp;#10;    color = &quot;black&quot;)&amp;#10;&amp;#10;# do not show if block is not over yet&amp;#10;if trials.thisN &gt; 0 and trials.thisN % 100 != 0:&amp;#10;    continueRoutine = False&amp;#10;else:&amp;#10;    # do not show before first block&amp;#10;    if blockN == 1:&amp;#10;        blockN = blockN + 1&amp;#10;        continueRoutine = False&amp;#10;    else:&amp;#10;        break_instructions.setAutoDraw(True)&amp;#10;        blockN = blockN + 1&amp;#10;        &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="break_instructions = new visual.TextStim({&amp;#10;    win: psychoJS.window,&amp;#10;    text: `Great job! You can take a break now. \n\n Press space to start block ${blockN} of ${maxBlock}.`,&amp;#10;    height: 0.05,&amp;#10;    color: new util.Color('black')&amp;#10;});&amp;#10;&amp;#10;    &amp;#10;//   do not show if block is not over yet&amp;#10;if (((trials.thisN &gt; 0) &amp;&amp; ((trials.thisN % 63) !== 0))) {&amp;#10;    continueRoutine = false;&amp;#10;} else {&amp;#10;    // do not show before first block&amp;#10;    if ((blockN === 1)) {&amp;#10;        blockN = (blockN + 1);&amp;#10;        continueRoutine = false;&amp;#10;    } else {&amp;#10;        console.log(blockN)&amp;#10;        break_instructions.setAutoDraw(true);&amp;#10;        blockN = (blockN + 1);&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="break_instructions = visual.TextStim(&amp;#10;    win = win,&amp;#10;    text = f&quot;Great job! You can take a break now. \n\n Press space to start block {blockN} of {maxBlock}.&quot;,&amp;#10;    height = 0.05,&amp;#10;    color = &quot;black&quot;)&amp;#10;&amp;#10;# do not show if block is not over yet&amp;#10;if trials.thisN &gt; 0 and trials.thisN % 63 != 0:&amp;#10;    continueRoutine = False&amp;#10;else:&amp;#10;    # do not show before first block&amp;#10;    if blockN == 1:&amp;#10;        blockN = blockN + 1&amp;#10;        continueRoutine = False&amp;#10;    else:&amp;#10;        break_instructions.setAutoDraw(True)&amp;#10;        blockN = blockN + 1&amp;#10;        &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Both" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>

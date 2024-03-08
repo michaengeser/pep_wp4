@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 07, 2024, at 11:36
+    on Fri Mar  8 10:19:59 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -112,7 +112,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\JLU-SU\\OneDrive - Justus-Liebig-Universität Gießen\\Dokumente\\GitHub\\pep_wp4_beh\\image_similarities\\image_similarity_rating_lastrun.py',
+        originPath='/Users/kaiserlab/Documents/GitHub/pep_wp4/image_similarities/drawings_human_rated/image_similarity_rating_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -356,13 +356,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
+        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
+        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -453,13 +453,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
+        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(10*x_scale, 10*x_scale*0.75)[0], height=(10*x_scale, 10*x_scale*0.75)[1],
+        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -800,10 +800,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             img1pos = img_x_pos
             img2pos = -img_x_pos
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((10*x_scale, 10*x_scale*0.75))
+        image1.setSize((8*x_scale, 8*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
-        image2.setSize((10*x_scale, 10*x_scale*0.75))
+        image2.setSize((8*x_scale, 8*x_scale*0.75))
         image2.setImage(stim2)
         rating_1.reset()
         rating_1.setPos((0, -3.5*y_scale))
@@ -1521,10 +1521,10 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             img1pos = img_x_pos
             img2pos = -img_x_pos
         image1.setPos((img1pos*x_scale, 4*y_scale))
-        image1.setSize((10*x_scale, 10*x_scale*0.75))
+        image1.setSize((8*x_scale, 8*x_scale*0.75))
         image1.setImage(stim1)
         image2.setPos((img2pos*x_scale, 4*y_scale))
-        image2.setSize((10*x_scale, 10*x_scale*0.75))
+        image2.setSize((8*x_scale, 8*x_scale*0.75))
         image2.setImage(stim2)
         rating_1.reset()
         rating_1.setPos((0, -3.5*y_scale))
