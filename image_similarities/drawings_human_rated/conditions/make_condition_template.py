@@ -1,6 +1,7 @@
 import itertools
 import csv
 import pandas as pd
+import random as rnd
 
 
 def generate_condition_template():
@@ -11,7 +12,9 @@ def generate_condition_template():
     if len(subjects_numbers) != 35:
         raise ValueError("Number of subjects is not equal to 35.")
 
+    # make pairs and add id
     pairs = list(itertools.combinations(subjects_numbers, 2))
+    pairs = [(pair[0], pair[1], pair_id) for pair_id, pair in enumerate(pairs, start=1)]
 
     # Create a CSV file and write header
     with open('condition_template.csv', 'w', newline='') as csvfile:
@@ -20,8 +23,19 @@ def generate_condition_template():
         writer.writeheader()
 
         # Write data to the CSV file
-        for pair_id, pair in enumerate(pairs, start=1):
-            writer.writerow({'sub1': pair[0], 'sub2': pair[1], 'pairID': pair_id, 'trialID': pair_id})
+        for pair in pairs:
+            writer.writerow({'sub1': pair[0], 'sub2': pair[1], 'pairID': pair[2], 'trialID': pair[2]})
+
+        # Set random seed for reproducibility
+        rnd.seed(1)
+
+        trial_id = pairs[-1][2]
+        # Add repeats of randomly selected rows
+        for _ in range(5):
+            random_row = rnd.choice(pairs)
+            for _ in range(4):
+                trial_id += 1
+                writer.writerow({'sub1': random_row[0], 'sub2': random_row[1], 'pairID': random_row[2], 'trialID': trial_id})
 
 
 def create_condition_files(template_csv, category_name, category_abbreviation):
