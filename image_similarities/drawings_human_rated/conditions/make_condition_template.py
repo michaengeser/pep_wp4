@@ -4,12 +4,12 @@ import pandas as pd
 
 
 def generate_condition_template():
-    subjects_numbers = [num for num in range(101, 141+1) if num not in [107, 108, 110, 128, 133]]
+    subjects_numbers = [num for num in range(101, 141+1) if num not in [107, 108, 110, 115, 128, 133]]
     subjects_numbers = [str(num) for num in subjects_numbers]
 
     # Ensure that there are exactly 36 subjects
-    if len(subjects_numbers) != 36:
-        raise ValueError("Number of subjects is not equal to 36.")
+    if len(subjects_numbers) != 35:
+        raise ValueError("Number of subjects is not equal to 35.")
 
     pairs = list(itertools.combinations(subjects_numbers, 2))
 
