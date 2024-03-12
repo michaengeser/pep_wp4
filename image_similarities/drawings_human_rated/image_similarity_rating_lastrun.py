@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on Fri Mar  8 10:19:59 2024
+    on März 12, 2024, at 10:09
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -44,9 +44,8 @@ psychopyVersion = '2023.2.3'
 expName = 'image_similarity_rating'  # from the Builder filename that created this script
 expInfo = {
     'participant': '200',
-    'age': '',
-    'gender': ['female','male','diverse'],
     'session': ['bathroom','kitchen'],
+    'session_number': '',
     'date': data.getDateStr(),  # add a simple timestamp
     'expName': expName,
     'psychopyVersion': psychopyVersion,
@@ -112,7 +111,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='/Users/kaiserlab/Documents/GitHub/pep_wp4/image_similarities/drawings_human_rated/image_similarity_rating_lastrun.py',
+        originPath='C:\\Users\\JLU-SU\\OneDrive - Justus-Liebig-Universität Gießen\\Dokumente\\GitHub\\pep_wp4_beh\\image_similarities\\drawings_human_rated\\image_similarity_rating_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
@@ -163,7 +162,7 @@ def setupWindow(expInfo=None, win=None):
     if win is None:
         # if not given a window to setup, make one
         win = visual.Window(
-            size=[1920, 1080], fullscr=True, screen=0,
+            size=[1280, 720], fullscr=True, screen=0,
             winType='pyglet', allowStencil=False,
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
@@ -356,13 +355,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
+        width=(8.2*x_scale, 8.2*x_scale*0.75)[0], height=(8.2*x_scale, 8.2*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
+        width=(8.2*x_scale, 8.2*x_scale*0.75)[0], height=(8.2*x_scale, 8.2*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -433,7 +432,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # --- Initialize components for Routine "breakBlocks" ---
     # Run 'Begin Experiment' code from break_2
     blockN = 1
-    maxBlock = 6
+    maxBlock = 10
     startBlock = keyboard.Keyboard()
     
     # --- Initialize components for Routine "ITI" ---
@@ -453,13 +452,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     
     polygon = visual.Rect(
         win=win, name='polygon',
-        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
+        width=(8.2*x_scale, 8.2*x_scale*0.75)[0], height=(8.2*x_scale, 8.2*x_scale*0.75)[1],
         ori=0.0, pos=(img1pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-1.0, interpolate=True)
     polygon_2 = visual.Rect(
         win=win, name='polygon_2',
-        width=(8.5*x_scale, 8.5*x_scale*0.75)[0], height=(8.5*x_scale, 8.5*x_scale*0.75)[1],
+        width=(8.2*x_scale, 8.2*x_scale*0.75)[0], height=(8.2*x_scale, 8.2*x_scale*0.75)[1],
         ori=0.0, pos=(img2pos*x_scale, 4*y_scale), anchor='center',
         lineWidth=1.0,     colorSpace='rgb',  lineColor='black', fillColor='black',
         opacity=None, depth=-2.0, interpolate=True)
@@ -533,19 +532,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('preparation.started', globalClock.getTime())
-    # Run 'Begin Routine' code from output_dir
-    # Construct the path with placeholders replaced by actual values
-    output_dir_path = "data/sub-" + expInfo['participant'] + "/ses-" + expInfo['session']
-    
-    # Check if the path exists
-    if not os.path.exists(output_dir_path):
-        # Create the directory, including all intermediate directories
-        os.makedirs(output_dir_path)
-        print(f"Directory '{output_dir_path}' was created.")
-    else:
-        print(f"Directory '{output_dir_path}' already exists.")
-    
-    
     # keep track of which components have finished
     preparationComponents = []
     for thisComponent in preparationComponents:
@@ -1311,7 +1297,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             color = "black")
         
         # do not show if block is not over yet
-        if trials.thisN > 0 and trials.thisN % 100 != 0:
+        if trials.thisN > 0 and trials.thisN % 63 != 0:
             continueRoutine = False
         else:
             # do not show before first block
@@ -1786,7 +1772,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('end.started', globalClock.getTime())
-    message_end.setText(endMsg)
+    message_end.setText('The end!\n\nThank you for participating')
     key_resp.keys = []
     key_resp.rt = []
     _key_resp_allKeys = []
