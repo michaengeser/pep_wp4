@@ -699,23 +699,6 @@
         <Param val="False" valType="bool" updates="None" name="disabled"/>
         <Param val="condition_matrix" valType="code" updates="None" name="name"/>
       </CodeComponent>
-      <CodeComponent name="output_dir" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="# Construct the path with placeholders replaced by actual values&amp;#10;output_dir_path = &quot;data/sub-&quot; + expInfo['participant'] + &quot;/ses-&quot; + expInfo['session']&amp;#10;&amp;#10;# Check if the path exists&amp;#10;if not os.path.exists(output_dir_path):&amp;#10;    # Create the directory, including all intermediate directories&amp;#10;    os.makedirs(output_dir_path)&amp;#10;    print(f&quot;Directory '{output_dir_path}' was created.&quot;)&amp;#10;    output_dir_path_exist = 0&amp;#10;else:&amp;#10;    print(f&quot;Directory '{output_dir_path}' already exists.&quot;)&amp;#10;    output_dir_path_exist = 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="output_dir_path = (((&quot;data/sub-&quot; + expInfo[&quot;participant&quot;]) + &quot;/ses-&quot;) + expInfo[&quot;session&quot;]);&amp;#10;if ((! os.path.exists(output_dir_path))) {&amp;#10;    os.makedirs(output_dir_path);&amp;#10;    console.log(`Directory '${output_dir_path}' was created.`);&amp;#10;    output_dir_path_exist = 0;&amp;#10;} else {&amp;#10;    console.log(`Directory '${output_dir_path}' already exists.`);&amp;#10;    output_dir_path_exist = 1;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="True" valType="bool" updates="None" name="disabled"/>
-        <Param val="output_dir" valType="code" updates="None" name="name"/>
-      </CodeComponent>
     </Routine>
     <Routine name="practice_over">
       <RoutineSettingsComponent name="practice_over" plugin="None">
