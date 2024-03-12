@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on März 12, 2024, at 10:12
+    on Tue Mar 12 13:09:07 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -111,7 +111,7 @@ def setupData(expInfo, dataDir=None):
     thisExp = data.ExperimentHandler(
         name=expName, version='',
         extraInfo=expInfo, runtimeInfo=None,
-        originPath='C:\\Users\\JLU-SU\\OneDrive - Justus-Liebig-Universität Gießen\\Dokumente\\GitHub\\pep_wp4_beh\\image_similarities\\drawings_human_rated\\image_similarity_rating_lastrun.py',
+        originPath='/Users/kaiserlab/Documents/GitHub/pep_wp4/image_similarities/drawings_human_rated/image_similarity_rating_lastrun.py',
         savePickle=True, saveWideText=True,
         dataFileName=dataDir + os.sep + filename, sortColumns='time'
     )
