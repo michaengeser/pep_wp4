@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on Tue Mar 12 13:09:07 2024
+    on Tue Mar 12 16:31:49 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -36,6 +36,8 @@ import sys  # to get file system encoding
 
 from psychopy.hardware import keyboard
 
+# Run 'Before Experiment' code from init_block_message
+block_message = "Block 0"
 # --- Setup global variables (available in all functions) ---
 # Ensure that relative paths start from the same directory as this script
 _thisDir = os.path.dirname(os.path.abspath(__file__))
@@ -409,6 +411,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-8.0);
+    block_text = visual.TextStim(win=win, name='block_text',
+        text='',
+        font='Open Sans',
+        pos=(17*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-10.0);
     
     # --- Initialize components for Routine "ITI" ---
     text = visual.TextStim(win=win, name='text',
@@ -433,6 +442,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Run 'Begin Experiment' code from break_2
     blockN = 1
     maxBlock = 10
+    
     startBlock = keyboard.Keyboard()
     
     # --- Initialize components for Routine "ITI" ---
@@ -506,6 +516,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-8.0);
+    block_text = visual.TextStim(win=win, name='block_text',
+        text='',
+        font='Open Sans',
+        pos=(17*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-10.0);
     
     # --- Initialize components for Routine "end" ---
     message_end = visual.TextStim(win=win, name='message_end',
@@ -801,8 +818,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         rating_2.setSize((12*x_scale, 0.75*y_scale))
         question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
+        # Run 'Begin Routine' code from make_block_text
+        block_message = 'Block ' + str(blockN-1) + ' of ' + str(maxBlock)
+        block_text.setText(block_message)
         # keep track of which components have finished
-        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2]
+        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2, block_text]
         for thisComponent in trialComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -982,6 +1002,26 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # if question_2 is active this frame...
             if question_2.status == STARTED:
+                # update params
+                pass
+            
+            # *block_text* updates
+            
+            # if block_text is starting this frame...
+            if block_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                block_text.frameNStart = frameN  # exact frame index
+                block_text.tStart = t  # local t and not account for scr refresh
+                block_text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(block_text, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'block_text.started')
+                # update status
+                block_text.status = STARTED
+                block_text.setAutoDraw(True)
+            
+            # if block_text is active this frame...
+            if block_text.status == STARTED:
                 # update params
                 pass
             # Run 'Each Frame' code from wait_for_both_sliders
@@ -1307,7 +1347,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             else:
                 break_instructions.setAutoDraw(True)
                 blockN = blockN + 1
-                
         
         startBlock.keys = []
         startBlock.rt = []
@@ -1522,8 +1561,11 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         rating_2.setSize((12*x_scale, 0.75*y_scale))
         question_2.setPos((0, -5.5*y_scale))
         question_2.setHeight(0.7*y_scale)
+        # Run 'Begin Routine' code from make_block_text
+        block_message = 'Block ' + str(blockN-1) + ' of ' + str(maxBlock)
+        block_text.setText(block_message)
         # keep track of which components have finished
-        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2]
+        trialComponents = [polygon, polygon_2, image1, image2, rating_1, question, rating_2, question_2, block_text]
         for thisComponent in trialComponents:
             thisComponent.tStart = None
             thisComponent.tStop = None
@@ -1703,6 +1745,26 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # if question_2 is active this frame...
             if question_2.status == STARTED:
+                # update params
+                pass
+            
+            # *block_text* updates
+            
+            # if block_text is starting this frame...
+            if block_text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                block_text.frameNStart = frameN  # exact frame index
+                block_text.tStart = t  # local t and not account for scr refresh
+                block_text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(block_text, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'block_text.started')
+                # update status
+                block_text.status = STARTED
+                block_text.setAutoDraw(True)
+            
+            # if block_text is active this frame...
+            if block_text.status == STARTED:
                 # update params
                 pass
             # Run 'Each Frame' code from wait_for_both_sliders
