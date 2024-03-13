@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on Tue Mar 12 16:31:49 2024
+    on Wed Mar 13 15:47:28 2024
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -414,7 +414,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     block_text = visual.TextStim(win=win, name='block_text',
         text='',
         font='Open Sans',
-        pos=(17*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
+        pos=(16*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-10.0);
@@ -519,7 +519,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     block_text = visual.TextStim(win=win, name='block_text',
         text='',
         font='Open Sans',
-        pos=(17*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
+        pos=(16*x_scale, 9.8*y_scale), height=0.02, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-10.0);
@@ -1332,7 +1332,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         # Run 'Begin Routine' code from break_2
         break_instructions = visual.TextStim(
             win = win,
-            text = f"Great job! You can take a break now. \n\n Press space to start block {blockN} of {maxBlock}.",
+            text = f"Great job! You can take a break now. \n\n Try to stay focused! \n\n Press space to start block {blockN} of {maxBlock}.",
             height = 0.05,
             color = "black")
         
