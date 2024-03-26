@@ -1,2 +1,4 @@
 
 /image_similarities/pictures
+/analysis/vgg16_imagenet
+/analysis/vgg16_places365
